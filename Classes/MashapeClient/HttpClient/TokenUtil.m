@@ -27,14 +27,14 @@
 #import "../Parser/ParserFactory.h"
 #import "../Exceptions/MashapeClientException.h"
 
-NSString * const TOKEN_URL = @"https://api.mashape.com/requestToken?apikey={apikey}";
+NSString * const TOKEN_URL = @"https://api.mashape.com/requestToken?devkey={devkey}";
 
 @implementation TokenUtil
 
-+ (NSString*) getToken:(NSString*)apiKey {
++ (NSString*) getToken:(NSString*)developerKey {
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: apiKey forKey:@"apikey"];
+    [params setObject: developerKey forKey:@"devkey"];
 	
 	NSString * response = [HttpClient doPost:TOKEN_URL parameters:params];
 	SBJsonParser * parser = [ParserFactory parser];

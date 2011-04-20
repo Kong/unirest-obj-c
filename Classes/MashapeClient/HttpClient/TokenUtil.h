@@ -30,6 +30,6 @@ extern NSString * const TOKEN_URL;
 	
 }
 
-+ (NSString*) getToken:(NSString*)apiKey;
++ (NSString*) getToken:(NSString*)developerKey;
 
 @end
