@@ -27,13 +27,13 @@
 #import "../Exceptions/MashapeClientException.h"
 #import "../Parser/ParserFactory.h"
 
-NSString * const VERSION = @"V01";
+NSString * const VERSION = @"V02";
 NSString * const LANGUAGE = @"OBJECTIVEC";
 
 @interface HttpClient()
 	// Private methods
     + (NSString*) doHttpRequest:(NSString*)httpMethod url:(NSString*)urlToCall parameters:(NSMutableDictionary*) params;
-	+ (NSString*) prepareParameters:(NSMutableDictionary*) params;
+    + (NSString*) prepareParameters:(NSMutableString*)uri params:(NSMutableDictionary*) params;
 	+ (NSString*) doGet:(NSString*)url parameters:(NSMutableDictionary*) params;
 @end
 
@@ -97,8 +97,7 @@ NSString * const LANGUAGE = @"OBJECTIVEC";
 
 + (NSString*) doGet:(NSString*)url parameters:(NSMutableDictionary*) params {
 	
-	NSMutableString *uri = [NSMutableString stringWithString:url];
-	uri = [self prepareParameters:uri params:params];
+	NSString* uri = [self prepareParameters:[NSMutableString stringWithString:url] params:params];
 	
 	NSURLRequest * urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
 	NSURLResponse * response = nil;
@@ -112,16 +111,15 @@ NSString * const LANGUAGE = @"OBJECTIVEC";
 
 + (NSString*) doHttpRequest:(NSString*)httpMethod url:(NSString*)urlToCall parameters:(NSMutableDictionary*) params {
 	
-	NSMutableString* uri = [NSMutableString stringWithString:url];
-	uri = [self prepareParameters:uri params:params];
+	NSString* uri = [self prepareParameters:[NSMutableString stringWithString:urlToCall] params:params];
 	
 	NSArray* uriParts = [uri componentsSeparatedByString:@"?"];
 	NSString * queryString = @"";
 	if ([uriParts count] > 1) {
-		queryString = [parts objectAtIndex:1];
+		queryString = [uriParts objectAtIndex:1];
 	}
 	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[parts objectAtIndex:0]]];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[uriParts objectAtIndex:0]]];
 	[request setHTTPMethod:httpMethod];
 	[request setHTTPBody:[queryString dataUsingEncoding:NSUTF8StringEncoding]];
 	
@@ -133,19 +131,21 @@ NSString * const LANGUAGE = @"OBJECTIVEC";
 	return result;
 }
 
-+ (NSMutableString*) prepareParameters:(NSMutableString*) uri params:(NSMutableDictionary*) params {
++ (NSString*) prepareParameters:(NSMutableString*) uri params:(NSMutableDictionary*) params {
+
+	uri = [NSMutableString stringWithString:[UrlUtils getCleanUrl:uri parameters:params]];
 
 	for (NSString* key in params) {
 		
 		NSString * value = (NSString*)[params objectForKey:key];
-		NSString* placeHolder = [NSString initWithFormat:@"{%@}" key];
+		NSString* placeHolder = [[NSString alloc] initWithFormat:@"{%@}", key];
 		NSString* encodedValue = (NSString *)CFURLCreateStringByAddingPercentEscapes(
 							    NULL,
 							    (CFStringRef)value,
 							    NULL,
 							    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
 							    kCFStringEncodingUTF8);
-		[uri replaceOccurrencesOfString:placeHolder withString:encodedValue];
+		[uri replaceOccurrencesOfString:placeHolder withString:encodedValue options:NSCaseInsensitiveSearch range:NSMakeRange(0, [uri length])];
 	}
 	
 	return uri;

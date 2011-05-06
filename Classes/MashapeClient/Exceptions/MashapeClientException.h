@@ -22,7 +22,6 @@
  *
  */
 
-
 extern NSString * const EXCEPTION_SYSTEM_ERROR_CODE;
 
 extern NSString * const EXCEPTION_NOTSUPPORTED_HTTPMETHOD_CODE;
