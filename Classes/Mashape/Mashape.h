@@ -22,22 +22,6 @@
  *
  */
 
-typedef enum HttpMethod
-{
-	GET, 
-	POST, 
-	PUT, 
-	DELETE
-} HttpMethod;
-
-
-extern NSString * const LANGUAGE;
-extern NSString * const VERSION;
-
-@interface HttpClient : NSObject {
-
-}
-
-+ (NSMutableDictionary*) makeRequest: (HttpMethod)httpMethod url:(NSString*)urlToCall token:(NSString*)tokenCode parameters:(NSMutableDictionary*) params;
-+ (NSString*) doPost:(NSString*)url parameters:(NSMutableDictionary*) params;
-@end
+#import "Exceptions/MashapeClientException.h"
+#import "Http/HttpClient.h"
+#import "Http/MashapeDelegate.h"

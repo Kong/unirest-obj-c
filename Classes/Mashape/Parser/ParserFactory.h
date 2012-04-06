@@ -22,12 +22,12 @@
  *
  */
 
-#include "../JSON/JSON.h";
+#include "../JSON/JSON.h"
 
 @interface ParserFactory : NSObject {
 	
 }
 
-+ (SBJsonParser*) parser;
++ (SBJsonParser*) getInstance;
 
 @end

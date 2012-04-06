@@ -22,13 +22,18 @@
  *
  */
 
-@interface UrlUtils : NSObject {
+#import "ParserFactory.h"
 
+@implementation ParserFactory
+
++(SBJsonParser*) getInstance {
+	static SBJsonParser* instance = nil;
+	
+	if (instance == nil) {
+		instance = [SBJsonParser new];
+	}
+	
+	return instance;
 }
-
-+ (NSString*) addRouteParameter: (NSString*) url parameterName:(NSString*) parameterName;
-+ (NSString*) addClientParameters: (NSString*) url;
-+ (NSString*) getCleanUrl: (NSString*) url parameters:(NSMutableDictionary*) parameters;
-+ (BOOL) isPlaceholder: (NSString*) value;
 
 @end

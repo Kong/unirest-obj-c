@@ -22,20 +22,13 @@
  *
  */
 
-#import "MashapeClientException.h"
+#import "../RegexKitLite/RegexKitLite.h"
 
-NSString * const EXCEPTION_SYSTEM_ERROR_CODE = @"2000";
+@interface UrlUtils : NSObject {
 
-NSString * const EXCEPTION_NOTSUPPORTED_HTTPMETHOD_CODE = @"1003";
-NSString * const EXCEPTION_NOTSUPPORTED_HTTPMETHOD = @"HTTP method not supported. Only DELETE, GET, POST, PUT are supported";
-
-NSString * const EXCEPTION_EMPTY_REQUEST = @"A request attempt was made to the component, but the response was empty. The component's URL may be wrong or the firewall may be blocking your outbound HTTP requests";
-NSString * const EXCEPTION_INVALID_REQUEST = @"The component returned an invalid response";
-
-@implementation MashapeClientException
-
-+ (void)raiseWithName:(NSString*)name reason:(NSString*)exceptionReason {
-	[[self exceptionWithName:name reason:exceptionReason userInfo:nil] raise];
 }
 
++(void) prepareRequest: (NSString**) url parameters:(NSMutableDictionary**) parameters addRegularQueryStringParameters:(BOOL) addRegularQueryStringParameters;
++(void) generateClientHeaders: (NSMutableURLRequest**) request;
++ (NSString*) encodeURI:(NSString*)value;
 @end

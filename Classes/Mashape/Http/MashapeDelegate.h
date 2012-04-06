@@ -22,18 +22,14 @@
  *
  */
 
-extern NSString * const EXCEPTION_SYSTEM_ERROR_CODE;
+#import "../Exceptions/MashapeClientException.h"
 
-extern NSString * const EXCEPTION_NOTSUPPORTED_HTTPMETHOD_CODE;
-extern NSString * const EXCEPTION_NOTSUPPORTED_HTTPMETHOD;
 
-extern NSString * const EXCEPTION_EMPTY_REQUEST;
-extern NSString * const EXCEPTION_INVALID_REQUEST;
+@protocol MashapeDelegate
 
-@interface MashapeClientException : NSException {
-	
-}
+@required
 
-+ (void)raiseWithName:(NSString*)name reason:(NSString*)exceptionReason;
+-(void)requestCompleted:(id) response;
+-(void)errorOccurred:(MashapeClientException*) exception;
 
 @end

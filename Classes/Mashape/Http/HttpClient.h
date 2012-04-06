@@ -22,6 +22,19 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "HttpClient/HttpClient.h"
-#import "HttpClient/TokenUtil.h"
+#import "MashapeDelegate.h"
+
+typedef enum HttpMethod
+{
+	GET, 
+	POST, 
+	PUT, 
+	DELETE
+} HttpMethod;
+
+@interface HttpClient : NSObject {
+
+}
++ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
++ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson;
+@end

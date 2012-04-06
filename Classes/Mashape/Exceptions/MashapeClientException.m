@@ -22,20 +22,22 @@
  *
  */
 
-#import "ParserFactory.h"
+#import "MashapeClientException.h"
 
-@implementation ParserFactory
+NSInteger const EXCEPTION_SYSTEM_ERROR_CODE = 2000;
+NSString * const EXCEPTION_INVALID_REQUEST = @"The API returned an invalid response: %@";
 
-+(SBJsonParser*) parser
-{
-	static SBJsonParser* instance = nil;
-	
-	if (instance == nil)
-	{
-		instance = [SBJsonParser new];
-	}
-	
-	return instance;
+@implementation MashapeClientException
+@synthesize code;
+
+- (MashapeClientException*)initWithCodeAndMessage:(NSInteger) raiseCode message:(NSString*)message {
+	code = raiseCode;
+	[super initWithName:@"MashapeClientException" reason:message userInfo:nil];
+	return self;
+}
+
+- (NSInteger) code {
+	return code;
 }
 
 @end

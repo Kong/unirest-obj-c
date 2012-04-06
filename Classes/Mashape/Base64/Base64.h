@@ -22,14 +22,10 @@
  *
  */
 
-#import "HttpClient.h"
-
-extern NSString * const TOKEN_URL;
-
-@interface TokenUtil : NSObject {
-	
+@interface Base64 : NSObject {
+    
 }
 
-+ (NSString*) getToken:(NSString*)developerKey;
++(NSString *)encode:(NSData *)plainText;
 
 @end
