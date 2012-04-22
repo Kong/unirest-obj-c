@@ -24,9 +24,6 @@
 
 #import "UrlUtils.h"
 
-NSString * const CLIENT_LANGUAGE = @"OBJECTIVEC";
-NSString * const CLIENT_VERSION = @"V04";
-
 @interface UrlUtils()
 // Private methods
 + (void) addRegularQueryStringParameters: (NSString*) url parameters:(NSMutableDictionary**) parameters;
@@ -113,8 +110,7 @@ NSString * const CLIENT_VERSION = @"V04";
 
 +(void) generateClientHeaders: (NSMutableURLRequest**) request {
     
-    [*request addValue:CLIENT_LANGUAGE forHTTPHeaderField:@"X-Mashape-Language"];
-    [*request addValue:CLIENT_VERSION forHTTPHeaderField:@"X-Mashape-Version"];
+    [*request addValue:@"mashape-objectivec/1.0" forHTTPHeaderField:@"User-Agent"];
     
 }
 
