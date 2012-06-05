@@ -40,7 +40,7 @@
     NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
     NSString* encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [*request addValue:encodedHeaderValue forHTTPHeaderField:@"Proxy-Authorization"];
+    [*request addValue:encodedHeaderValue forHTTPHeaderField:@"X-Mashape-Authorization"];
 
 }
 
