@@ -35,6 +35,6 @@ typedef enum HttpMethod
 @interface HttpClient : NSObject {
 
 }
-+ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
-+ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson;
++ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
++ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson;
 @end

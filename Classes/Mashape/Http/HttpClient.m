@@ -31,17 +31,17 @@
 
 @interface HttpClient()
 // Private methods
-+ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey;
-+ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
++ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey;
++ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
 @end
 
 @implementation HttpClient
 
-+ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
++ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
 
 	NSOperationQueue* queue = [NSOperationQueue new];
 	
-	SEL methodSelector = @selector(makeRequest:url:parameters:mashapeAuthentication:publicKey:privateKey:encodeJson:callback:);
+	SEL methodSelector = @selector(makeRequest:url:parameters:publicKey:privateKey:encodeJson:callback:);
 	NSMethodSignature * methodSignature = [self methodSignatureForSelector:methodSelector];
 	NSInvocation * invocation = [NSInvocation 
 									invocationWithMethodSignature:methodSignature];
@@ -51,11 +51,10 @@
 	[invocation setArgument:&httpMethod atIndex:2];
 	[invocation setArgument:&url atIndex:3];
 	[invocation setArgument:&parameters atIndex:4];
-	[invocation setArgument:&mashapeAuthentication atIndex:5];
-    [invocation setArgument:&publicKey atIndex:6];
-    [invocation setArgument:&privateKey atIndex:7];
-   	[invocation setArgument:&encodeJson atIndex:8];
-	[invocation setArgument:&callback atIndex:9];
+    [invocation setArgument:&publicKey atIndex:5];
+    [invocation setArgument:&privateKey atIndex:6];
+   	[invocation setArgument:&encodeJson atIndex:7];
+	[invocation setArgument:&callback atIndex:8];
 	[invocation retainArguments]; 
 	
 	/* Create our NSInvocationOperation to call loadDataWithOperation, passing in nil */
@@ -66,11 +65,11 @@
 	return [queue autorelease];
 }
 
-+ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson {
-    return [self makeRequest:httpMethod url:url parameters:parameters mashapeAuthentication:mashapeAuthentication publicKey:publicKey privateKey:privateKey encodeJson:encodeJson callback:nil];
++ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson {
+    return [self makeRequest:httpMethod url:url parameters:parameters publicKey:publicKey privateKey:privateKey encodeJson:encodeJson callback:nil];
 }
 
-+ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
++ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
 	
 	[UrlUtils prepareRequest:&url parameters:&parameters addRegularQueryStringParameters:(httpMethod == GET ? NO : YES)];
 	
@@ -78,16 +77,16 @@
 	
 	switch (httpMethod) {
 		case GET:
-			response = [self execRequest:@"GET" url:url parameters:parameters mashapeAuthentication:mashapeAuthentication publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"GET" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
 			break;
 		case POST:
-			response = [self execRequest:@"POST" url:url parameters:parameters mashapeAuthentication:mashapeAuthentication publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"POST" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
 			break;
 		case PUT:
-			response = [self execRequest:@"PUT" url:url parameters:parameters mashapeAuthentication:mashapeAuthentication publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"PUT" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
 			break;
 		case DELETE:
-			response = [self execRequest:@"DELETE" url:url parameters:parameters mashapeAuthentication:mashapeAuthentication publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"DELETE" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
 			break;
 	}
     
@@ -116,7 +115,7 @@
 	
 }
 
-+ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters mashapeAuthentication:(BOOL) mashapeAuthentication publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey {
++ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey {
 
 	NSURL* uri = [NSURL URLWithString:url];
 	NSMutableURLRequest *request = nil;
@@ -149,7 +148,7 @@
 
     [UrlUtils generateClientHeaders:&request];
     
-    if (mashapeAuthentication) {
+    if (!([publicKey length] == 0 || [privateKey length] == 0)) {
         [AuthUtil generateAuthenticationHeader:&request publicKey:publicKey privateKey:privateKey];
     }
 	
