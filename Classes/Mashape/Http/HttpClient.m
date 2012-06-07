@@ -26,8 +26,7 @@
 #import "UrlUtils.h"
 #import "AuthUtil.h"
 #import "../Exceptions/MashapeClientException.h"
-#import "../Parser/ParserFactory.h"
-
+#import "../JSON/JSON/CJSONDeserializer.h"
 
 @interface HttpClient()
 // Private methods
@@ -61,8 +60,7 @@
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithInvocation:invocation];
 	/* Add the operation to the queue */
     [queue addOperation:operation];
-    [operation release];
-	return [queue autorelease];
+	return queue;
 }
 
 + (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson {
@@ -93,11 +91,13 @@
     id jsonObject = response;
 	
     if (encodeJson) {
-        SBJsonParser * parser = [ParserFactory getInstance];
-        jsonObject = [parser objectWithString:response];
-
-        if (jsonObject == nil) {
-            MashapeClientException* jsonException = [[[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]] autorelease];
+        
+        NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error = nil;
+        jsonObject = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
+        
+        if (error != nil) {
+            MashapeClientException* jsonException = [[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]];
             if (callback == nil) {
                 [jsonException raise];
             } else {
@@ -148,7 +148,8 @@
 
     [UrlUtils generateClientHeaders:&request];
     
-    if (!([publicKey length] == 0 || [privateKey length] == 0)) {
+    if (!(publicKey == nil || privateKey == nil)) {
+         NSLog(@"%@", @"CIAO");
         [AuthUtil generateAuthenticationHeader:&request publicKey:publicKey privateKey:privateKey];
     }
 	
@@ -157,7 +158,7 @@
 	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
-	return [result autorelease];
+	return result;
 
 }
 

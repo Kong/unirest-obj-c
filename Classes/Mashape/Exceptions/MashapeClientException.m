@@ -32,12 +32,7 @@ NSString * const EXCEPTION_INVALID_REQUEST = @"The API returned an invalid respo
 
 - (MashapeClientException*)initWithCodeAndMessage:(NSInteger) raiseCode message:(NSString*)message {
 	code = raiseCode;
-	[super initWithName:@"MashapeClientException" reason:message userInfo:nil];
-	return self;
-}
-
-- (NSInteger) code {
-	return code;
+	return[super initWithName:@"MashapeClientException" reason:message userInfo:nil];
 }
 
 @end

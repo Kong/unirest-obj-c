@@ -22,8 +22,6 @@
  *
  */
 
-#import "../RegexKitLite/RegexKitLite.h"
-
 @interface UrlUtils : NSObject {
 
 }
