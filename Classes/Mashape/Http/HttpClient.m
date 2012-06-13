@@ -94,7 +94,7 @@
         
         NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
-        jsonObject = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
+        jsonObject = [[CJSONDeserializer deserializer] deserialize:jsonData error:&error];
         
         if (error != nil) {
             MashapeClientException* jsonException = [[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]];
