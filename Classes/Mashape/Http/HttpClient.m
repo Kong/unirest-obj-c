@@ -90,21 +90,26 @@
     
     id jsonObject = response;
 	
-    if (encodeJson) {
-        
-        NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        jsonObject = [[CJSONDeserializer deserializer] deserialize:jsonData error:&error];
-        
-        if (error != nil) {
-            MashapeClientException* jsonException = [[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]];
-            if (callback == nil) {
-                [jsonException raise];
-            } else {
-                [callback errorOccurred:jsonException];
-            }
-        }
-    }
+	if (encodeJson) {
+
+	        NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
+	        NSError *error = nil;
+	        jsonObject = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
+
+	        if (error != nil) {
+	            error = nil;
+	            jsonObject = [[CJSONDeserializer deserializer] deserializeAsArray:jsonData error:&error];
+	            if (error != nil) {
+	                MashapeClientException* jsonException = [[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]];
+	                if (callback == nil) {
+	                    [jsonException raise];
+	                } else {
+	                    [callback errorOccurred:jsonException];
+	                }
+	            }
+	        }
+	    }
+
     
 	if (callback == nil) {
 		return jsonObject;
