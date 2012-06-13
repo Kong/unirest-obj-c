@@ -50,14 +50,15 @@
 	}
 
 	NSString* finalUrl = *url;
-    
+    NSString* ref = [[NSString alloc] initWithString:finalUrl];
+
     NSError* error = nil;
     NSRegularExpression* findPlaceholders = [NSRegularExpression regularExpressionWithPattern:@"\\{([\\w\\.]+)\\}" options:NSRegularExpressionCaseInsensitive error:&error];
     
-    NSArray* matches = [findPlaceholders matchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length])];
+    NSArray* matches = [findPlaceholders matchesInString:ref options:0 range:NSMakeRange(0, [ref length])];
 					
 	for (NSTextCheckingResult* match in matches) {
-		NSString* key = [finalUrl substringWithRange:[match rangeAtIndex:1]];
+		NSString* key = [ref substringWithRange:[match rangeAtIndex:1]];
 		NSString* value = [*parameters objectForKey:key];
 		if (value == nil) {
             NSRegularExpression* replacePlaceholders = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"&?[\\w]*=?\\{%@\\}", key] options:NSRegularExpressionCaseInsensitive error:&error];
