@@ -149,7 +149,6 @@
     [UrlUtils generateClientHeaders:&request];
     
     if (!(publicKey == nil || privateKey == nil)) {
-         NSLog(@"%@", @"CIAO");
         [AuthUtil generateAuthenticationHeader:&request publicKey:publicKey privateKey:privateKey];
     }
 	
