@@ -53,9 +53,6 @@
     
     NSError* error = nil;
     NSRegularExpression* findPlaceholders = [NSRegularExpression regularExpressionWithPattern:@"\\{([\\w\\.]+)\\}" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSRegularExpression* replacePlaceholders = [NSRegularExpression regularExpressionWithPattern:@"&?[\\w]*=?\\{%@\\}" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSRegularExpression* replacePlaceholdersWithValue = [NSRegularExpression regularExpressionWithPattern:@"(\\?.+)\\{%@\\}" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSRegularExpression* replaceURIPlaceholdersWithValue = [NSRegularExpression regularExpressionWithPattern:@"\\{%@\\}" options:NSRegularExpressionCaseInsensitive error:&error];
     
     NSArray* matches = [findPlaceholders matchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length])];
 					
@@ -63,11 +60,13 @@
 		NSString* key = [finalUrl substringWithRange:[match rangeAtIndex:1]];
 		NSString* value = [*parameters objectForKey:key];
 		if (value == nil) {
+            NSRegularExpression* replacePlaceholders = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"&?[\\w]*=?\\{%@\\}", key] options:NSRegularExpressionCaseInsensitive error:&error];
             finalUrl = [replacePlaceholders stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:@""];
 		} else {
-            
+            NSRegularExpression* replacePlaceholdersWithValue = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"(\\?.+)\\{%@\\}", key] options:NSRegularExpressionCaseInsensitive error:&error];
             finalUrl = [replacePlaceholdersWithValue stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:[NSString stringWithFormat:@"$1%@", [self encodeURI:value]]];
             
+            NSRegularExpression* replaceURIPlaceholdersWithValue = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"\\{%@\\}", key] options:NSRegularExpressionCaseInsensitive error:&error];
             finalUrl = [replaceURIPlaceholdersWithValue stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:[self encodeURI:value]];
 		}
 	}
