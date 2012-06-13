@@ -59,8 +59,8 @@
     
     NSArray* matches = [findPlaceholders matchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length])];
 					
-	for (NSArray* match in matches) {
-		NSString* key = [match objectAtIndex:1];
+	for (NSTextCheckingResult* match in matches) {
+		NSString* key = [finalUrl substringWithRange:[match rangeAtIndex:1]];
 		NSString* value = [*parameters objectForKey:key];
 		if (value == nil) {
             finalUrl = [replacePlaceholders stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:@""];
