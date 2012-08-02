@@ -24,19 +24,21 @@
 
 #import "HttpClient.h"
 #import "UrlUtils.h"
-#import "AuthUtil.h"
 #import "../Exceptions/MashapeClientException.h"
 #import "../JSON/JSON/CJSONDeserializer.h"
+#import "../Auth/Auth.h"
+#import "../Auth/QueryAuth.h"
+#import "../Auth/HeaderAuth.h"
 
 @interface HttpClient()
 // Private methods
-+ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey;
-+ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
++ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers;
++ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
 @end
 
 @implementation HttpClient
 
-+ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
++ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
 
 	NSOperationQueue* queue = [NSOperationQueue new];
 	
@@ -50,10 +52,9 @@
 	[invocation setArgument:&httpMethod atIndex:2];
 	[invocation setArgument:&url atIndex:3];
 	[invocation setArgument:&parameters atIndex:4];
-    [invocation setArgument:&publicKey atIndex:5];
-    [invocation setArgument:&privateKey atIndex:6];
-   	[invocation setArgument:&encodeJson atIndex:7];
-	[invocation setArgument:&callback atIndex:8];
+    [invocation setArgument:&authHandlers atIndex:5];
+   	[invocation setArgument:&encodeJson atIndex:6];
+	[invocation setArgument:&callback atIndex:7];
 	[invocation retainArguments]; 
 	
 	/* Create our NSInvocationOperation to call loadDataWithOperation, passing in nil */
@@ -63,28 +64,26 @@
 	return queue;
 }
 
-+ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson {
-    return [self makeRequest:httpMethod url:url parameters:parameters publicKey:publicKey privateKey:privateKey encodeJson:encodeJson callback:nil];
++ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson {
+    return [self makeRequest:httpMethod url:url parameters:parameters authHandlers:authHandlers encodeJson:encodeJson callback:nil];
 }
 
-+ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
-	
-	[UrlUtils prepareRequest:&url parameters:&parameters addRegularQueryStringParameters:(httpMethod == GET ? NO : YES)];
++ (id) makeRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback {
 	
 	NSString* response = nil;
 	
 	switch (httpMethod) {
 		case GET:
-			response = [self execRequest:@"GET" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"GET" url:url parameters:parameters authHandlers:authHandlers];
 			break;
 		case POST:
-			response = [self execRequest:@"POST" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"POST" url:url parameters:parameters authHandlers:authHandlers];
 			break;
 		case PUT:
-			response = [self execRequest:@"PUT" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"PUT" url:url parameters:parameters authHandlers:authHandlers];
 			break;
 		case DELETE:
-			response = [self execRequest:@"DELETE" url:url parameters:parameters publicKey:publicKey privateKey:privateKey];
+			response = [self execRequest:@"DELETE" url:url parameters:parameters authHandlers:authHandlers];
 			break;
 	}
     
@@ -120,8 +119,23 @@
 	
 }
 
-+ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters publicKey:(NSString*) publicKey privateKey:(NSString*)privateKey {
++ (NSString*) execRequest:(NSString*)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers {
 
+    if (parameters == nil) {
+        parameters = [[NSMutableDictionary alloc]init];
+    }
+
+    NSMutableDictionary *headers = [[NSMutableDictionary alloc]init];
+    for (Auth *auth in authHandlers) {
+        if ([auth isKindOfClass:[QueryAuth class]]) {
+            [parameters addEntriesFromDictionary: [auth handleParams]];
+        } else if ([auth isKindOfClass:[HeaderAuth class]]) {
+            [headers addEntriesFromDictionary: [auth handleHeader]];
+        }
+    }
+    
+    [UrlUtils prepareRequest:&url parameters:&parameters addRegularQueryStringParameters:(httpMethod == @"GET" ? NO : YES)];
+    
 	NSURL* uri = [NSURL URLWithString:url];
 	NSMutableURLRequest *request = nil;
 	
@@ -152,9 +166,9 @@
 	}
 
     [UrlUtils generateClientHeaders:&request];
-    
-    if (!(publicKey == nil || privateKey == nil)) {
-        [AuthUtil generateAuthenticationHeader:&request publicKey:publicKey privateKey:privateKey];
+    for (NSString *key in headers) {
+        NSString *value = [headers objectForKey:key];
+        [request addValue:value forHTTPHeaderField:key];
     }
 	
 	NSURLResponse * response = nil;

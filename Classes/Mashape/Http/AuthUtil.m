@@ -33,15 +33,20 @@
 
 @implementation AuthUtil
 
-+ (void) generateAuthenticationHeader:(NSMutableURLRequest**)request publicKey:(NSString*)publicKey privateKey:(NSString*)privateKey {
++ (NSString*) generateMashapeAuthentication:(NSString*)publicKey privateKey:(NSString*)privateKey {
 
     NSString* hash = [self hmacSha1:publicKey key:privateKey];
 
     NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
     NSString* encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [*request addValue:encodedHeaderValue forHTTPHeaderField:@"X-Mashape-Authorization"];
+    return encodedHeaderValue;
+}
 
++ (NSString*) generateBasicAuthentication:(NSString*)username password:(NSString*)password {
+    NSString *headerValue = [NSString stringWithFormat:@"%@:%@", username, password];
+    NSString *encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
+    return encodedHeaderValue;
 }
 
 + (NSString*) hmacSha1:(NSString*) value key:(NSString*) key {

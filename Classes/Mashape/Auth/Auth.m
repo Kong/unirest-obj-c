@@ -22,10 +22,24 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "Auth.h"
+
+@implementation Auth
+
+- (id) init {
+    self = [super init];
+    if (self != nil) {
+        headers = [[NSMutableDictionary alloc]init];
+        params = [[NSMutableDictionary alloc]init];
+    }
+    return self;
+}
+
+- (NSMutableDictionary*) handleHeader {
+    return headers;
+}
+
+- (NSMutableDictionary*) handleParams {
+    return params;
+}
+@end

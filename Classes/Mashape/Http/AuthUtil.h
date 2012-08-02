@@ -25,6 +25,7 @@
 @interface AuthUtil : NSObject {
 
 }
-+ (void) generateAuthenticationHeader:(NSMutableURLRequest**)request publicKey:(NSString*)publicKey privateKey:(NSString*)privateKey;
++ (NSString*) generateMashapeAuthentication:(NSString*)publicKey privateKey:(NSString*)privateKey;
++ (NSString*) generateBasicAuthentication:(NSString*)username password:(NSString*)password;
 
 @end

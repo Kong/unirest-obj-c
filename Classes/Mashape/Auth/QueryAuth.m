@@ -22,10 +22,15 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "QueryAuth.h"
+
+@implementation QueryAuth
+
+- (id) initWithKey: (NSString*)paramName value: (NSString*)paramValue {
+    self = [super init];
+    if (self != nil) {
+        [params setObject:paramValue forKey:paramName];
+    }
+    return self;
+}
+@end

@@ -44,10 +44,6 @@
 			[*parameters removeObjectForKey:key];
 		}
 	}
-	
-	if (addRegularQueryStringParameters) {
-		[self addRegularQueryStringParameters:*url parameters:parameters];
-	}
 
 	NSString* finalUrl = *url;
     NSString* ref = [[NSString alloc] initWithString:finalUrl];
@@ -69,8 +65,20 @@
             
             NSRegularExpression* replaceURIPlaceholdersWithValue = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"\\{%@\\}", key] options:NSRegularExpressionCaseInsensitive error:&error];
             finalUrl = [replaceURIPlaceholdersWithValue stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:[self encodeURI:value]];
+            [*parameters removeObjectForKey:key];
 		}
 	}
+    
+    
+	if (addRegularQueryStringParameters) {
+		[self addRegularQueryStringParameters:*url parameters:parameters];
+	} else {
+        for (id key in *parameters) {
+       		NSString *value = [*parameters objectForKey:key];
+            NSString *delimiter = ([*url rangeOfString:@"?"].location == NSNotFound) ? @"?" : @"&";
+            finalUrl = [NSString stringWithFormat:@"%@%@%@=%@", finalUrl, delimiter, key, [self encodeURI:value]];
+        }
+    }
 
     finalUrl = [[NSRegularExpression regularExpressionWithPattern:@"\\?&" options:NSRegularExpressionCaseInsensitive error:&error] stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:@"?"];
     finalUrl = [[NSRegularExpression regularExpressionWithPattern:@"\\?$" options:NSRegularExpressionCaseInsensitive error:&error] stringByReplacingMatchesInString:finalUrl options:0 range:NSMakeRange(0, [finalUrl length]) withTemplate:@""];

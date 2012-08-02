@@ -22,10 +22,16 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "CustomHeaderAuth.h"
+
+@implementation CustomHeaderAuth
+
+- (id) initWithKey: (NSString*)headerName value: (NSString*)headerValue {
+    self = [super init];
+    if (self != nil) {
+        [headers setObject:headerValue forKey:headerName];
+    }
+    return self;
+}
+
+@end

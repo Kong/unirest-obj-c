@@ -22,10 +22,8 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "Auth.h"
+
+@interface HeaderAuth : Auth
+
+@end

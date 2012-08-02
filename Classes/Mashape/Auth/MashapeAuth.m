@@ -22,10 +22,18 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "MashapeAuth.h"
+#import "../Http/AuthUtil.h"
+
+@implementation MashapeAuth
+
+- (id) initWithPublicKey: (NSString*)publicKey privateKey: (NSString*)privateKey {
+    self = [super init];
+    
+    if (self != nil) {
+        NSString *authValue = [AuthUtil generateMashapeAuthentication:publicKey privateKey:privateKey];
+        [headers setObject:authValue forKey:@"X-Mashape-Authorization"];
+    }
+    return self;
+}
+@end

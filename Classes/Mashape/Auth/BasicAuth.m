@@ -22,10 +22,17 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "BasicAuth.h"
+#import "../Http/AuthUtil.h"
+
+@implementation BasicAuth
+
+- (id) initWithUsername: (NSString*)username password: (NSString*)password {
+    self = [super init];
+    if (self != nil) {
+        [headers setObject:[AuthUtil generateBasicAuthentication:username password:password] forKey:@"Authorization"];
+    }
+    return self;
+}
+
+@end

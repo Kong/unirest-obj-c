@@ -22,10 +22,12 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "HeaderAuth.h"
+
+@implementation HeaderAuth
+
+- (id) init {
+    self = [super init];
+    return self;
+}
+@end
