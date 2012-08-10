@@ -46,7 +46,7 @@
 + (NSString*) generateBasicAuthentication:(NSString*)username password:(NSString*)password {
     NSString *headerValue = [NSString stringWithFormat:@"%@:%@", username, password];
     NSString *encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
-    return encodedHeaderValue;
+    return [NSString stringWithFormat:@"Basic %@", encodedHeaderValue];
 }
 
 + (NSString*) hmacSha1:(NSString*) value key:(NSString*) key {
