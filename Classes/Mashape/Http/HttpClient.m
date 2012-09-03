@@ -25,7 +25,7 @@
 #import "HttpClient.h"
 #import "UrlUtils.h"
 #import "../Exceptions/MashapeClientException.h"
-#import "../JSON/JSON/CJSONDeserializer.h"
+#import "../JSON/SBJson.h"
 #import "../Auth/Auth.h"
 #import "../Auth/QueryAuth.h"
 #import "../Auth/HeaderAuth.h"
@@ -93,11 +93,10 @@
 
 	        NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
 	        NSError *error = nil;
-	        jsonObject = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error];
-
+		jsonObject = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] JSONValue];
 	        if (error != nil) {
 	            error = nil;
-	            jsonObject = [[CJSONDeserializer deserializer] deserializeAsArray:jsonData error:&error];
+		    jsonObject = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] JSONValue];
 	            if (error != nil) {
 	                MashapeClientException* jsonException = [[MashapeClientException alloc] initWithCodeAndMessage:EXCEPTION_SYSTEM_ERROR_CODE message:[NSString stringWithFormat:EXCEPTION_INVALID_REQUEST, response]];
 	                if (callback == nil) {
