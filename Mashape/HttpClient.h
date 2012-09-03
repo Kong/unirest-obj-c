@@ -1,4 +1,5 @@
 #import "MashapeResponse.h"
+#import "MashapeDelegate.h"
 
 typedef enum HttpMethod
 {
@@ -24,5 +25,6 @@ typedef enum ResponseType
 
 @interface HttpClient : NSObject
 
-+(MashapeResponse*) doRequest:(HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters contentType:(ContentType)contentType responseType:(ResponseType) responseType authenticationHandlers:(NSArray*) authenticationHandlers;
++(MashapeResponse*) doRequest:(HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters contentType:(ContentType)contentType responseType:(ResponseType) responseType authenticationHandlers:(NSArray*) authenticationHandlers callback:(id<MashapeDelegate>) callback;
+
 @end

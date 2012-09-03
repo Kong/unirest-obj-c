@@ -9,11 +9,12 @@
 @interface HttpClient()
 + (NSString*) encodeURI:(NSString*)value;
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
++ (MashapeResponse*) buildMashapeResponse:(NSHTTPURLResponse*) response data:(NSData*) data responseType:(ResponseType) responseType;
 @end
 
 @implementation HttpClient
 
-+(MashapeResponse*) doRequest:(HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters contentType:(ContentType)contentType responseType:(ResponseType) responseType authenticationHandlers:(NSArray*) authenticationHandlers {
++(MashapeResponse*) doRequest:(HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters contentType:(ContentType)contentType responseType:(ResponseType) responseType authenticationHandlers:(NSArray*) authenticationHandlers callback:(id<MashapeDelegate>)callback {
     
     if (parameters == nil) {
         parameters = [[NSMutableDictionary alloc]init];
@@ -98,18 +99,30 @@
         
         [request setHTTPBody:body];
     }
-    
-    NSHTTPURLResponse * response = nil;
-    NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
+    if (callback == nil) {
+        NSHTTPURLResponse * response = nil;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        return [self buildMashapeResponse:response data:data responseType:responseType];
+    } else {
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                   MashapeResponse* mashapeResponse = [self buildMashapeResponse:httpResponse data:data responseType:responseType];
+                                   [callback requestCompleted:mashapeResponse];
+                               }];
+     return nil;   
+    }
+}
+
++ (MashapeResponse*) buildMashapeResponse:(NSHTTPURLResponse*) response data:(NSData*) data responseType:(ResponseType) responseType {
     MashapeResponse* mashapeResponse = [[MashapeResponse alloc] init];
     mashapeResponse.headers = [response allHeaderFields];
     mashapeResponse.code = response.statusCode;
     mashapeResponse.raw_body = data;
-    
     [HttpUtils setResponse:responseType data:data outputResponse:&mashapeResponse];
-    
     return mashapeResponse;
 }
 
