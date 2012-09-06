@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,10 +22,27 @@
  *
  */
 
-@interface Base64 : NSObject {
-    
-}
+#import "MashapeResponse.h"
 
-+(NSString *)encode:(NSData *)plainText;
+@interface MashapeResponse ()
+@property (readwrite, retain) NSData* rawBody;
+@property (readwrite) NSDictionary* headers;
+@property (readwrite) int code;
+@end
+
+@implementation MashapeResponse
+
+@synthesize rawBody;
+@synthesize headers;
+@synthesize code;
+@synthesize body;
+
+-(MashapeResponse*)initWithResponse:(int)httpCode headers:(NSDictionary*) httpHeaders rawBody:(NSData*) httpRawBody {
+    self = [super init];
+    [self setCode:httpCode];
+    [self setHeaders:httpHeaders];
+    [self setRawBody:httpRawBody];
+    return self;
+}
 
 @end

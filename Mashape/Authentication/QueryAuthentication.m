@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,17 +22,14 @@
  *
  */
 
-#import "MashapeClientException.h"
+#import "QueryAuthentication.h"
 
-NSInteger const EXCEPTION_SYSTEM_ERROR_CODE = 2000;
-NSString * const EXCEPTION_INVALID_REQUEST = @"The API returned an invalid response: %@";
+@implementation QueryAuthentication
 
-@implementation MashapeClientException
-@synthesize code;
-
-- (MashapeClientException*)initWithCodeAndMessage:(NSInteger) raiseCode message:(NSString*)message {
-	code = raiseCode;
-	return[super initWithName:@"MashapeClientException" reason:message userInfo:nil];
+- (Authentication*) initWithParam: (NSString*)paramName value: (NSString*)paramValue {
+    [super init];
+    [parameters setObject:paramValue forKey:paramName];
+    return self;
 }
 
 @end

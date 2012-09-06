@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,11 +22,19 @@
  *
  */
 
-@interface UrlUtils : NSObject {
+#import "BasicAuthentication.h"
+#import "Utils/Base64.h"
 
+@implementation BasicAuthentication
+
+- (Authentication*) initWithUsernameAndPassword: (NSString*)username password: (NSString*)password {
+    [super init];
+
+	NSString *headerValue = [NSString stringWithFormat:@"%@:%@", username, password];
+    NSString *encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [headers setObject:[NSString stringWithFormat:@"Basic %@", encodedHeaderValue] forKey:@"Authorization"];
+    return self;
 }
 
-+(void) prepareRequest: (NSString**) url parameters:(NSMutableDictionary**) parameters addRegularQueryStringParameters:(BOOL) addRegularQueryStringParameters;
-+(void) generateClientHeaders: (NSMutableURLRequest**) request;
-+ (NSString*) encodeURI:(NSString*)value;
 @end

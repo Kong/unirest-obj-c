@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,19 +22,10 @@
  *
  */
 
-#import "MashapeDelegate.h"
+#import "MashapeResponse.h"
 
-typedef enum HttpMethod
-{
-	GET, 
-	POST, 
-	PUT, 
-	DELETE
-} HttpMethod;
+@interface MashapeStringResponse : MashapeResponse
 
-@interface HttpClient : NSObject {
+-(NSString*) body;
 
-}
-+ (NSOperationQueue*) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson callback:(id<MashapeDelegate>) callback;
-+ (id) doRequest: (HttpMethod)httpMethod url:(NSString*)url parameters:(NSMutableDictionary*) parameters authHandlers:(NSArray*) authHandlers encodeJson:(BOOL) encodeJson;
 @end
