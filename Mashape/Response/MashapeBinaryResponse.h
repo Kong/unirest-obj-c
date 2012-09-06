@@ -24,11 +24,8 @@
 
 #import "MashapeResponse.h"
 
-@implementation MashapeResponse
+@interface MashapeBinaryResponse : MashapeResponse
 
-@synthesize raw_body;
-@synthesize body;
-@synthesize headers;
-@synthesize code;
+-(NSString*) body;
 
 @end

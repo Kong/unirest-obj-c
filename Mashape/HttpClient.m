@@ -29,11 +29,11 @@
 #import "Authentication/MashapeAuthentication.h"
 #import "HttpClient.h"
 #import "HttpUtils.h"
+#import "Response/MashapeResponse.h"
 
 @interface HttpClient()
 + (NSString*) encodeURI:(NSString*)value;
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
-+ (MashapeResponse*) buildMashapeResponse:(NSHTTPURLResponse*) response data:(NSData*) data responseType:(ResponseType) responseType;
 @end
 
 @implementation HttpClient
@@ -128,7 +128,7 @@
         NSError * error = nil;
         NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
-        return [self buildMashapeResponse:response data:data responseType:responseType];
+        return [HttpUtils getResponse:responseType httpResponse:response data:data];
     } else {
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[NSOperationQueue mainQueue]
@@ -139,15 +139,6 @@
                                }];
      return nil;   
     }
-}
-
-+ (MashapeResponse*) buildMashapeResponse:(NSHTTPURLResponse*) response data:(NSData*) data responseType:(ResponseType) responseType {
-    MashapeResponse* mashapeResponse = [[MashapeResponse alloc] init];
-    mashapeResponse.headers = [response allHeaderFields];
-    mashapeResponse.code = response.statusCode;
-    mashapeResponse.raw_body = data;
-    [HttpUtils setResponse:responseType data:data outputResponse:&mashapeResponse];
-    return mashapeResponse;
 }
 
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters {

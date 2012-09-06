@@ -44,7 +44,8 @@ typedef enum ContentType
 typedef enum ResponseType
 {
 	R_JSON,
-	R_BINARY
+	R_BINARY,
+    R_STRING
 } ResponseType;
 
 @interface HttpClient : NSObject

@@ -22,13 +22,10 @@
  *
  */
 
-#define BOUNDARY @"---------------------------17237809831461299884346131229"
+#import "MashapeResponse.h"
 
-#import "Response/MashapeResponse.h"
+@interface MashapeJsonObjectResponse : MashapeResponse
 
-@interface HttpUtils : NSObject
-
-+(void) setRequestHeaders:(ContentType) contentType responseType:(ResponseType)responseType headers:(NSMutableDictionary**)headers;
-+(MashapeResponse*) getResponse:(ResponseType) responseType httpResponse:(NSHTTPURLResponse*) httpResponse data:(NSData*) data;
+-(NSString*) body;
 
 @end

@@ -24,6 +24,10 @@
 
 #import "HttpClient.h"
 #import "HttpUtils.h"
+#import "Response/MashapeBinaryResponse.h"
+#import "Response/MashapeStringResponse.h"
+#import "Response/MashapeJsonObjectResponse.h"
+#import "Response/MashapeJsonArrayResponse.h"
 #import "JSON/SBJson.h"
 
 @implementation HttpUtils
@@ -53,25 +57,45 @@
         case R_JSON:
             responseTypeHeader = @"application/json";
             break;
+        case R_STRING:
+            responseTypeHeader = @"text/plain";
+            break;
         case R_BINARY:
             break;
     }
     
-    [*headers setObject:responseTypeHeader forKey:@"Accept"];
+    if ([responseTypeHeader length] != 0) {
+        [*headers setObject:responseTypeHeader forKey:@"Accept"];
+    }
     
 }
 
-+(void) setResponse:(ResponseType) responseType data:(NSData*) data outputResponse:(MashapeResponse**) outputResponse {
++(MashapeResponse*) getResponse:(ResponseType) responseType httpResponse:(NSHTTPURLResponse*) httpResponse data:(NSData*) data {
 
+    MashapeResponse* response;
+    
+    id json;
     switch(responseType) {
         case R_JSON:
-            [*outputResponse setBody:[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] JSONValue]];
+            json = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] JSONValue];
+            if ([json class] == [NSArray class]) {
+                response = [[MashapeJsonArrayResponse alloc] initWithResponse:[httpResponse statusCode] headers:[httpResponse allHeaderFields] rawBody:data];
+            } else {
+                response = [[MashapeJsonObjectResponse alloc] initWithResponse:[httpResponse statusCode] headers:[httpResponse allHeaderFields] rawBody:data];
+            }
+            [response setBody:json];
+            break;
+        case R_STRING:
+            response = [[MashapeStringResponse alloc] initWithResponse:[httpResponse statusCode] headers:[httpResponse allHeaderFields] rawBody:data];
+            [response setBody:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
             break;
         case R_BINARY:
-            [*outputResponse setBody:data];
+            response = [[MashapeBinaryResponse alloc] initWithResponse:[httpResponse statusCode] headers:[httpResponse allHeaderFields] rawBody:data];
+            [response setBody:data];
             break;
     }
     
+    return response;
 }
 
 @end

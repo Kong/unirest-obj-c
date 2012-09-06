@@ -22,18 +22,27 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import "MashapeResponse.h"
 
-@interface MashapeResponse : NSObject {
-    NSData* raw_body;
-    NSDictionary* headers;
-    int code;
-    id body;
+@interface MashapeResponse ()
+@property (readwrite, retain) NSData* rawBody;
+@property (readwrite) NSDictionary* headers;
+@property (readwrite) int code;
+@end
+
+@implementation MashapeResponse
+
+@synthesize rawBody;
+@synthesize headers;
+@synthesize code;
+@synthesize body;
+
+-(MashapeResponse*)initWithResponse:(int)httpCode headers:(NSDictionary*) httpHeaders rawBody:(NSData*) httpRawBody {
+    self = [super init];
+    [self setCode:httpCode];
+    [self setHeaders:httpHeaders];
+    [self setRawBody:httpRawBody];
+    return self;
 }
-
-@property(nonatomic, retain) NSData *raw_body;
-@property(nonatomic, retain) NSDictionary *headers;
-@property(nonatomic, assign) int code;
-@property(nonatomic, assign) id body;
 
 @end

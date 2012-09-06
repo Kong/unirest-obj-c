@@ -22,13 +22,12 @@
  *
  */
 
-#define BOUNDARY @"---------------------------17237809831461299884346131229"
-
-#import "Response/MashapeResponse.h"
-
-@interface HttpUtils : NSObject
-
-+(void) setRequestHeaders:(ContentType) contentType responseType:(ResponseType)responseType headers:(NSMutableDictionary**)headers;
-+(MashapeResponse*) getResponse:(ResponseType) responseType httpResponse:(NSHTTPURLResponse*) httpResponse data:(NSData*) data;
-
-@end
+#import "MashapeResponse.h"
+#import "MashapeDelegate.h"
+#import "HttpClient.h"
+#import "HttpUtils.h"
+#import "Authentication/Authentication.h"
+#import "Authentication/BasicAuthentication.h"
+#import "Authentication/HeaderAuthentication.h"
+#import "Authentication/QueryAuthentication.h"
+#import "Authentication/MashapeAuthentication.h"
