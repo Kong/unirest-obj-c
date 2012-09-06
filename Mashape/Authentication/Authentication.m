@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,12 +22,23 @@
  *
  */
 
-#import "HeaderAuth.h"
+#import "Authentication.h"
 
-@implementation HeaderAuth
+@interface Authentication ()
+    @property (readwrite) NSMutableDictionary* headers;
+    @property (readwrite) NSMutableDictionary* parameters;
+@end
 
-- (id) init {
-    self = [super init];
+@implementation Authentication
+
+@synthesize headers;
+@synthesize parameters;
+
+- (Authentication*) init {
+    [super init];
+    self.headers = [[NSMutableDictionary alloc]init];
+    self.parameters = [[NSMutableDictionary alloc]init];
     return self;
 }
+
 @end

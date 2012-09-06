@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,14 +22,10 @@
  *
  */
 
-#import "../Exceptions/MashapeClientException.h"
+#import "MashapeResponse.h"
 
+@interface MashapeJsonArrayResponse : MashapeResponse
 
-@protocol MashapeDelegate
-
-@required
-
--(void)requestCompleted:(id) response;
--(void)errorOccurred:(MashapeClientException*) exception;
+-(NSString*) body;
 
 @end

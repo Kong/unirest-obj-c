@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,10 +22,10 @@
  *
  */
 
-#import "Exceptions/MashapeClientException.h"
-#import "Http/HttpClient.h"
-#import "Http/MashapeDelegate.h"
-#import "Auth/MashapeAuth.h"
-#import "Auth/QueryAuth.h"
-#import "Auth/BasicAuth.h"
-#import "Auth/CustomHeaderAuth.h"
+#import "Authentication.h"
+
+@interface HeaderAuthentication : Authentication
+
+- (Authentication*) initWithKey: (NSString*)headerName value: (NSString*)headerValue;
+
+@end

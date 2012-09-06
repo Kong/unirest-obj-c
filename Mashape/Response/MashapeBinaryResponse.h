@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,18 +22,10 @@
  *
  */
 
-#import "MashapeAuth.h"
-#import "../Http/AuthUtil.h"
+#import "MashapeResponse.h"
 
-@implementation MashapeAuth
+@interface MashapeBinaryResponse : MashapeResponse
 
-- (id) initWithPublicKey: (NSString*)publicKey privateKey: (NSString*)privateKey {
-    self = [super init];
-    
-    if (self != nil) {
-        NSString *authValue = [AuthUtil generateMashapeAuthentication:publicKey privateKey:privateKey];
-        [headers setObject:authValue forKey:@"X-Mashape-Authorization"];
-    }
-    return self;
-}
+-(NSString*) body;
+
 @end

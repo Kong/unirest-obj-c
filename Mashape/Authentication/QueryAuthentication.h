@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,17 +22,10 @@
  *
  */
 
-#import "BasicAuth.h"
-#import "../Http/AuthUtil.h"
+#import "Authentication.h"
 
-@implementation BasicAuth
+@interface QueryAuthentication : Authentication
 
-- (id) initWithUsername: (NSString*)username password: (NSString*)password {
-    self = [super init];
-    if (self != nil) {
-        [headers setObject:[AuthUtil generateBasicAuthentication:username password:password] forKey:@"Authorization"];
-    }
-    return self;
-}
+- (Authentication*) initWithParam: (NSString*)paramName value: (NSString*)paramValue;
 
 @end

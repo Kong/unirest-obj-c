@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,16 +22,12 @@
  *
  */
 
-#import "CustomHeaderAuth.h"
+#import "MashapeJsonObjectResponse.h"
 
-@implementation CustomHeaderAuth
+@implementation MashapeJsonObjectResponse
 
-- (id) initWithKey: (NSString*)headerName value: (NSString*)headerValue {
-    self = [super init];
-    if (self != nil) {
-        [headers setObject:headerValue forKey:headerName];
-    }
-    return self;
+-(NSDictionary*) body {
+	return (NSDictionary*) [super body];
 }
 
 @end

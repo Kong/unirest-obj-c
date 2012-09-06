@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,15 +22,12 @@
  *
  */
 
-#import "QueryAuth.h"
+#import "MashapeStringResponse.h"
 
-@implementation QueryAuth
+@implementation MashapeStringResponse
 
-- (id) initWithKey: (NSString*)paramName value: (NSString*)paramValue {
-    self = [super init];
-    if (self != nil) {
-        [params setObject:paramValue forKey:paramName];
-    }
-    return self;
+-(NSString*) body {
+	return (NSString*) super.body;
 }
+
 @end

@@ -1,7 +1,7 @@
 /*
  * Mashape Objective-C Client library.
  *
- * Copyright (C) 2011 Mashape, Inc.
+ * Copyright (C) 2012 Mashape, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,31 +22,27 @@
  *
  */
 
-#import "AuthUtil.h"
-#import "../Base64/Base64.h"
+#import "MashapeAuthentication.h"
+#import "Utils/Base64.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-@interface AuthUtil()
+@interface MashapeAuthentication()
 // Private methods
 + (NSString*) hmacSha1:(NSString*) value key:(NSString*) key;
 @end
 
-@implementation AuthUtil
+@implementation MashapeAuthentication
 
-+ (NSString*) generateMashapeAuthentication:(NSString*)publicKey privateKey:(NSString*)privateKey {
-
-    NSString* hash = [self hmacSha1:publicKey key:privateKey];
-
-    NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
-    NSString* encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
+- (Authentication*) initWithMashapeKeys: (NSString*)publicKey privateKey: (NSString*)privateKey {
+    [super init];
     
-    return encodedHeaderValue;
-}
-
-+ (NSString*) generateBasicAuthentication:(NSString*)username password:(NSString*)password {
-    NSString *headerValue = [NSString stringWithFormat:@"%@:%@", username, password];
-    NSString *encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
-    return [NSString stringWithFormat:@"Basic %@", encodedHeaderValue];
+	NSString* hash = [MashapeAuthentication hmacSha1:publicKey key:privateKey];
+	NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
+	NSString* encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    [headers setObject:encodedHeaderValue forKey:@"X-Mashape-Authorization"];
+   
+    return self;
 }
 
 + (NSString*) hmacSha1:(NSString*) value key:(NSString*) key {
