@@ -29,7 +29,7 @@
 	id body;
 }
 
-@property(readonly) NSData *rawBody;
+@property(readonly, retain) NSData *rawBody;
 @property(readonly) NSDictionary *headers;
 @property(readonly) int code;
 @property(readwrite, retain) id body;

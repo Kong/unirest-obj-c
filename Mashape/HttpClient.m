@@ -134,7 +134,7 @@
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-                                   MashapeResponse* mashapeResponse = [self buildMashapeResponse:httpResponse data:data responseType:responseType];
+                                   MashapeResponse* mashapeResponse = [HttpUtils getResponse:responseType httpResponse:httpResponse data:data];
                                    [callback requestCompleted:mashapeResponse];
                                }];
      return nil;   
