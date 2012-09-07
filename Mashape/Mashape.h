@@ -31,3 +31,8 @@
 #import "Authentication/HeaderAuthentication.h"
 #import "Authentication/QueryAuthentication.h"
 #import "Authentication/MashapeAuthentication.h"
+#import "Response/MashapeResponse.h"
+#import "Response/MashapeBinaryResponse.h"
+#import "Response/MashapeJsonObjectResponse.h"
+#import "Response/MashapeJsonArrayResponse.h"
+#import "Response/MashapeStringResponse.h"
