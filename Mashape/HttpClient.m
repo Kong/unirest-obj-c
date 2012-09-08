@@ -32,7 +32,6 @@
 #import "Response/MashapeResponse.h"
 
 @interface HttpClient()
-+ (NSString*) encodeURI:(NSString*)value;
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
 @end
 
@@ -148,7 +147,7 @@
     for(id key in parameters) {
         id value = [parameters objectForKey:key];
         if ([value class] != [NSURL class] && value != nil) { // Don't encode files
-            NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [HttpClient encodeURI:key], @"=", [HttpClient encodeURI:value]];
+            NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [HttpUtils encodeURI:key], @"=", [HttpUtils encodeURI:value]];
             if (firstParameter) {
                 result = [NSString stringWithFormat:@"%@%@", result, parameter];
             } else {
@@ -159,16 +158,6 @@
     }
 
     return result;
-}
-
-+ (NSString*) encodeURI:(NSString*)value {
-	NSString* result = (NSString *)CFURLCreateStringByAddingPercentEscapes(
-                                                                                    NULL,
-                                                                                    (CFStringRef)value,
-                                                                                    NULL,
-                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                    kCFStringEncodingUTF8);
-	return result;
 }
 
 @end

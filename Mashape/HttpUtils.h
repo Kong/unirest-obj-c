@@ -30,5 +30,6 @@
 
 +(void) setRequestHeaders:(ContentType) contentType responseType:(ResponseType)responseType headers:(NSMutableDictionary**)headers;
 +(MashapeResponse*) getResponse:(ResponseType) responseType httpResponse:(NSHTTPURLResponse*) httpResponse data:(NSData*) data;
++ (NSString*) encodeURI:(NSString*)value;
 
 @end
