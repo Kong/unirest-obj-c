@@ -22,20 +22,18 @@
  *
  */
 
-#import "MashapeResponse.h"
-#import "MashapeDelegate.h"
-#import "HttpClient.h"
-#import "HttpUtils.h"
-#import "Authentication/Authentication.h"
-#import "Authentication/BasicAuthentication.h"
-#import "Authentication/HeaderAuthentication.h"
-#import "Authentication/QueryAuthentication.h"
-#import "Authentication/MashapeAuthentication.h"
-#import "Authentication/OAuthAuthentication.h"
-#import "Authentication/OAuth10aAuthentication.h"
-#import "Authentication/OAuth2Authentication.h"
-#import "Response/MashapeResponse.h"
-#import "Response/MashapeBinaryResponse.h"
-#import "Response/MashapeJsonObjectResponse.h"
-#import "Response/MashapeJsonArrayResponse.h"
-#import "Response/MashapeStringResponse.h"
+#import "OAuthAuthentication.h"
+
+@implementation OAuthAuthentication
+
+- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret redirectUrl:(NSString*) redirectUrl {
+    [super init];
+    
+    [parameters setObject:consumerKey forKey:CONSUMER_KEY];
+    [parameters setObject:consumerSecret forKey:CONSUMER_SECRET];
+    [parameters setObject:redirectUrl forKey:REDIRECT_URL];
+    
+    return self;
+}
+
+@end

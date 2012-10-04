@@ -27,6 +27,9 @@
 #import "Authentication/BasicAuthentication.h"
 #import "Authentication/QueryAuthentication.h"
 #import "Authentication/MashapeAuthentication.h"
+#import "Authentication/OAuthAuthentication.h"
+#import "Authentication/OAuth10aAuthentication.h"
+#import "Authentication/OAuth2Authentication.h"
 #import "HttpClient.h"
 #import "HttpUtils.h"
 #import "Response/MashapeResponse.h"
@@ -49,6 +52,26 @@
             [parameters addEntriesFromDictionary: authentication.parameters];
         } else if ([authentication isKindOfClass:[HeaderAuthentication class]]) {
             [headers addEntriesFromDictionary: authentication.headers];
+        } else if ([authentication isKindOfClass:[OAuth10aAuthentication class]]) {
+            NSMutableDictionary* authenticationParameters = [authentication parameters];
+            if ([url hasSuffix:@"/oauth_url"] == false && (((NSString*)[authenticationParameters objectForKey:ACCESS_TOKEN]).length == 0 ||
+                ((NSString*)[authenticationParameters objectForKey:ACCESS_SECRET]).length == 0)) {
+                @throw [NSException exceptionWithName:@"OAuthInvalidCredentials" reason:@"Before consuming OAuth endpoint, invoke [MashapeClient authorize:accessToken accessSecret:accessSecret] with not null values" userInfo:nil];
+            }
+            
+            [headers setObject:[authenticationParameters objectForKey:CONSUMER_KEY] forKey:@"x-mashape-oauth-consumerkey"];
+            [headers setObject:[authenticationParameters objectForKey:CONSUMER_SECRET] forKey:@"x-mashape-oauth-consumersecret"];
+            [headers setObject:[authenticationParameters objectForKey:ACCESS_TOKEN] forKey:@"x-mashape-oauth-accesstoken"];
+            [headers setObject:[authenticationParameters objectForKey:ACCESS_SECRET] forKey:@"x-mashape-oauth-accesssecret"];
+    
+        } else if ([authentication isKindOfClass:[OAuth2Authentication class]]) {
+            NSMutableDictionary* authenticationParameters = [authentication parameters];
+            if ([url hasSuffix:@"/oauth_url"] == false && (((NSString*)[authenticationParameters objectForKey:ACCESS_TOKEN]).length == 0)) {
+                @throw [NSException exceptionWithName:@"OAuthInvalidCredentials" reason:@"Before consuming OAuth endpoint, invoke [MashapeClient authorize:accessToken] with a not null value" userInfo:nil];
+            }
+         
+            [parameters setObject:[authenticationParameters objectForKey:ACCESS_TOKEN] forKey:ACCESS_TOKEN];
+        
         }
     }
     
