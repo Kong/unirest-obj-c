@@ -10,9 +10,9 @@
 
 @implementation OAuth2Authentication
 
-- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret redirectUrl:(NSString*) redirectUrl {
+- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret callbackUrl:(NSString*) callbackUrl {
     
-    return [super initWithCredentials:consumerKey consumerSecret:consumerSecret redirectUrl:redirectUrl];
+    return [super initWithCredentials:consumerKey consumerSecret:consumerSecret callbackUrl:callbackUrl];
     
 }
 

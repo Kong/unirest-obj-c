@@ -24,7 +24,7 @@
 
 #define CONSUMER_KEY @"consumerKey"
 #define CONSUMER_SECRET @"consumerSecret"
-#define REDIRECT_URL @"redirectUrl"
+#define CALLBACK_URL @"callbackUrl"
 #define ACCESS_TOKEN @"accessToken"
 #define ACCESS_SECRET @"accessSecret"
 
@@ -32,6 +32,6 @@
 
 @interface OAuthAuthentication : Authentication
 
-- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret redirectUrl:(NSString*) redirectUrl;
+- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret callbackUrl:(NSString*) callbackUrl;
 
 @end

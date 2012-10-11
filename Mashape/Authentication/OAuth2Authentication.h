@@ -10,6 +10,6 @@
 
 @interface OAuth2Authentication : OAuthAuthentication
 
-- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret redirectUrl:(NSString*) redirectUrl;
+- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret callbackUrl:(NSString*) callbackUrl;
 
 @end

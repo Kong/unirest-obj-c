@@ -26,12 +26,12 @@
 
 @implementation OAuthAuthentication
 
-- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret redirectUrl:(NSString*) redirectUrl {
+- (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret callbackUrl:(NSString*) callbackUrl {
     [super init];
     
     [parameters setObject:consumerKey forKey:CONSUMER_KEY];
     [parameters setObject:consumerSecret forKey:CONSUMER_SECRET];
-    [parameters setObject:redirectUrl forKey:REDIRECT_URL];
+    [parameters setObject:callbackUrl forKey:CALLBACK_URL];
     
     return self;
 }
