@@ -83,6 +83,9 @@
     }
     
     [HttpUtils setRequestHeaders:contentType responseType:responseType headers:&headers];
+
+    // Add cookies to the headers
+    [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
     
     NSString* querystring = [HttpClient dictionaryToQuerystring:parameters];
     
