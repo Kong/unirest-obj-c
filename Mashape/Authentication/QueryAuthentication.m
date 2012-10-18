@@ -27,7 +27,7 @@
 @implementation QueryAuthentication
 
 - (Authentication*) initWithParam: (NSString*)paramName value: (NSString*)paramValue {
-    [super init];
+    self = [super init];
     [parameters setObject:paramValue forKey:paramName];
     return self;
 }
