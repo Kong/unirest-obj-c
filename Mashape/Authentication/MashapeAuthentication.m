@@ -34,7 +34,7 @@
 @implementation MashapeAuthentication
 
 - (Authentication*) initWithMashapeKeys: (NSString*)publicKey privateKey: (NSString*)privateKey {
-    [super init];
+    self = [super init];
     
 	NSString* hash = [MashapeAuthentication hmacSha1:publicKey key:privateKey];
 	NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
