@@ -26,6 +26,6 @@
 
 @interface MashapeJsonObjectResponse : MashapeResponse
 
--(NSString*) body;
+-(NSDictionary*) body;
 
 @end

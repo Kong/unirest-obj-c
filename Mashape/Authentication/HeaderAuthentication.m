@@ -27,7 +27,7 @@
 @implementation HeaderAuthentication
 
 - (Authentication*) initWithKey: (NSString*)headerName value: (NSString*)headerValue {
-    [super init];
+    self = [super init];
     [headers setObject:headerValue forKey:headerName];
     return self;
 }

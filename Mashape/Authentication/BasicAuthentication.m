@@ -28,7 +28,7 @@
 @implementation BasicAuthentication
 
 - (Authentication*) initWithUsernameAndPassword: (NSString*)username password: (NSString*)password {
-    [super init];
+    self = [super init];
 
 	NSString *headerValue = [NSString stringWithFormat:@"%@:%@", username, password];
     NSString *encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
