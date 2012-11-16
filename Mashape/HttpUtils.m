@@ -71,9 +71,9 @@
 }
 
 + (NSString*) encodeURI:(NSString*)value {
-	NSString* result = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+	NSString* result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                     NULL,
-                                                                                    (CFStringRef)value,
+                                                                                    (__bridge CFStringRef)value,
                                                                                     NULL,
                                                                                     (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                     kCFStringEncodingUTF8);

@@ -27,7 +27,7 @@
 @implementation OAuthAuthentication
 
 - (Authentication*) initWithCredentials: (NSString*)consumerKey consumerSecret: (NSString*)consumerSecret callbackUrl:(NSString*) callbackUrl {
-    [super init];
+    self = [super init];
     
     [parameters setObject:consumerKey forKey:CONSUMER_KEY];
     [parameters setObject:consumerSecret forKey:CONSUMER_SECRET];

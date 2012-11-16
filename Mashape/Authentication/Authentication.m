@@ -35,7 +35,7 @@
 @synthesize parameters;
 
 - (Authentication*) init {
-    [super init];
+    self = [super init];
     self.headers = [[NSMutableDictionary alloc]init];
     self.parameters = [[NSMutableDictionary alloc]init];
     return self;
