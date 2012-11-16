@@ -32,6 +32,7 @@
 #import "Authentication/OAuth2Authentication.h"
 #import "HttpClient.h"
 #import "HttpUtils.h"
+#import "JSON/SBJson.h"
 #import "Response/MashapeResponse.h"
 
 @interface HttpClient()
@@ -146,7 +147,7 @@
                 [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
                 break;
             case C_JSON:
-                //TODO
+                body = [NSMutableData dataWithData:[[[parameters objectForKey:JSON_PARAM_BODY] JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
                 break;
         }
         

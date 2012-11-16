@@ -25,6 +25,8 @@
 #import "MashapeResponse.h"
 #import "MashapeDelegate.h"
 
+#define JSON_PARAM_BODY @"88416847677069008618"
+
 typedef enum HttpMethod
 {
 	GET,
