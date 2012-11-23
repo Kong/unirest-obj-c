@@ -35,88 +35,6 @@
 #import "JSON/SBJson.h"
 #import "Response/MashapeResponse.h"
 
-// Delegate to handle ansync http requests
-@interface HttpConnectionDelegate : NSObject <NSURLConnectionDataDelegate> {
-    NSMutableData* _receivedData;
-    id<MashapeDelegate> _callback;
-    ResponseType _responseType;
-}
-
-@property (strong, nonatomic, readonly) NSHTTPURLResponse* response;
-@property (nonatomic, readonly) BOOL finished;
-
-+(HttpConnectionDelegate*)delegateWithResponseType:(ResponseType)responseType callback:(id<MashapeDelegate>)callback;
-
--(id)initWithResponseType:(ResponseType)responseType callback:(id<MashapeDelegate>)callback;
--(MashapeResponse*)generateResponse;
-
-@end
-
-@implementation HttpConnectionDelegate
-
-@synthesize response = _response;
-@synthesize finished = _finished;
-
-+(HttpConnectionDelegate*)delegateWithResponseType:(ResponseType)responseType callback:(id<MashapeDelegate>)callback {
-    return [[HttpConnectionDelegate alloc] initWithResponseType:responseType callback:callback];
-}
-
--(id)initWithResponseType:(ResponseType)responseType callback:(id<MashapeDelegate>)callback {
-    self = [super init];
-    
-    if (self) {
-        
-        _callback = callback;
-        _responseType = responseType;
-        _finished = FALSE;
-        
-        // Init data object
-        _receivedData = [NSMutableData data];
-    }
-    
-    return self;
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    
-    // Save the last response and reset the data (in case of a redirect, for example)
-    _response = (NSHTTPURLResponse*) response;
-    [_receivedData setLength:0];
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    
-    // Add data to the already received
-    [_receivedData appendData:data];
-}
-
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Drop data
-    [_receivedData setLength:0];
-    [_callback requestCompleted:nil]; // Return nil when the request completes
-    _finished = TRUE;
-    
-    NSLog(@"Connection failed to load: %@", [error localizedDescription]);
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // Complete, return with the response
-    _finished = TRUE;
-    
-    // Don't parse the result when it doesn't needed
-    if (_callback != nil)
-        [_callback requestCompleted:[self generateResponse]];
-}
-
--(MashapeResponse *)generateResponse {
-    return [HttpUtils getResponse:_responseType httpResponse:_response data:_receivedData];
-}
-
-@end
-
-
-
-
 @interface HttpClient()
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
 @end
@@ -170,10 +88,12 @@
     // Add cookies to the headers
     [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
     
-    NSString* querystring = [HttpClient dictionaryToQuerystring:parameters];
-    
-    if (httpMethod == GET) {
-        url = [NSString stringWithFormat:@"%@?%@", url, querystring];
+    NSString* querystring = nil;
+    if (contentType != C_JSON) {
+        querystring = [HttpClient dictionaryToQuerystring:parameters];
+        if (httpMethod == GET) {
+            url = [NSString stringWithFormat:@"%@?%@", url, querystring];
+        }
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -239,22 +159,17 @@
         [request setHTTPBody:body];
     }
     if (callback == nil) {
-        
-        // Start request
-        HttpConnectionDelegate* delegate = [HttpConnectionDelegate delegateWithResponseType:responseType callback:nil];
-        [NSURLConnection connectionWithRequest:request delegate:delegate];
-        
-        // Wait for it to complete
-        while (![delegate finished]) {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        }
-        
-        return [delegate generateResponse];
-        
+        NSHTTPURLResponse * response = nil;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        return [HttpUtils getResponse:responseType httpResponse:response data:data];
     } else {
-        
-        // Make an async request - HttpConnectionDelegate will call the callback when the request finishes
-        [NSURLConnection connectionWithRequest:request delegate:[HttpConnectionDelegate delegateWithResponseType:responseType callback:callback]];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                   MashapeResponse* mashapeResponse = [HttpUtils getResponse:responseType httpResponse:httpResponse data:data];
+                                   [callback requestCompleted:mashapeResponse];
+                               }];
         
      return nil;   
     }
