@@ -26,6 +26,6 @@
 
 @interface MashapeAuthentication : HeaderAuthentication
 
-- (Authentication*) initWithMashapeKeys: (NSString*)publicKey privateKey: (NSString*)privateKey;
+- (Authentication*) initWithMashapeKey: (NSString*)mashapeKey;
 
 @end

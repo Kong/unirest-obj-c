@@ -33,14 +33,10 @@
 
 @implementation MashapeAuthentication
 
-- (Authentication*) initWithMashapeKeys: (NSString*)publicKey privateKey: (NSString*)privateKey {
+- (Authentication*) initWithMashapeKey: (NSString*)mashapeKey {
     self = [super init];
     
-	NSString* hash = [MashapeAuthentication hmacSha1:publicKey key:privateKey];
-	NSString* headerValue = [NSString stringWithFormat:@"%@:%@", publicKey, hash];
-	NSString* encodedHeaderValue = [Base64 encode:[headerValue dataUsingEncoding:NSUTF8StringEncoding]];
-	
-    [headers setObject:encodedHeaderValue forKey:@"X-Mashape-Authorization"];
+    [headers setObject:mashapeKey forKey:@"X-Mashape-Authorization"];
    
     return self;
 }
