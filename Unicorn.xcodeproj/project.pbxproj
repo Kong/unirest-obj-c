@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A9E78BAD16E9801F006B80FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BAC16E9801F006B80FD /* Foundation.framework */; };
+		A9E78BBC16E9801F006B80FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */; };
+		A9E78BBE16E9801F006B80FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBD16E9801F006B80FD /* UIKit.framework */; };
+		A9E78BBF16E9801F006B80FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BAC16E9801F006B80FD /* Foundation.framework */; };
+		A9E78BC216E9801F006B80FD /* libUnicorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BA916E9801F006B80FD /* libUnicorn.a */; };
+		A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9E78BC616E9801F006B80FD /* InfoPlist.strings */; };
+		A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BCA16E9801F006B80FD /* UnicornTests.m */; };
+		A9E78BF016E9803E006B80FD /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* HttpClient.m */; };
+		A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD716E9803E006B80FD /* HttpClientHelper.m */; };
+		A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD916E9803E006B80FD /* HttpRequest.m */; };
+		A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDB16E9803E006B80FD /* HttpRequestWithBody.m */; };
+		A9E78BF416E9803E006B80FD /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDE16E9803E006B80FD /* BaseRequest.m */; };
+		A9E78BF516E9803E006B80FD /* BodyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE016E9803E006B80FD /* BodyRequest.m */; };
+		A9E78BF616E9803E006B80FD /* MultipartRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE216E9803E006B80FD /* MultipartRequest.m */; };
+		A9E78BF716E9803E006B80FD /* SimpleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE416E9803E006B80FD /* SimpleRequest.m */; };
+		A9E78BF816E9803E006B80FD /* HttpBinaryResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE716E9803E006B80FD /* HttpBinaryResponse.m */; };
+		A9E78BF916E9803E006B80FD /* HttpJsonResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE916E9803E006B80FD /* HttpJsonResponse.m */; };
+		A9E78BFA16E9803E006B80FD /* HttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BEB16E9803E006B80FD /* HttpResponse.m */; };
+		A9E78BFB16E9803E006B80FD /* HttpStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BED16E9803E006B80FD /* HttpStringResponse.m */; };
+		A9E78BFC16E9803E006B80FD /* JsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BEF16E9803E006B80FD /* JsonNode.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A9E78BC016E9801F006B80FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9E78BA116E9801F006B80FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E78BA816E9801F006B80FD;
+			remoteInfo = Unicorn;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9E78BA716E9801F006B80FD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A9E78BA916E9801F006B80FD /* libUnicorn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnicorn.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E78BAC16E9801F006B80FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A9E78BB016E9801F006B80FD /* Unicorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unicorn-Prefix.pch"; sourceTree = "<group>"; };
+		A9E78BBA16E9801F006B80FD /* UnicornTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnicornTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A9E78BBD16E9801F006B80FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		A9E78BC516E9801F006B80FD /* UnicornTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnicornTests-Info.plist"; sourceTree = "<group>"; };
+		A9E78BC716E9801F006B80FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A9E78BC916E9801F006B80FD /* UnicornTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnicornTests.h; sourceTree = "<group>"; };
+		A9E78BCA16E9801F006B80FD /* UnicornTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnicornTests.m; sourceTree = "<group>"; };
+		A9E78BD416E9803E006B80FD /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
+		A9E78BD516E9803E006B80FD /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClient.m; sourceTree = "<group>"; };
+		A9E78BD616E9803E006B80FD /* HttpClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClientHelper.h; sourceTree = "<group>"; };
+		A9E78BD716E9803E006B80FD /* HttpClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClientHelper.m; sourceTree = "<group>"; };
+		A9E78BD816E9803E006B80FD /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		A9E78BD916E9803E006B80FD /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		A9E78BDA16E9803E006B80FD /* HttpRequestWithBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestWithBody.h; sourceTree = "<group>"; };
+		A9E78BDB16E9803E006B80FD /* HttpRequestWithBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestWithBody.m; sourceTree = "<group>"; };
+		A9E78BDD16E9803E006B80FD /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
+		A9E78BDE16E9803E006B80FD /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
+		A9E78BDF16E9803E006B80FD /* BodyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyRequest.h; sourceTree = "<group>"; };
+		A9E78BE016E9803E006B80FD /* BodyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyRequest.m; sourceTree = "<group>"; };
+		A9E78BE116E9803E006B80FD /* MultipartRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipartRequest.h; sourceTree = "<group>"; };
+		A9E78BE216E9803E006B80FD /* MultipartRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipartRequest.m; sourceTree = "<group>"; };
+		A9E78BE316E9803E006B80FD /* SimpleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleRequest.h; sourceTree = "<group>"; };
+		A9E78BE416E9803E006B80FD /* SimpleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleRequest.m; sourceTree = "<group>"; };
+		A9E78BE616E9803E006B80FD /* HttpBinaryResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpBinaryResponse.h; sourceTree = "<group>"; };
+		A9E78BE716E9803E006B80FD /* HttpBinaryResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpBinaryResponse.m; sourceTree = "<group>"; };
+		A9E78BE816E9803E006B80FD /* HttpJsonResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpJsonResponse.h; sourceTree = "<group>"; };
+		A9E78BE916E9803E006B80FD /* HttpJsonResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpJsonResponse.m; sourceTree = "<group>"; };
+		A9E78BEA16E9803E006B80FD /* HttpResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpResponse.h; sourceTree = "<group>"; };
+		A9E78BEB16E9803E006B80FD /* HttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpResponse.m; sourceTree = "<group>"; };
+		A9E78BEC16E9803E006B80FD /* HttpStringResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpStringResponse.h; sourceTree = "<group>"; };
+		A9E78BED16E9803E006B80FD /* HttpStringResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpStringResponse.m; sourceTree = "<group>"; };
+		A9E78BEE16E9803E006B80FD /* JsonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonNode.h; sourceTree = "<group>"; };
+		A9E78BEF16E9803E006B80FD /* JsonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonNode.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9E78BA616E9801F006B80FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E78BAD16E9801F006B80FD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E78BB616E9801F006B80FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E78BBC16E9801F006B80FD /* SenTestingKit.framework in Frameworks */,
+				A9E78BBE16E9801F006B80FD /* UIKit.framework in Frameworks */,
+				A9E78BBF16E9801F006B80FD /* Foundation.framework in Frameworks */,
+				A9E78BC216E9801F006B80FD /* libUnicorn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A9E78BA016E9801F006B80FD = {
+			isa = PBXGroup;
+			children = (
+				A9E78BAE16E9801F006B80FD /* Unicorn */,
+				A9E78BC316E9801F006B80FD /* UnicornTests */,
+				A9E78BAB16E9801F006B80FD /* Frameworks */,
+				A9E78BAA16E9801F006B80FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A9E78BAA16E9801F006B80FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BA916E9801F006B80FD /* libUnicorn.a */,
+				A9E78BBA16E9801F006B80FD /* UnicornTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9E78BAB16E9801F006B80FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BAC16E9801F006B80FD /* Foundation.framework */,
+				A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */,
+				A9E78BBD16E9801F006B80FD /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9E78BAE16E9801F006B80FD /* Unicorn */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BD416E9803E006B80FD /* HttpClient.h */,
+				A9E78BD516E9803E006B80FD /* HttpClient.m */,
+				A9E78BD616E9803E006B80FD /* HttpClientHelper.h */,
+				A9E78BD716E9803E006B80FD /* HttpClientHelper.m */,
+				A9E78BD816E9803E006B80FD /* HttpRequest.h */,
+				A9E78BD916E9803E006B80FD /* HttpRequest.m */,
+				A9E78BDA16E9803E006B80FD /* HttpRequestWithBody.h */,
+				A9E78BDB16E9803E006B80FD /* HttpRequestWithBody.m */,
+				A9E78BDC16E9803E006B80FD /* HttpRequest */,
+				A9E78BE516E9803E006B80FD /* HttpResponse */,
+				A9E78BAF16E9801F006B80FD /* Supporting Files */,
+			);
+			path = Unicorn;
+			sourceTree = "<group>";
+		};
+		A9E78BAF16E9801F006B80FD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BB016E9801F006B80FD /* Unicorn-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9E78BC316E9801F006B80FD /* UnicornTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BC916E9801F006B80FD /* UnicornTests.h */,
+				A9E78BCA16E9801F006B80FD /* UnicornTests.m */,
+				A9E78BC416E9801F006B80FD /* Supporting Files */,
+			);
+			path = UnicornTests;
+			sourceTree = "<group>";
+		};
+		A9E78BC416E9801F006B80FD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BC516E9801F006B80FD /* UnicornTests-Info.plist */,
+				A9E78BC616E9801F006B80FD /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9E78BDC16E9803E006B80FD /* HttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BDD16E9803E006B80FD /* BaseRequest.h */,
+				A9E78BDE16E9803E006B80FD /* BaseRequest.m */,
+				A9E78BDF16E9803E006B80FD /* BodyRequest.h */,
+				A9E78BE016E9803E006B80FD /* BodyRequest.m */,
+				A9E78BE116E9803E006B80FD /* MultipartRequest.h */,
+				A9E78BE216E9803E006B80FD /* MultipartRequest.m */,
+				A9E78BE316E9803E006B80FD /* SimpleRequest.h */,
+				A9E78BE416E9803E006B80FD /* SimpleRequest.m */,
+			);
+			path = HttpRequest;
+			sourceTree = "<group>";
+		};
+		A9E78BE516E9803E006B80FD /* HttpResponse */ = {
+			isa = PBXGroup;
+			children = (
+				A9E78BE616E9803E006B80FD /* HttpBinaryResponse.h */,
+				A9E78BE716E9803E006B80FD /* HttpBinaryResponse.m */,
+				A9E78BE816E9803E006B80FD /* HttpJsonResponse.h */,
+				A9E78BE916E9803E006B80FD /* HttpJsonResponse.m */,
+				A9E78BEA16E9803E006B80FD /* HttpResponse.h */,
+				A9E78BEB16E9803E006B80FD /* HttpResponse.m */,
+				A9E78BEC16E9803E006B80FD /* HttpStringResponse.h */,
+				A9E78BED16E9803E006B80FD /* HttpStringResponse.m */,
+				A9E78BEE16E9803E006B80FD /* JsonNode.h */,
+				A9E78BEF16E9803E006B80FD /* JsonNode.m */,
+			);
+			path = HttpResponse;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9E78BA816E9801F006B80FD /* Unicorn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unicorn" */;
+			buildPhases = (
+				A9E78BA516E9801F006B80FD /* Sources */,
+				A9E78BA616E9801F006B80FD /* Frameworks */,
+				A9E78BA716E9801F006B80FD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Unicorn;
+			productName = Unicorn;
+			productReference = A9E78BA916E9801F006B80FD /* libUnicorn.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A9E78BB916E9801F006B80FD /* UnicornTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnicornTests" */;
+			buildPhases = (
+				A9E78BB516E9801F006B80FD /* Sources */,
+				A9E78BB616E9801F006B80FD /* Frameworks */,
+				A9E78BB716E9801F006B80FD /* Resources */,
+				A9E78BB816E9801F006B80FD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9E78BC116E9801F006B80FD /* PBXTargetDependency */,
+			);
+			name = UnicornTests;
+			productName = UnicornTests;
+			productReference = A9E78BBA16E9801F006B80FD /* UnicornTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9E78BA116E9801F006B80FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Marco Palladino";
+			};
+			buildConfigurationList = A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unicorn" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A9E78BA016E9801F006B80FD;
+			productRefGroup = A9E78BAA16E9801F006B80FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9E78BA816E9801F006B80FD /* Unicorn */,
+				A9E78BB916E9801F006B80FD /* UnicornTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9E78BB716E9801F006B80FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9E78BB816E9801F006B80FD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9E78BA516E9801F006B80FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E78BF016E9803E006B80FD /* HttpClient.m in Sources */,
+				A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */,
+				A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */,
+				A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */,
+				A9E78BF416E9803E006B80FD /* BaseRequest.m in Sources */,
+				A9E78BF516E9803E006B80FD /* BodyRequest.m in Sources */,
+				A9E78BF616E9803E006B80FD /* MultipartRequest.m in Sources */,
+				A9E78BF716E9803E006B80FD /* SimpleRequest.m in Sources */,
+				A9E78BF816E9803E006B80FD /* HttpBinaryResponse.m in Sources */,
+				A9E78BF916E9803E006B80FD /* HttpJsonResponse.m in Sources */,
+				A9E78BFA16E9803E006B80FD /* HttpResponse.m in Sources */,
+				A9E78BFB16E9803E006B80FD /* HttpStringResponse.m in Sources */,
+				A9E78BFC16E9803E006B80FD /* JsonNode.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E78BB516E9801F006B80FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A9E78BC116E9801F006B80FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E78BA816E9801F006B80FD /* Unicorn */;
+			targetProxy = A9E78BC016E9801F006B80FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A9E78BC616E9801F006B80FD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E78BC716E9801F006B80FD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9E78BCC16E9801F006B80FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A9E78BCD16E9801F006B80FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A9E78BCF16E9801F006B80FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Unicorn.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A9E78BD016E9801F006B80FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Unicorn.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A9E78BD216E9801F006B80FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				INFOPLIST_FILE = "UnicornTests/UnicornTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A9E78BD316E9801F006B80FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				INFOPLIST_FILE = "UnicornTests/UnicornTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unicorn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E78BCC16E9801F006B80FD /* Debug */,
+				A9E78BCD16E9801F006B80FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unicorn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E78BCF16E9801F006B80FD /* Debug */,
+				A9E78BD016E9801F006B80FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnicornTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E78BD216E9801F006B80FD /* Debug */,
+				A9E78BD316E9801F006B80FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9E78BA116E9801F006B80FD /* Project object */;
+}
