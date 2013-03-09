@@ -14,7 +14,7 @@
 		A9E78BC216E9801F006B80FD /* libUnicorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BA916E9801F006B80FD /* libUnicorn.a */; };
 		A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9E78BC616E9801F006B80FD /* InfoPlist.strings */; };
 		A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BCA16E9801F006B80FD /* UnicornTests.m */; };
-		A9E78BF016E9803E006B80FD /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* HttpClient.m */; };
+		A9E78BF016E9803E006B80FD /* Unicorn.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* Unicorn.m */; };
 		A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD716E9803E006B80FD /* HttpClientHelper.m */; };
 		A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD916E9803E006B80FD /* HttpRequest.m */; };
 		A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDB16E9803E006B80FD /* HttpRequestWithBody.m */; };
@@ -62,8 +62,8 @@
 		A9E78BC716E9801F006B80FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9E78BC916E9801F006B80FD /* UnicornTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnicornTests.h; sourceTree = "<group>"; };
 		A9E78BCA16E9801F006B80FD /* UnicornTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnicornTests.m; sourceTree = "<group>"; };
-		A9E78BD416E9803E006B80FD /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
-		A9E78BD516E9803E006B80FD /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClient.m; sourceTree = "<group>"; };
+		A9E78BD416E9803E006B80FD /* Unicorn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unicorn.h; sourceTree = "<group>"; };
+		A9E78BD516E9803E006B80FD /* Unicorn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unicorn.m; sourceTree = "<group>"; };
 		A9E78BD616E9803E006B80FD /* HttpClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClientHelper.h; sourceTree = "<group>"; };
 		A9E78BD716E9803E006B80FD /* HttpClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClientHelper.m; sourceTree = "<group>"; };
 		A9E78BD816E9803E006B80FD /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		A9E78BAE16E9801F006B80FD /* Unicorn */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BD416E9803E006B80FD /* HttpClient.h */,
-				A9E78BD516E9803E006B80FD /* HttpClient.m */,
+				A9E78BD416E9803E006B80FD /* Unicorn.h */,
+				A9E78BD516E9803E006B80FD /* Unicorn.m */,
 				A9E78BD616E9803E006B80FD /* HttpClientHelper.h */,
 				A9E78BD716E9803E006B80FD /* HttpClientHelper.m */,
 				A9E78BD816E9803E006B80FD /* HttpRequest.h */,
@@ -317,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9E78BF016E9803E006B80FD /* HttpClient.m in Sources */,
+				A9E78BF016E9803E006B80FD /* Unicorn.m in Sources */,
 				A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */,
 				A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */,
 				A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */,
