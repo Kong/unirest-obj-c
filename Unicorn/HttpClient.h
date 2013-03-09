@@ -4,7 +4,7 @@
 #import "HttpRequest/MultipartRequest.h"
 #import "HttpRequest/BodyRequest.h"
 
-@interface HttpClient : NSObject 
+@interface Unicorn : NSObject
 
 +(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
 

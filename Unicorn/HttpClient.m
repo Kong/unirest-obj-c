@@ -1,10 +1,10 @@
 #import "HttpClient.h"
 
-@interface HttpClient()
+@interface Unicorn()
 + (id) getConfig:instance config:(void (^)(id)) config;
 @end
 
-@implementation HttpClient
+@implementation Unicorn
 
 + (id) getConfig:instance config:(void (^)(id)) config {
     if (config) {

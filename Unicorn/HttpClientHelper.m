@@ -52,7 +52,7 @@
     
     NSMutableDictionary* headers = [[request headers] mutableCopy];
     
-    [headers setValue:@"mashape-objectivec/3.0" forKey:@"user-agent"];
+    [headers setValue:@"unicorn-objc/1.0" forKey:@"user-agent"];
     
     // Add cookies to the headers
     [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[request url]]]]];

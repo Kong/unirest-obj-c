@@ -489,6 +489,7 @@
 				A9E78BD016E9801F006B80FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnicornTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +498,7 @@
 				A9E78BD316E9801F006B80FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
