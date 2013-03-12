@@ -17,7 +17,6 @@
 +(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
 +(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
 
-+(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config;
++(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
 
 @end

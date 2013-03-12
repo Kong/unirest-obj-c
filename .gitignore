@@ -1,6 +1,6 @@
 .DS_Store
-project.xcworkspace
 xcuserdata
 .arc
 .arcconfig
 .internal/
+project.xcworkspace
