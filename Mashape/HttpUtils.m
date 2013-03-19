@@ -71,12 +71,12 @@
 }
 
 + (NSString*) encodeURI:(NSString*)value {
-	NSString* result = (NSString *)CFURLCreateStringByAddingPercentEscapes(
-                                                                                    NULL,
-                                                                                    (CFStringRef)value,
-                                                                                    NULL,
-                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                    kCFStringEncodingUTF8);
+	NSString* result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+	                                                                                NULL,
+	                                                                                (CFStringRef)value,
+	                                                                                NULL,
+	                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+	                                                                                kCFStringEncodingUTF8));																				
 	return result;
 }
 
