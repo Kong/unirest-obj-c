@@ -12,79 +12,89 @@ Download the Objective-C Unicorn Library from Github and import the folder into 
 ### Creating Request
 So you're probably wondering how using Unicorn makes creating requests in Objective-C easier, let's look at a working example:
 
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+```objective-c
+NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-    HttpJsonResponse* response = [[Unicorn post:^(MultipartRequest* request) {
-      [request setUrl:@"http://httpbin.org/post"];
-      [request setHeaders:headers];
-      [request setParameters:parameters];
-    }] asJson];
+HttpJsonResponse* response = [[Unicorn post:^(MultipartRequest* request) {
+  [request setUrl:@"http://httpbin.org/post"];
+  [request setHeaders:headers];
+  [request setParameters:parameters];
+}] asJson];
+```
     
 Just like in the Unicorn Java library the Objective-C library supports multiple response types given as the last parameter. In the example above we use `asJson` to get a JSON response, likewise there are `asBinary` and `asString` for responses of other nature such as file data and hypermedia responses.
 
 ### Asynchronous Requests
 For non-blocking requests you will want to make an asychronous request to keep your application going while data is fetched or updated in the background, doing so with Unicorn is extremely easy with barely any code change from the previous example:
 
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+```objective-c
+NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-    [[Unicorn post:^(MultipartRequest* request) {
-      [request setUrl:@"http://httpbin.org/post"];
-      [request setHeaders:headers];
-      [request setParameters:parameters];
-    }] asJsonAsync:^(HttpJsonResponse* response) {
-      // This is the asyncronous callback block
-      int code = [response code];
-      NSDictionary* responseHeaders = [response headers];
-      JsonNode* body = [response body];
-      NSData* rawBody = [response rawBody];
-    }];
+[[Unicorn post:^(MultipartRequest* request) {
+  [request setUrl:@"http://httpbin.org/post"];
+  [request setHeaders:headers];
+  [request setParameters:parameters];
+}] asJsonAsync:^(HttpJsonResponse* response) {
+  // This is the asyncronous callback block
+  int code = [response code];
+  NSDictionary* responseHeaders = [response headers];
+  JsonNode* body = [response body];
+  NSData* rawBody = [response rawBody];
+}];
+```
     
 ### File Uploads
 Transferring files through request with Unicorn in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `MultipartRequest` like so:
 
+```objective-c
 NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-    NSURL file = nil;
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", file, @"file", nil];
+NSURL file = nil;
+NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", file, @"file", nil];
 
-    HttpJsonResponse* response = [[Unicorn post:^(MultipartRequest* request) {
-      [request setUrl:@"http://httpbin.org/post"];
-      [request setHeaders:headers];
-      [request setParameters:parameters];
-    }] asJson];
+HttpJsonResponse* response = [[Unicorn post:^(MultipartRequest* request) {
+  [request setUrl:@"http://httpbin.org/post"];
+  [request setHeaders:headers];
+  [request setParameters:parameters];
+}] asJson];
+```
 
  
 ### Custom Entity Body
 To send a custom body such as JSON simply serialize your data utilizing the `NSJSONSerialization` with a `BodyRequest` and `[method]Entity` instead of just `[method]` block like so:
 
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+```objective-c
+NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-    HttpJsonResponse* response = [[Unicorn postEntity:^(BodyRequest* request) {
-      [request setUrl:@"http://httpbin.org/post"];
-      [request setHeaders:headers];
-      // Converting NSDictionary to JSON:
-      [request setBody:[NSJSONSerialization dataWithJSONObject:headers options:0 error:nil]];
-    }] asJson];
+HttpJsonResponse* response = [[Unicorn postEntity:^(BodyRequest* request) {
+  [request setUrl:@"http://httpbin.org/post"];
+  [request setHeaders:headers];
+  // Converting NSDictionary to JSON:
+  [request setBody:[NSJSONSerialization dataWithJSONObject:headers options:0 error:nil]];
+}] asJson];
+```
 
 
 
 ### Request Reference
 The Objective-C Unicorn library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 
-    +(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
+```objective-c
++(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
 
-    +(HttpRequestWithBody*) post:(void (^)(MultipartRequest*)) config;
-    +(HttpRequestWithBody*) postEntity:(void (^)(BodyRequest*)) config;
++(HttpRequestWithBody*) post:(void (^)(MultipartRequest*)) config;
++(HttpRequestWithBody*) postEntity:(void (^)(BodyRequest*)) config;
 
-    +(HttpRequestWithBody*) put:(void (^)(MultipartRequest*)) config;
-    +(HttpRequestWithBody*) putEntity:(void (^)(BodyRequest*)) config;
++(HttpRequestWithBody*) put:(void (^)(MultipartRequest*)) config;
++(HttpRequestWithBody*) putEntity:(void (^)(BodyRequest*)) config;
 
-    +(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
-    +(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
++(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
++(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
 
-    +(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
++(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
+```
 
 `HttpRequest` `[Unicorn get:` `(void (^)(SimpleRequest*))] config;`  
 Sends equivalent request with method type to given URL
@@ -105,14 +115,16 @@ Sends equivalent request with method type to given URL
 ### Response Reference
 The `HttpRequest` and `HttpRequestWithBody` can then be executed by calling one of:
 
-    -(HttpStringResponse*) asString;
-    -(void) asStringAsync:(void (^)(HttpStringResponse*)) response;
+```objective-c
+-(HttpStringResponse*) asString;
+-(void) asStringAsync:(void (^)(HttpStringResponse*)) response;
 
-    -(HttpBinaryResponse*) asBinary;
-    -(void) asBinaryAsync:(void (^)(HttpBinaryResponse*)) response;
+-(HttpBinaryResponse*) asBinary;
+-(void) asBinaryAsync:(void (^)(HttpBinaryResponse*)) response;
 
-    -(HttpJsonResponse*) asJson;
-    -(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response;
+-(HttpJsonResponse*) asJson;
+-(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response;
+```
 
 `-(HttpStringResponse*)` `asString;`  
 Blocking request call with response returned as string for Hypermedia APIs or other.
