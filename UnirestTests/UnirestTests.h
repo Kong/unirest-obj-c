@@ -25,6 +25,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface UnicornTests : SenTestCase
+@interface UnirestTests : SenTestCase
 
 @end

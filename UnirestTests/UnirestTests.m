@@ -23,9 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "UnicornTests.h"
+#import "UnirestTests.h"
 
-@implementation UnicornTests
+@implementation UnirestTests
 
 - (void)setUp
 {
@@ -43,7 +43,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in UnicornTests");
+    STFail(@"Unit tests are not implemented yet in UnirestTests");
 }
 
 @end

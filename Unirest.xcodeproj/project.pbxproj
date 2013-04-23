@@ -13,7 +13,7 @@
 		A9E78BBF16E9801F006B80FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BAC16E9801F006B80FD /* Foundation.framework */; };
 		A9E78BC216E9801F006B80FD /* libUnirest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BA916E9801F006B80FD /* libUnirest.a */; };
 		A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9E78BC616E9801F006B80FD /* InfoPlist.strings */; };
-		A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BCA16E9801F006B80FD /* UnicornTests.m */; };
+		A9E78BCB16E9801F006B80FD /* UnirestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BCA16E9801F006B80FD /* UnirestTests.m */; };
 		A9E78BF016E9803E006B80FD /* Unirest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* Unirest.m */; };
 		A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD716E9803E006B80FD /* HttpClientHelper.m */; };
 		A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD916E9803E006B80FD /* HttpRequest.m */; };
@@ -35,7 +35,7 @@
 			containerPortal = A9E78BA116E9801F006B80FD /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A9E78BA816E9801F006B80FD;
-			remoteInfo = Unicorn;
+			remoteInfo = Unirest;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -60,8 +60,8 @@
 		A9E78BBD16E9801F006B80FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A9E78BC516E9801F006B80FD /* UnirestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnirestTests-Info.plist"; sourceTree = "<group>"; };
 		A9E78BC716E9801F006B80FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A9E78BC916E9801F006B80FD /* UnicornTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnicornTests.h; sourceTree = "<group>"; };
-		A9E78BCA16E9801F006B80FD /* UnicornTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnicornTests.m; sourceTree = "<group>"; };
+		A9E78BC916E9801F006B80FD /* UnirestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnirestTests.h; sourceTree = "<group>"; };
+		A9E78BCA16E9801F006B80FD /* UnirestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnirestTests.m; sourceTree = "<group>"; };
 		A9E78BD416E9803E006B80FD /* Unirest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unirest.h; sourceTree = "<group>"; };
 		A9E78BD516E9803E006B80FD /* Unirest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unirest.m; sourceTree = "<group>"; };
 		A9E78BD616E9803E006B80FD /* HttpClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClientHelper.h; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 				A9E78BAF16E9801F006B80FD /* Supporting Files */,
 			);
 			name = Unirest;
-			path = Unicorn;
+			path = Unirest;
 			sourceTree = "<group>";
 		};
 		A9E78BAF16E9801F006B80FD /* Supporting Files */ = {
@@ -172,12 +172,12 @@
 		A9E78BC316E9801F006B80FD /* UnirestTests */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BC916E9801F006B80FD /* UnicornTests.h */,
-				A9E78BCA16E9801F006B80FD /* UnicornTests.m */,
+				A9E78BC916E9801F006B80FD /* UnirestTests.h */,
+				A9E78BCA16E9801F006B80FD /* UnirestTests.m */,
 				A9E78BC416E9801F006B80FD /* Supporting Files */,
 			);
 			name = UnirestTests;
-			path = UnicornTests;
+			path = UnirestTests;
 			sourceTree = "<group>";
 		};
 		A9E78BC416E9801F006B80FD /* Supporting Files */ = {
@@ -237,7 +237,7 @@
 			dependencies = (
 			);
 			name = Unirest;
-			productName = Unicorn;
+			productName = Unirest;
 			productReference = A9E78BA916E9801F006B80FD /* libUnirest.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -256,7 +256,7 @@
 				A9E78BC116E9801F006B80FD /* PBXTargetDependency */,
 			);
 			name = UnirestTests;
-			productName = UnicornTests;
+			productName = UnirestTests;
 			productReference = A9E78BBA16E9801F006B80FD /* UnirestTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -339,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */,
+				A9E78BCB16E9801F006B80FD /* UnirestTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,9 +420,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/Unicorn.dst;
+				DSTROOT = /tmp/Unirest.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unirest-Prefix.pch";
+				GCC_PREFIX_HEADER = "Unirest/Unirest-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Unirest;
 				SKIP_INSTALL = YES;
@@ -433,9 +433,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/Unicorn.dst;
+				DSTROOT = /tmp/Unirest.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unirest-Prefix.pch";
+				GCC_PREFIX_HEADER = "Unirest/Unirest-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Unirest;
 				SKIP_INSTALL = YES;
@@ -450,8 +450,8 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
-				INFOPLIST_FILE = "UnicornTests/UnirestTests-Info.plist";
+				GCC_PREFIX_HEADER = "Unirest/Unirest-Prefix.pch";
+				INFOPLIST_FILE = "UnirestTests/UnirestTests-Info.plist";
 				PRODUCT_NAME = UnirestTests;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -465,8 +465,8 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
-				INFOPLIST_FILE = "UnicornTests/UnirestTests-Info.plist";
+				GCC_PREFIX_HEADER = "Unirest/Unirest-Prefix.pch";
+				INFOPLIST_FILE = "UnirestTests/UnirestTests-Info.plist";
 				PRODUCT_NAME = UnirestTests;
 				WRAPPER_EXTENSION = octest;
 			};
