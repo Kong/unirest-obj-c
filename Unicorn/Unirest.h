@@ -29,7 +29,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #import "HttpRequest/MultipartRequest.h"
 #import "HttpRequest/BodyRequest.h"
 
-@interface Unicorn : NSObject
+@interface Unirest : NSObject
 
 +(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
 

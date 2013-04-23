@@ -23,13 +23,13 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Unicorn.h"
+#import "Unirest.h"
 
-@interface Unicorn()
+@interface Unirest()
 + (id) getConfig:instance config:(void (^)(id)) config;
 @end
 
-@implementation Unicorn
+@implementation Unirest
 
 + (id) getConfig:instance config:(void (^)(id)) config {
     if (config) {

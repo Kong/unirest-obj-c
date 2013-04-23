@@ -11,10 +11,10 @@
 		A9E78BBC16E9801F006B80FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */; };
 		A9E78BBE16E9801F006B80FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBD16E9801F006B80FD /* UIKit.framework */; };
 		A9E78BBF16E9801F006B80FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BAC16E9801F006B80FD /* Foundation.framework */; };
-		A9E78BC216E9801F006B80FD /* libUnicorn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BA916E9801F006B80FD /* libUnicorn.a */; };
+		A9E78BC216E9801F006B80FD /* libUnirest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BA916E9801F006B80FD /* libUnirest.a */; };
 		A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9E78BC616E9801F006B80FD /* InfoPlist.strings */; };
 		A9E78BCB16E9801F006B80FD /* UnicornTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BCA16E9801F006B80FD /* UnicornTests.m */; };
-		A9E78BF016E9803E006B80FD /* Unicorn.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* Unicorn.m */; };
+		A9E78BF016E9803E006B80FD /* Unirest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD516E9803E006B80FD /* Unirest.m */; };
 		A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD716E9803E006B80FD /* HttpClientHelper.m */; };
 		A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BD916E9803E006B80FD /* HttpRequest.m */; };
 		A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDB16E9803E006B80FD /* HttpRequestWithBody.m */; };
@@ -52,18 +52,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A9E78BA916E9801F006B80FD /* libUnicorn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnicorn.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E78BA916E9801F006B80FD /* libUnirest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnirest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E78BAC16E9801F006B80FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A9E78BB016E9801F006B80FD /* Unicorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unicorn-Prefix.pch"; sourceTree = "<group>"; };
-		A9E78BBA16E9801F006B80FD /* UnicornTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnicornTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E78BB016E9801F006B80FD /* Unirest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
+		A9E78BBA16E9801F006B80FD /* UnirestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnirestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A9E78BBD16E9801F006B80FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		A9E78BC516E9801F006B80FD /* UnicornTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnicornTests-Info.plist"; sourceTree = "<group>"; };
+		A9E78BC516E9801F006B80FD /* UnirestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnirestTests-Info.plist"; sourceTree = "<group>"; };
 		A9E78BC716E9801F006B80FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9E78BC916E9801F006B80FD /* UnicornTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnicornTests.h; sourceTree = "<group>"; };
 		A9E78BCA16E9801F006B80FD /* UnicornTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnicornTests.m; sourceTree = "<group>"; };
-		A9E78BD416E9803E006B80FD /* Unicorn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unicorn.h; sourceTree = "<group>"; };
-		A9E78BD516E9803E006B80FD /* Unicorn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unicorn.m; sourceTree = "<group>"; };
+		A9E78BD416E9803E006B80FD /* Unirest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unirest.h; sourceTree = "<group>"; };
+		A9E78BD516E9803E006B80FD /* Unirest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unirest.m; sourceTree = "<group>"; };
 		A9E78BD616E9803E006B80FD /* HttpClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClientHelper.h; sourceTree = "<group>"; };
 		A9E78BD716E9803E006B80FD /* HttpClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClientHelper.m; sourceTree = "<group>"; };
 		A9E78BD816E9803E006B80FD /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 				A9E78BBC16E9801F006B80FD /* SenTestingKit.framework in Frameworks */,
 				A9E78BBE16E9801F006B80FD /* UIKit.framework in Frameworks */,
 				A9E78BBF16E9801F006B80FD /* Foundation.framework in Frameworks */,
-				A9E78BC216E9801F006B80FD /* libUnicorn.a in Frameworks */,
+				A9E78BC216E9801F006B80FD /* libUnirest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,8 +116,8 @@
 		A9E78BA016E9801F006B80FD = {
 			isa = PBXGroup;
 			children = (
-				A9E78BAE16E9801F006B80FD /* Unicorn */,
-				A9E78BC316E9801F006B80FD /* UnicornTests */,
+				A9E78BAE16E9801F006B80FD /* Unirest */,
+				A9E78BC316E9801F006B80FD /* UnirestTests */,
 				A9E78BAB16E9801F006B80FD /* Frameworks */,
 				A9E78BAA16E9801F006B80FD /* Products */,
 			);
@@ -126,8 +126,8 @@
 		A9E78BAA16E9801F006B80FD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BA916E9801F006B80FD /* libUnicorn.a */,
-				A9E78BBA16E9801F006B80FD /* UnicornTests.octest */,
+				A9E78BA916E9801F006B80FD /* libUnirest.a */,
+				A9E78BBA16E9801F006B80FD /* UnirestTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,11 +142,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A9E78BAE16E9801F006B80FD /* Unicorn */ = {
+		A9E78BAE16E9801F006B80FD /* Unirest */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BD416E9803E006B80FD /* Unicorn.h */,
-				A9E78BD516E9803E006B80FD /* Unicorn.m */,
+				A9E78BD416E9803E006B80FD /* Unirest.h */,
+				A9E78BD516E9803E006B80FD /* Unirest.m */,
 				A9E78BD616E9803E006B80FD /* HttpClientHelper.h */,
 				A9E78BD716E9803E006B80FD /* HttpClientHelper.m */,
 				A9E78BD816E9803E006B80FD /* HttpRequest.h */,
@@ -157,31 +157,33 @@
 				A9E78BE516E9803E006B80FD /* HttpResponse */,
 				A9E78BAF16E9801F006B80FD /* Supporting Files */,
 			);
+			name = Unirest;
 			path = Unicorn;
 			sourceTree = "<group>";
 		};
 		A9E78BAF16E9801F006B80FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BB016E9801F006B80FD /* Unicorn-Prefix.pch */,
+				A9E78BB016E9801F006B80FD /* Unirest-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A9E78BC316E9801F006B80FD /* UnicornTests */ = {
+		A9E78BC316E9801F006B80FD /* UnirestTests */ = {
 			isa = PBXGroup;
 			children = (
 				A9E78BC916E9801F006B80FD /* UnicornTests.h */,
 				A9E78BCA16E9801F006B80FD /* UnicornTests.m */,
 				A9E78BC416E9801F006B80FD /* Supporting Files */,
 			);
+			name = UnirestTests;
 			path = UnicornTests;
 			sourceTree = "<group>";
 		};
 		A9E78BC416E9801F006B80FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A9E78BC516E9801F006B80FD /* UnicornTests-Info.plist */,
+				A9E78BC516E9801F006B80FD /* UnirestTests-Info.plist */,
 				A9E78BC616E9801F006B80FD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -222,9 +224,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9E78BA816E9801F006B80FD /* Unicorn */ = {
+		A9E78BA816E9801F006B80FD /* Unirest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unicorn" */;
+			buildConfigurationList = A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unirest" */;
 			buildPhases = (
 				A9E78BA516E9801F006B80FD /* Sources */,
 				A9E78BA616E9801F006B80FD /* Frameworks */,
@@ -234,14 +236,14 @@
 			);
 			dependencies = (
 			);
-			name = Unicorn;
+			name = Unirest;
 			productName = Unicorn;
-			productReference = A9E78BA916E9801F006B80FD /* libUnicorn.a */;
+			productReference = A9E78BA916E9801F006B80FD /* libUnirest.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A9E78BB916E9801F006B80FD /* UnicornTests */ = {
+		A9E78BB916E9801F006B80FD /* UnirestTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnicornTests" */;
+			buildConfigurationList = A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnirestTests" */;
 			buildPhases = (
 				A9E78BB516E9801F006B80FD /* Sources */,
 				A9E78BB616E9801F006B80FD /* Frameworks */,
@@ -253,9 +255,9 @@
 			dependencies = (
 				A9E78BC116E9801F006B80FD /* PBXTargetDependency */,
 			);
-			name = UnicornTests;
+			name = UnirestTests;
 			productName = UnicornTests;
-			productReference = A9E78BBA16E9801F006B80FD /* UnicornTests.octest */;
+			productReference = A9E78BBA16E9801F006B80FD /* UnirestTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -267,7 +269,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Marco Palladino";
 			};
-			buildConfigurationList = A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unicorn" */;
+			buildConfigurationList = A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unirest" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -279,8 +281,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A9E78BA816E9801F006B80FD /* Unicorn */,
-				A9E78BB916E9801F006B80FD /* UnicornTests */,
+				A9E78BA816E9801F006B80FD /* Unirest */,
+				A9E78BB916E9801F006B80FD /* UnirestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -317,7 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9E78BF016E9803E006B80FD /* Unicorn.m in Sources */,
+				A9E78BF016E9803E006B80FD /* Unirest.m in Sources */,
 				A9E78BF116E9803E006B80FD /* HttpClientHelper.m in Sources */,
 				A9E78BF216E9803E006B80FD /* HttpRequest.m in Sources */,
 				A9E78BF316E9803E006B80FD /* HttpRequestWithBody.m in Sources */,
@@ -346,7 +348,7 @@
 /* Begin PBXTargetDependency section */
 		A9E78BC116E9801F006B80FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A9E78BA816E9801F006B80FD /* Unicorn */;
+			target = A9E78BA816E9801F006B80FD /* Unirest */;
 			targetProxy = A9E78BC016E9801F006B80FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -420,9 +422,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Unicorn.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				GCC_PREFIX_HEADER = "Unicorn/Unirest-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Unirest;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -433,9 +435,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Unicorn.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
+				GCC_PREFIX_HEADER = "Unicorn/Unirest-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Unirest;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -449,8 +451,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
-				INFOPLIST_FILE = "UnicornTests/UnicornTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "UnicornTests/UnirestTests-Info.plist";
+				PRODUCT_NAME = UnirestTests;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -464,8 +466,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Unicorn/Unicorn-Prefix.pch";
-				INFOPLIST_FILE = "UnicornTests/UnicornTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "UnicornTests/UnirestTests-Info.plist";
+				PRODUCT_NAME = UnirestTests;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -473,7 +475,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unicorn" */ = {
+		A9E78BA416E9801F006B80FD /* Build configuration list for PBXProject "Unirest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9E78BCC16E9801F006B80FD /* Debug */,
@@ -482,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unicorn" */ = {
+		A9E78BCE16E9801F006B80FD /* Build configuration list for PBXNativeTarget "Unirest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9E78BCF16E9801F006B80FD /* Debug */,
@@ -491,7 +493,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnicornTests" */ = {
+		A9E78BD116E9801F006B80FD /* Build configuration list for PBXNativeTarget "UnirestTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9E78BD216E9801F006B80FD /* Debug */,
