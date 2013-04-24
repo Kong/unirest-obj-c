@@ -7,7 +7,7 @@ Documentation
 -------------------
 
 ### Installing
-Download the Objective-C Unirest Library from Github and import the folder into your project to begin utilizing unirests amazing powers today!
+Download the Objective-C Unirest Library from Github and import the folder into your project to begin utilizing Unirest's amazing powers today!
 
 ### Creating Request
 So you're probably wondering how using Unirest makes creating requests in Objective-C easier, let's look at a working example:
@@ -96,19 +96,19 @@ The Objective-C unirest library uses configuration blocks of type SimpleRequest,
 +(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
 ```
 
-`HttpRequest` `[unirest get:` `(void (^)(SimpleRequest*))] config;`  
+`HttpRequest` `[Unirest get:` `(void (^)(SimpleRequest*))] config;`  
 Sends equivalent request with method type to given URL
 
-`HttpRequestWithBody` `[unirest (post|postEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+`HttpRequestWithBody` `[Unirest (post|postEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
 Sends equivalent request with method type to given URL
 
-`HttpRequestWithBody` `[unirest (put|putEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+`HttpRequestWithBody` `[Unirest (put|putEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
 Sends equivalent request with method type to given URL
 
-`HttpRequestWithBody` `[unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+`HttpRequestWithBody` `[Unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
 Sends equivalent request with method type to given URL
 
-`HttpRequest` `[unirest delete:` `(void (^)(SimpleRequest*))] config;`  
+`HttpRequest` `[Unirest delete:` `(void (^)(SimpleRequest*))] config;`  
 Sends equivalent request with method type to given URL
 
 
