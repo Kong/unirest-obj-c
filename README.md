@@ -16,7 +16,7 @@ So you're probably wondering how using Unirest makes creating requests in Object
 NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
 NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-HttpJsonResponse* response = [[unirest post:^(MultipartRequest* request) {
+HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -32,7 +32,7 @@ For non-blocking requests you will want to make an asychronous request to keep y
 NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
 NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-[[unirest post:^(MultipartRequest* request) {
+[[Unirest post:^(MultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -53,7 +53,7 @@ NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application
 NSURL file = nil;
 NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", file, @"file", nil];
 
-HttpJsonResponse* response = [[unirest post:^(MultipartRequest* request) {
+HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -68,7 +68,7 @@ To send a custom body such as JSON simply serialize your data utilizing the `NSJ
 NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
 NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
 
-HttpJsonResponse* response = [[unirest postEntity:^(BodyRequest* request) {
+HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   // Converting NSDictionary to JSON:
