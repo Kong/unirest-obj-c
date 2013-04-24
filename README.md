@@ -7,7 +7,13 @@ Documentation
 -------------------
 
 ### Installing
-Download the Objective-C Unirest Library from Github and import the folder into your project to begin utilizing Unirest's amazing powers today!
+Download the Objective-C unirest Library from <a href="https://github.com/Mashape/unirest-obj-c">GitHub</a> and import the folder into your project
+
+The Unirest-Obj-C client library requires ARC (Automatic Reference Counting) to be enabled in your XCode project. To enable ARC select your project or target and then go to Build Settings and under the section Apple LLVM compiler 3.0 - Language you will see the option Objective-C Automatic Reference Counting:
+
+<img src="http://unirest.io/img/arc-enable.png" alt="Enable ARC in xcode"/>
+
+For existing projects, fortunately XCode offers a tool to convert existing code to ARC, which is available at Edit -> Refactor  -> Convert to Objective-C ARC
 
 ### Creating Request
 So you're probably wondering how using Unirest makes creating requests in Objective-C easier, let's look at a working example:
