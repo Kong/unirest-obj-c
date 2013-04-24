@@ -1,16 +1,16 @@
-unirest Objective-C
+Unirest Objective-C
 ============================================
 
-unirest is a set of lightweight HTTP libraries available in PHP, Ruby, Python, Java, Objective-C.
+Unirest is a set of lightweight HTTP libraries available in PHP, Ruby, Python, Java, Objective-C.
 
 Documentation
 -------------------
 
 ### Installing
-Download the Objective-C unirest Library from Github and import the folder into your project to begin utilizing unirests amazing powers today!
+Download the Objective-C Unirest Library from Github and import the folder into your project to begin utilizing unirests amazing powers today!
 
 ### Creating Request
-So you're probably wondering how using unirest makes creating requests in Objective-C easier, let's look at a working example:
+So you're probably wondering how using Unirest makes creating requests in Objective-C easier, let's look at a working example:
 
 ```objective-c
 NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
@@ -23,7 +23,7 @@ HttpJsonResponse* response = [[unirest post:^(MultipartRequest* request) {
 }] asJson];
 ```
     
-Just like in the unirest Java library the Objective-C library supports multiple response types given as the last parameter. In the example above we use `asJson` to get a JSON response, likewise there are `asBinary` and `asString` for responses of other nature such as file data and hypermedia responses.
+Just like in the Unirest Java library the Objective-C library supports multiple response types given as the last parameter. In the example above we use `asJson` to get a JSON response, likewise there are `asBinary` and `asString` for responses of other nature such as file data and hypermedia responses.
 
 ### Asynchronous Requests
 For non-blocking requests you will want to make an asychronous request to keep your application going while data is fetched or updated in the background, doing so with unirest is extremely easy with barely any code change from the previous example:
