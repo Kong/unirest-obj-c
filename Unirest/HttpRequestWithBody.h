@@ -29,13 +29,16 @@
     
     NSData* _body;
     NSDictionary* _parameters;
-    
+    NSArray* _parametersOrder;
 }
 
 @property(readwrite) NSData* body;
 @property(readwrite) NSDictionary* parameters;
+@property(readwrite) NSArray* parametersOrder;
 
 -(HttpRequestWithBody*) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
+
+-(HttpRequestWithBody*) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters order:(NSArray*) parametersOrder;
 
 -(HttpRequestWithBody*) initWithBodyRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
 

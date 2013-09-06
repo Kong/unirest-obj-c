@@ -28,5 +28,6 @@
 @implementation MultipartRequest
 
 @synthesize parameters;
+@synthesize parametersOrder;
 
 @end
