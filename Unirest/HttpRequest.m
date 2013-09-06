@@ -107,7 +107,7 @@
 
 -(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response {
     [self invokeAsync:^{
-        return [self asBinary];
+        return [self asJson];
     }     resultBlock:response errorBlock:nil];
 }
 
