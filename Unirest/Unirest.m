@@ -46,7 +46,7 @@
 +(HttpRequestWithBody*) post:(void (^)(MultipartRequest*)) config {
     MultipartRequest* _config = [self getConfig:[[MultipartRequest alloc] init] config:config];
     
-    return [[HttpRequestWithBody alloc] initWithMultipartRequest:POST url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[HttpRequestWithBody alloc] initWithMultipartRequest:POST url:[_config url] headers:[_config headers] parameters:[_config parameters] order:[_config parametersOrder]];
 }
 
 +(HttpRequestWithBody*) postEntity:(void (^)(BodyRequest*)) config {
@@ -58,7 +58,7 @@
 +(HttpRequestWithBody*) put:(void (^)(MultipartRequest*)) config {
     MultipartRequest* _config = [self getConfig:[[MultipartRequest alloc] init] config:config];
     
-    return [[HttpRequestWithBody alloc] initWithMultipartRequest:PUT url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[HttpRequestWithBody alloc] initWithMultipartRequest:PUT url:[_config url] headers:[_config headers] parameters:[_config parameters] order:[_config parametersOrder]];
 }
 
 +(HttpRequestWithBody*) putEntity:(void (^)(BodyRequest*)) config {
@@ -70,7 +70,7 @@
 +(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config {
     MultipartRequest* _config = [self getConfig:[[MultipartRequest alloc] init] config:config];
     
-    return [[HttpRequestWithBody alloc] initWithMultipartRequest:PATCH url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[HttpRequestWithBody alloc] initWithMultipartRequest:PATCH url:[_config url] headers:[_config headers] parameters:[_config parameters] order:[_config parametersOrder]];
 }
 
 +(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config {

@@ -29,14 +29,23 @@
 
 @synthesize body = _body;
 @synthesize parameters = _parameters;
+@synthesize parametersOrder = _parametersOrder;
 
 
 -(HttpRequestWithBody*) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters {
+    self = [self initWithMultipartRequest:httpMethod url:url headers:headers parameters:parameters order:nil];
+    return self;
+}
+
+-(HttpRequestWithBody*) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters order:(NSArray *)parametersOrder{
     self = [super initWithSimpleRequest:httpMethod url:url headers:headers];
     if (parameters == nil) {
         parameters = [[NSDictionary alloc] init];
     }
     [self setParameters:[parameters mutableCopy]];
+    if (parametersOrder != nil) {
+        [self setParametersOrder:[parametersOrder mutableCopy]];
+    }
     return self;
 }
 

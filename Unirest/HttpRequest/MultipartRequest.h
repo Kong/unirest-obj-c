@@ -28,9 +28,10 @@
 @interface MultipartRequest : SimpleRequest {
     
     NSDictionary* parameters;
-    
+    NSArray* parametersOrder;
 }
 
 @property(readwrite) NSDictionary* parameters;
+@property(readwrite) NSArray* parametersOrder;
 
 @end

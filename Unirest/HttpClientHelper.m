@@ -27,7 +27,7 @@
 
 @interface HttpClientHelper()
 + (NSString*) encodeURI:(NSString*)value;
-+ (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
++ (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters order:(NSArray*) parametersOrder;
 + (BOOL) hasBinaryParameters:(NSDictionary*) parameters;
 @end
 
@@ -53,11 +53,17 @@
 	return result;
 }
 
-+ (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters {
++ (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters order:(NSArray*) parametersOrder{
     NSString* result = @"";
     
     BOOL firstParameter = YES;
-    for(id key in parameters) {
+    
+    id<NSFastEnumeration> enumerator = parameters;
+    if (parametersOrder != nil) {
+        enumerator = parametersOrder;
+    }
+    
+    for(id key in enumerator) {
         id value = [parameters objectForKey:key];
         if (!([value isKindOfClass:[NSURL class]] || value == nil)) { // Don't encode files and null values
             NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [HttpClientHelper encodeURI:key], @"=", [HttpClientHelper encodeURI:value]];
@@ -113,12 +119,19 @@
         if ([requestWithBody body] == nil) {
             // Has parameters
             NSDictionary* parameters = [requestWithBody parameters];
+            NSArray* parametersOrder = [requestWithBody parametersOrder];
+            
             bool isBinary = [HttpClientHelper hasBinaryParameters:parameters];
             if (isBinary) {
                 
                 [headers setObject:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOUNDARY] forKey:@"content-type"];
                 
-                for(id key in parameters) {
+                id<NSFastEnumeration> enumerator = parameters;
+                if (parametersOrder != nil) {
+                    enumerator = parametersOrder;
+                }
+                
+                for(id key in enumerator) {
                     id value = [parameters objectForKey:key];
                     if ([value isKindOfClass:[NSURL class]] && value != nil) { // Don't encode files and null values
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -127,7 +140,9 @@
                         NSData* data = [NSData dataWithContentsOfURL:value];
                         
                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[@"Content-Type: image/jpg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:data];
                     } else {
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -139,10 +154,10 @@
                 // Close
                 [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
                 
-                NSString* newStr = [NSString stringWithUTF8String:[body bytes]];
+                NSString* newStr = [[NSString alloc]initWithData:body encoding:NSUTF8StringEncoding];
                 NSLog(@"%@", newStr);
             } else {
-                NSString* querystring = [HttpClientHelper dictionaryToQuerystring:parameters];
+                NSString* querystring = [HttpClientHelper dictionaryToQuerystring:parameters order:parametersOrder];
                 body = [NSMutableData dataWithData:[querystring dataUsingEncoding:NSUTF8StringEncoding]];
             }
         } else {
