@@ -138,9 +138,6 @@
                 
                 // Close
                 [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
-                
-                NSString* newStr = [NSString stringWithUTF8String:[body bytes]];
-                NSLog(@"%@", newStr);
             } else {
                 NSString* querystring = [HttpClientHelper dictionaryToQuerystring:parameters];
                 body = [NSMutableData dataWithData:[querystring dataUsingEncoding:NSUTF8StringEncoding]];
