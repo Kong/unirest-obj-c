@@ -49,7 +49,7 @@ NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", 
   NSData* rawBody = [response rawBody];
 }];
 ```
-    
+
 ### File Uploads
 Transferring files through request with unirest in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `MultipartRequest` like so:
 
@@ -64,7 +64,6 @@ HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
   [request setParameters:parameters];
 }] asJson];
 ```
-
  
 ### Custom Entity Body
 To send a custom body such as JSON simply serialize your data utilizing the `NSJSONSerialization` with a `BodyRequest` and `[method]Entity` instead of just `[method]` block like so:
@@ -80,8 +79,6 @@ HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
   [request setBody:[NSJSONSerialization dataWithJSONObject:headers options:0 error:nil]];
 }] asJson];
 ```
-
-
 
 ### Request Reference
 The Objective-C unirest library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
@@ -101,20 +98,21 @@ The Objective-C unirest library uses configuration blocks of type SimpleRequest,
 +(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
 ```
 
-`HttpRequest` `[Unirest get:` `(void (^)(SimpleRequest*))] config;`  
-Sends equivalent request with method type to given URL
-
-`HttpRequestWithBody` `[Unirest (post|postEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
-Sends equivalent request with method type to given URL
-
-`HttpRequestWithBody` `[Unirest (put|putEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
-Sends equivalent request with method type to given URL
-
-`HttpRequestWithBody` `[Unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
-Sends equivalent request with method type to given URL
-
-`HttpRequest` `[Unirest delete:` `(void (^)(SimpleRequest*))] config;`  
-Sends equivalent request with method type to given URL
+- `HttpRequest` `[Unirest get:` `(void (^)(SimpleRequest*))] config;`  
+  
+  Sends equivalent request with method type to given URL
+- `HttpRequestWithBody` `[Unirest (post|postEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+  
+  Sends equivalent request with method type to given URL
+- `HttpRequestWithBody` `[Unirest (put|putEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+  
+  Sends equivalent request with method type to given URL
+- `HttpRequestWithBody` `[Unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+  
+  Sends equivalent request with method type to given URL
+- `HttpRequest` `[Unirest delete:` `(void (^)(SimpleRequest*))] config;`  
+  
+  Sends equivalent request with method type to given URL
 
 
 ### Response Reference
@@ -131,20 +129,21 @@ The `HttpRequest` and `HttpRequestWithBody` can then be executed by calling one 
 -(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response;
 ```
 
-`-(HttpStringResponse*)` `asString;`  
-Blocking request call with response returned as string for Hypermedia APIs or other.
-
-`-(void)` `asStringAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
-Asynchronous request call with response returned as string for Hypermedia APIs or other.
-
-`-(HttpStringResponse*)` `asBinary;`  
-Blocking request call with response returned as binary output for files and other media.
-
-`-(void)` `asBinaryAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
-Asynchronous request call with response returned as binary output for files and other media.
-
-`-(HttpStringResponse*)` `asJson;`  
-Blocking request call with response returned as JSON.
-
-`-(void)` `asJsonAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
-Asynchronous request call with response returned as JSON.
+- `-(HttpStringResponse*)` `asString;`  
+  
+  Blocking request call with response returned as string for Hypermedia APIs or other.
+- `-(void)` `asStringAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+  
+  Asynchronous request call with response returned as string for Hypermedia APIs or other.
+- `-(HttpStringResponse*)` `asBinary;`  
+  
+  Blocking request call with response returned as binary output for files and other media.
+- `-(void)` `asBinaryAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+  
+  Asynchronous request call with response returned as binary output for files and other media.
+- `-(HttpStringResponse*)` `asJson;`  
+  
+  Blocking request call with response returned as JSON.
+- `-(void)` `asJsonAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+  
+  Asynchronous request call with response returned as JSON.
