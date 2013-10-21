@@ -2,10 +2,7 @@
 
 Unirest is a set of lightweight HTTP libraries available in multiple languages.
 
-Documentation
--------------------
-
-### Installing
+## Installing
 <a href="https://github.com/Mashape/unirest-obj-c/archive/master.zip">Download</a> the Objective-C Unirest Library from <a href="https://github.com/Mashape/unirest-obj-c">GitHub</a> (or clone the repo) and import the folder into your project.
 
 The Unirest-Obj-C client library requires ARC (Automatic Reference Counting) to be enabled in your XCode project. To enable ARC select your project or target and then go to Build Settings and under the section Apple LLVM compiler 3.0 - Language you will see the option Objective-C Automatic Reference Counting:
@@ -14,7 +11,7 @@ The Unirest-Obj-C client library requires ARC (Automatic Reference Counting) to 
 
 For existing projects, fortunately XCode offers a tool to convert existing code to ARC, which is available at Edit -> Refactor  -> Convert to Objective-C ARC
 
-### Creating Request
+## Creating Request
 So you're probably wondering how using Unirest makes creating requests in Objective-C easier, let's look at a working example:
 
 ```objective-c
@@ -30,7 +27,7 @@ HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
     
 Just like in the Unirest Java library the Objective-C library supports multiple response types given as the last parameter. In the example above we use `asJson` to get a JSON response, likewise there are `asBinary` and `asString` for responses of other nature such as file data and hypermedia responses.
 
-### Asynchronous Requests
+## Asynchronous Requests
 For non-blocking requests you will want to make an asychronous request to keep your application going while data is fetched or updated in the background, doing so with unirest is extremely easy with barely any code change from the previous example:
 
 ```objective-c
@@ -50,7 +47,7 @@ NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", 
 }];
 ```
 
-### File Uploads
+## File Uploads
 Transferring files through request with unirest in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `MultipartRequest` like so:
 
 ```objective-c
@@ -65,7 +62,7 @@ HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
 }] asJson];
 ```
  
-### Custom Entity Body
+## Custom Entity Body
 To send a custom body such as JSON simply serialize your data utilizing the `NSJSONSerialization` with a `BodyRequest` and `[method]Entity` instead of just `[method]` block like so:
 
 ```objective-c
@@ -80,7 +77,7 @@ HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
 }] asJson];
 ```
 
-### Request Reference
+# Request
 The Objective-C unirest library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 
 ```objective-c
@@ -114,8 +111,7 @@ The Objective-C unirest library uses configuration blocks of type SimpleRequest,
   
   Sends equivalent request with method type to given URL
 
-
-### Response Reference
+# Response
 The `HttpRequest` and `HttpRequestWithBody` can then be executed by calling one of:
 
 ```objective-c
