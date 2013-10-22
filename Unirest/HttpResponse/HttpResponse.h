@@ -23,16 +23,10 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface HttpResponse : NSObject {
-    
-    int _code;
-    NSDictionary* _headers;
-    NSData* _rawBody;
-    
-}
+@interface HttpResponse : NSObject
 
 @property(readwrite) int code;
-@property(readwrite) NSDictionary* headers;
-@property(readwrite) NSData* rawBody;
+@property(readwrite, strong) NSDictionary* headers;
+@property(readwrite, strong) NSData* rawBody;
 
 @end

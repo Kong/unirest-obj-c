@@ -25,18 +25,13 @@
 
 #import "HttpRequest.h"
 
-@interface HttpRequestWithBody : HttpRequest {
-    
-    NSData* _body;
-    NSDictionary* _parameters;
-    
-}
+@interface HttpRequestWithBody : HttpRequest
 
-@property(readwrite) NSData* body;
-@property(readwrite) NSDictionary* parameters;
+@property(readwrite, strong) NSData* body;
+@property(readwrite, strong) NSDictionary* parameters;
 
--(HttpRequestWithBody*) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
+-(instancetype) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
 
--(HttpRequestWithBody*) initWithBodyRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
+-(instancetype) initWithBodyRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
 
 @end

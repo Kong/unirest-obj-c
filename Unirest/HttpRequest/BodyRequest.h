@@ -25,12 +25,8 @@
 
 #import "SimpleRequest.h"
 
-@interface BodyRequest : SimpleRequest {
-    
-    NSData* body;
-    
-}
+@interface BodyRequest : SimpleRequest
 
-@property(readwrite) NSData* body;
+@property(readwrite, strong) NSData* body;
 
 @end

@@ -27,6 +27,4 @@
 
 @implementation MultipartRequest
 
-@synthesize parameters;
-
 @end

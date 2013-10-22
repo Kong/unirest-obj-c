@@ -25,12 +25,8 @@
 
 #import "SimpleRequest.h"
 
-@interface MultipartRequest : SimpleRequest {
-    
-    NSDictionary* parameters;
-    
-}
+@interface MultipartRequest : SimpleRequest
 
-@property(readwrite) NSDictionary* parameters;
+@property(readwrite, strong) NSDictionary* parameters;
 
 @end

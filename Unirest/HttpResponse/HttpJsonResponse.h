@@ -26,14 +26,10 @@
 #import "HttpResponse.h"
 #import "JsonNode.h"
 
-@interface HttpJsonResponse : HttpResponse {
-    
-    JsonNode* _body;
-    
-}
+@interface HttpJsonResponse : HttpResponse
 
-@property(readwrite) JsonNode* body;
+@property(readwrite, strong) JsonNode* body;
 
--(HttpJsonResponse*) initWithSimpleResponse:(HttpResponse*) httpResponse;
+-(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse;
 
 @end

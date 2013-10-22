@@ -27,9 +27,6 @@
 
 @implementation JsonNode
 
-@synthesize array = _array;
-@synthesize object = _object;
-
 -(BOOL) isArray {
     return _array != nil;
 }

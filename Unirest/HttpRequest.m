@@ -34,11 +34,6 @@
 
 @implementation HttpRequest
 
-@synthesize httpMethod = _httpMethod;
-@synthesize headers = _headers;
-@synthesize url = _url;
-
-
 // invokeAsync snippet got from: https://gist.github.com/raulraja/1176022
 
 - (void)invokeAsync:(id (^)(void))asyncBlock resultBlock:(void (^)(id))resultBlock errorBlock:(void (^)(id))errorBlock {
@@ -63,18 +58,20 @@
     });
 }
 
--(HttpRequest*) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers {
+-(instancetype) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers {
     self = [super init];
-    [self setHttpMethod:httpMethod];
-    [self setUrl:url];
-    NSMutableDictionary* lowerCaseHeaders = [[NSMutableDictionary alloc] init];
-    if (headers != nil) {
-        for(id key in headers) {
-            id value = [headers objectForKey:key];
-            [lowerCaseHeaders setObject:value forKey:[key lowercaseString]];
+    if (self) {
+        [self setHttpMethod:httpMethod];
+        [self setUrl:url];
+        NSMutableDictionary* lowerCaseHeaders = [[NSMutableDictionary alloc] init];
+        if (headers != nil) {
+            for(id key in headers) {
+                id value = [headers objectForKey:key];
+                [lowerCaseHeaders setObject:value forKey:[key lowercaseString]];
+            }
         }
+        [self setHeaders:lowerCaseHeaders];
     }
-    [self setHeaders:lowerCaseHeaders];
     return self;
 }
 

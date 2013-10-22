@@ -79,9 +79,16 @@
     return [[HttpRequestWithBody alloc] initWithBodyRequest:PATCH url:[_config url] headers:[_config headers] body:[_config body]];
 }
 
-+(HttpRequest*) delete:(void (^)(SimpleRequest*)) config {
-    SimpleRequest* _config = [self getConfig:[[SimpleRequest alloc] init] config:config];
-    return [[HttpRequest alloc] initWithSimpleRequest:DELETE url:[_config url] headers:[_config headers]];   
++(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config {
+    MultipartRequest* _config = [self getConfig:[[MultipartRequest alloc] init] config:config];
+    
+    return [[HttpRequestWithBody alloc] initWithMultipartRequest:DELETE url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+}
+
++(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config {
+    BodyRequest* _config = [self getConfig:[[BodyRequest alloc] init] config:config];
+    
+    return [[HttpRequestWithBody alloc] initWithBodyRequest:DELETE url:[_config url] headers:[_config headers] body:[_config body]];
 }
 
 @end

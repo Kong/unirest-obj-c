@@ -23,14 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface BaseRequest : NSObject {
-    
-    NSString* url;
-    NSDictionary* headers;
-    
-}
+@interface BaseRequest : NSObject
 
-@property(readwrite) NSString* url;
-@property(readwrite) NSDictionary* headers;
+@property(readwrite, strong) NSString* url;
+@property(readwrite, strong) NSDictionary* headers;
 
 @end

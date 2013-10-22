@@ -24,6 +24,7 @@
  */
 
 #import "UnirestTests.h"
+#import "Unirest.h"
 
 @implementation UnirestTests
 
@@ -41,9 +42,59 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testGet
 {
-    STFail(@"Unit tests are not implemented yet in UnirestTests");
+    HttpJsonResponse* response = [[Unirest get:^(SimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get?name=Mark"];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"args"];
+    
+    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(1 == [args count], @"Invalid arguments size");
+    NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+}
+
+- (void)testPost
+{
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", @"thefosk", @"nick", nil];
+    
+    HttpJsonResponse* response = [[Unirest post:^(MultipartRequest * request) {
+        [request setUrl:@"http://httpbin.org/post"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"form"];
+    
+    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(2 == [args count], @"Invalid arguments size");
+    NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+    NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
+}
+
+- (void)testDeleteNoBody
+{
+    HttpJsonResponse* response = [[Unirest delete:^(MultipartRequest * request) {
+     [request setUrl:@"http://httpbin.org/delete"];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"form"];
+    
+    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(0 == [args count], @"Invalid arguments size");
+}
+
+- (void)testDelete
+{
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", nil];
+    
+    HttpJsonResponse* response = [[Unirest delete:^(MultipartRequest * request) {
+        [request setUrl:@"http://httpbin.org/delete"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert([@"name=Mark" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
 }
 
 @end

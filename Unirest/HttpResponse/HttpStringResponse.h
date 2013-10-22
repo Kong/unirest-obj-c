@@ -25,14 +25,10 @@
 
 #import "HttpResponse.h"
 
-@interface HttpStringResponse : HttpResponse {
-    
-    NSString* _body;
-    
-}
+@interface HttpStringResponse : HttpResponse
 
-@property(readwrite) NSString* body;
+@property(readwrite, strong) NSString* body;
 
--(HttpStringResponse*) initWithSimpleResponse:(HttpResponse*) httpResponse;
+-(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse;
 
 @end

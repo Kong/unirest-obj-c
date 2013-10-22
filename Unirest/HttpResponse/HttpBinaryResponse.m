@@ -27,14 +27,14 @@
 
 @implementation HttpBinaryResponse
 
-@synthesize body = _body;
-
--(HttpBinaryResponse*) initWithSimpleResponse:(HttpResponse*) httpResponse {
+-(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse {
     self = [super init];
-    [self setCode:[httpResponse code]];
-    [self setHeaders:[httpResponse headers]];
-    [self setRawBody:[httpResponse rawBody]];
-    [self setBody:[httpResponse rawBody]];
+    if (self) {
+        [self setCode:[httpResponse code]];
+        [self setHeaders:[httpResponse headers]];
+        [self setRawBody:[httpResponse rawBody]];
+        [self setBody:[httpResponse rawBody]];
+    }
     return self;
 }
 

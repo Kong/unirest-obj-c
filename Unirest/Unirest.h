@@ -42,6 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 +(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
 +(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
 
-+(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
++(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config;
++(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config;
 
 @end

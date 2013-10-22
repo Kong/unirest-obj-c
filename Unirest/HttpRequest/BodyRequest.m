@@ -27,6 +27,4 @@
 
 @implementation BodyRequest
 
-@synthesize body;
-
 @end

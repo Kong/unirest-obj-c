@@ -23,16 +23,12 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface JsonNode : NSObject {
-    NSDictionary* _object;
-    NSArray* _array;
-    
-}
+@interface JsonNode : NSObject
 
 -(BOOL) isArray;
 
-@property(readwrite) NSDictionary* object;
-@property(readwrite) NSArray* array;
+@property(readwrite, strong) NSDictionary* object;
+@property(readwrite, strong) NSArray* array;
 
 -(NSDictionary*) JSONObject;
 

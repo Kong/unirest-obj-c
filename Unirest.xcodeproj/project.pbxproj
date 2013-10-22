@@ -157,7 +157,6 @@
 				A9E78BE516E9803E006B80FD /* HttpResponse */,
 				A9E78BAF16E9801F006B80FD /* Supporting Files */,
 			);
-			name = Unirest;
 			path = Unirest;
 			sourceTree = "<group>";
 		};
@@ -176,7 +175,6 @@
 				A9E78BCA16E9801F006B80FD /* UnirestTests.m */,
 				A9E78BC416E9801F006B80FD /* Supporting Files */,
 			);
-			name = UnirestTests;
 			path = UnirestTests;
 			sourceTree = "<group>";
 		};
@@ -445,6 +443,7 @@
 		A9E78BD216E9801F006B80FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -460,6 +459,7 @@
 		A9E78BD316E9801F006B80FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",

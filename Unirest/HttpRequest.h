@@ -36,19 +36,13 @@ typedef enum HttpMethod
     PATCH
 } HttpMethod;
 
-@interface HttpRequest : NSObject {
-    
-    NSDictionary* _headers;
-    NSString* _url;
-    HttpMethod _httpMethod;
-    
-}
+@interface HttpRequest : NSObject
 
-@property(readwrite, retain) NSDictionary* headers;
-@property(readwrite, retain) NSString* url;
+@property(readwrite, strong) NSDictionary* headers;
+@property(readwrite, strong) NSString* url;
 @property(readwrite) HttpMethod httpMethod;
 
--(HttpRequest*) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
+-(instancetype) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
 
 -(HttpStringResponse*) asString;
 -(void) asStringAsync:(void (^)(HttpStringResponse*)) response;
