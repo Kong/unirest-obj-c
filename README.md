@@ -15,8 +15,8 @@ For existing projects, fortunately Xcode offers a tool to convert existing code 
 So you're probably wondering how using Unirest makes creating requests in Objective-C easier, let's look at a working example:
 
 ```objective-c
-NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+NSDictionary* headers = @{@"accept": @"application/json"};
+NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
 HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
