@@ -80,7 +80,7 @@
     return [[UNIHTTPStringResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asStringAsync:(void (^)(UNIHTTPStringResponse*)) response {
+-(void) asStringAsync:(UNIHTTPStringResponseBlock) response {
     [self invokeAsync:^{
         return [self asString];
     }     resultBlock:response errorBlock:nil];
@@ -92,7 +92,7 @@
     return [[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asBinaryAsync:(void (^)(UNIHTTPBinaryResponse*)) response {
+-(void) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response {
     [self invokeAsync:^{
         return [self asBinary];
     }     resultBlock:response errorBlock:nil];
@@ -103,7 +103,7 @@
     return [[UNIHTTPJsonResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asJsonAsync:(void (^)(UNIHTTPJsonResponse*)) response {
+-(void) asJsonAsync:(UNIHTTPJsonResponseBlock) response {
     [self invokeAsync:^{
         return [self asJson];
     }     resultBlock:response errorBlock:nil];
