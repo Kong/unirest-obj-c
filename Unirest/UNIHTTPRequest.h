@@ -23,9 +23,37 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface BaseRequest : NSObject
+#import "HttpResponse/UNIHTTPStringResponse.h"
+#import "HttpResponse/UNIHTTPBinaryResponse.h"
+#import "HttpResponse/UNIHTTPJsonResponse.h"
 
-@property(readwrite, strong) NSString* url;
+typedef NS_ENUM(NSInteger, UNIHTTPMethod) {
+	GET,
+	POST,
+	PUT,
+	DELETE,
+  PATCH
+};
+
+typedef void (^UNIHTTPStringResponseBlock)(UNIHTTPStringResponse* stringResponse);
+typedef void (^UNIHTTPBinaryResponseBlock)(UNIHTTPBinaryResponse* binaryResponse);
+typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse);
+
+@interface UNIHTTPRequest : NSObject
+
 @property(readwrite, strong) NSDictionary* headers;
+@property(readwrite, strong) NSString* url;
+@property(readwrite) UNIHTTPMethod httpMethod;
+
+-(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
+
+-(UNIHTTPStringResponse*) asString;
+-(void) asStringAsync:(UNIHTTPStringResponseBlock) response;
+
+-(UNIHTTPBinaryResponse*) asBinary;
+-(void) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
+
+-(UNIHTTPJsonResponse*) asJson;
+-(void) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
 
 @end

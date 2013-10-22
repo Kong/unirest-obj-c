@@ -23,26 +23,30 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 */
 
-#import "HttpRequest.h"
-#import "HttpRequestWithBody.h"
-#import "HttpRequest/SimpleRequest.h"
-#import "HttpRequest/MultipartRequest.h"
-#import "HttpRequest/BodyRequest.h"
+#import "UNIHTTPRequest.h"
+#import "UNIHTTPRequestWithBody.h"
+#import "HttpRequest/UNISimpleRequest.h"
+#import "HttpRequest/UNIMultipartRequest.h"
+#import "HttpRequest/UNIBodyRequest.h"
 
-@interface Unirest : NSObject
+typedef void (^UNISimpleRequestBlock)(UNISimpleRequest* simpleRequest);
+typedef void (^UNIMultipartRequestBlock)(UNIMultipartRequest* multipartRequest);
+typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 
-+(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
+@interface UNIRest : NSObject
 
-+(HttpRequestWithBody*) post:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) postEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config;
 
-+(HttpRequestWithBody*) put:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) putEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) post:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) postEntity:(UNIBodyRequestBlock) config;
 
-+(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) put:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) putEntity:(UNIBodyRequestBlock) config;
 
-+(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) patch:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) patchEntity:(UNIBodyRequestBlock) config;
+
++(UNIHTTPRequestWithBody*) delete:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) deleteEntity:(UNIBodyRequestBlock) config;
 
 @end

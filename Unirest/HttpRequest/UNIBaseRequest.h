@@ -23,8 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "BodyRequest.h"
+@interface UNIBaseRequest : NSObject
 
-@implementation BodyRequest
+@property(readwrite, strong) NSString* url;
+@property(readwrite, strong) NSDictionary* headers;
 
 @end

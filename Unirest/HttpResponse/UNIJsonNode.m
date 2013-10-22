@@ -23,8 +23,20 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "BaseRequest.h"
+#import "UNIJsonNode.h"
 
-@interface SimpleRequest : BaseRequest
+@implementation UNIJsonNode
+
+-(BOOL) isArray {
+    return _array != nil;
+}
+
+-(NSDictionary*) JSONObject {
+    return [self object];
+}
+
+-(NSArray*) JSONArray {
+    return [self array];
+}
 
 @end

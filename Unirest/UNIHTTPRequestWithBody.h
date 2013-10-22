@@ -23,9 +23,15 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SimpleRequest.h"
+#import "UNIHTTPRequest.h"
 
-@implementation SimpleRequest
+@interface UNIHTTPRequestWithBody : UNIHTTPRequest
+
+@property(readwrite, strong) NSData* body;
+@property(readwrite, strong) NSDictionary* parameters;
+
+-(instancetype) initWithMultipartRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
+
+-(instancetype) initWithBodyRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
 
 @end
-

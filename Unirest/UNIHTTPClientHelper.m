@@ -23,15 +23,15 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpClientHelper.h"
+#import "UNIHTTPClientHelper.h"
 
-@interface HttpClientHelper()
+@interface UNIHTTPClientHelper()
 + (NSString*) encodeURI:(NSString*)value;
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
 + (BOOL) hasBinaryParameters:(NSDictionary*) parameters;
 @end
 
-@implementation HttpClientHelper
+@implementation UNIHTTPClientHelper
 
 + (BOOL) hasBinaryParameters:(NSDictionary*) parameters {
     for(id key in parameters) {
@@ -60,7 +60,7 @@
     for(id key in parameters) {
         id value = [parameters objectForKey:key];
         if (!([value isKindOfClass:[NSURL class]] || value == nil)) { // Don't encode files and null values
-            NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [HttpClientHelper encodeURI:key], @"=", [HttpClientHelper encodeURI:value]];
+            NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [UNIHTTPClientHelper encodeURI:key], @"=", [UNIHTTPClientHelper encodeURI:value]];
             if (firstParameter) {
                 result = [NSString stringWithFormat:@"%@%@", result, parameter];
             } else {
@@ -73,7 +73,7 @@
     return result;
 }
 
-+(HttpResponse*) request:(HttpRequest*) request {
++(UNIHTTPResponse*) request:(UNIHTTPRequest*) request {
     
     NSMutableDictionary* headers = [[request headers] mutableCopy];
     
@@ -84,7 +84,7 @@
     
     NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[request url]]];
     
-    HttpMethod httpMethod = [request httpMethod];
+    UNIHTTPMethod httpMethod = [request httpMethod];
 
     switch ([request httpMethod]) {
         case GET:
@@ -108,12 +108,12 @@
     
     // Add body
     if (httpMethod != GET) {
-        HttpRequestWithBody* requestWithBody = (HttpRequestWithBody*) request;
+        UNIHTTPRequestWithBody* requestWithBody = (UNIHTTPRequestWithBody*) request;
         
         if ([requestWithBody body] == nil) {
             // Has parameters
             NSDictionary* parameters = [requestWithBody parameters];
-            bool isBinary = [HttpClientHelper hasBinaryParameters:parameters];
+            bool isBinary = [UNIHTTPClientHelper hasBinaryParameters:parameters];
             if (isBinary) {
                 
                 [headers setObject:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOUNDARY] forKey:@"content-type"];
@@ -139,7 +139,7 @@
                 // Close
                 [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
             } else {
-                NSString* querystring = [HttpClientHelper dictionaryToQuerystring:parameters];
+                NSString* querystring = [UNIHTTPClientHelper dictionaryToQuerystring:parameters];
                 body = [NSMutableData dataWithData:[querystring dataUsingEncoding:NSUTF8StringEncoding]];
             }
         } else {
@@ -160,7 +160,7 @@
     NSError * error = nil;
     NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:&error];
     
-    HttpResponse* res = [[HttpResponse alloc] init];
+    UNIHTTPResponse* res = [[UNIHTTPResponse alloc] init];
     [res setCode:[response statusCode]];
     [res setHeaders:[response allHeaderFields]];
     [res setRawBody:data];

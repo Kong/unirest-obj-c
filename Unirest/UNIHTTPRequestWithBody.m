@@ -23,30 +23,22 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpJsonResponse.h"
+#import "UNIHTTPRequestWithBody.h"
 
-@implementation HttpJsonResponse
+@implementation UNIHTTPRequestWithBody
 
--(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse {
-    self = [super init];
-    if (self) {
-        [self setCode:[httpResponse code]];
-        [self setHeaders:[httpResponse headers]];
-        [self setRawBody:[httpResponse rawBody]];
-        
-        JsonNode* body = [[JsonNode alloc] init];
-        
-        NSError * error = nil;
-        id json = [NSJSONSerialization JSONObjectWithData:[httpResponse rawBody] options:NSJSONReadingMutableLeaves error:&error];
-        
-        if ([json isKindOfClass:[NSArray class]]) {
-            [body setArray:json];
-        } else {
-            [body setObject:json];
-        }
-        
-        [self setBody:body];
+-(instancetype) initWithMultipartRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters {
+    self = [super initWithSimpleRequest:httpMethod url:url headers:headers];
+    if (parameters == nil) {
+        parameters = [[NSDictionary alloc] init];
     }
+    [self setParameters:[parameters mutableCopy]];
+    return self;
+}
+
+-(instancetype) initWithBodyRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body {
+    self = [super initWithSimpleRequest:httpMethod url:url headers:headers];
+    [self setBody:body];
     return self;
 }
 

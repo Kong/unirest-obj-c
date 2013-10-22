@@ -23,19 +23,10 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpBinaryResponse.h"
+#import "UNISimpleRequest.h"
 
-@implementation HttpBinaryResponse
+@interface UNIBodyRequest : UNISimpleRequest
 
--(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse {
-    self = [super init];
-    if (self) {
-        [self setCode:[httpResponse code]];
-        [self setHeaders:[httpResponse headers]];
-        [self setRawBody:[httpResponse rawBody]];
-        [self setBody:[httpResponse rawBody]];
-    }
-    return self;
-}
+@property(readwrite, strong) NSData* body;
 
 @end

@@ -23,13 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse.h"
-#import "JsonNode.h"
+#import "UNISimpleRequest.h"
 
-@interface HttpJsonResponse : HttpResponse
-
-@property(readwrite, strong) JsonNode* body;
-
--(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse;
+@implementation UNISimpleRequest
 
 @end
+

@@ -23,8 +23,10 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "BaseRequest.h"
+#import "UNISimpleRequest.h"
 
-@implementation BaseRequest
+@interface UNIMultipartRequest : UNISimpleRequest
+
+@property(readwrite, strong) NSDictionary* parameters;
 
 @end
