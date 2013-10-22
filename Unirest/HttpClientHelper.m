@@ -107,7 +107,7 @@
     NSMutableData* body = [[NSMutableData alloc] init];
     
     // Add body
-    if (httpMethod != GET) {
+    if (httpMethod != GET && httpMethod != DELETE) {
         HttpRequestWithBody* requestWithBody = (HttpRequestWithBody*) request;
         
         if ([requestWithBody body] == nil) {
