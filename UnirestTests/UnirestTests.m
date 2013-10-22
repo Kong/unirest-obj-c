@@ -57,7 +57,7 @@
 
 - (void)testPost
 {
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", @"thefosk", @"nick", nil];
+  NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
     
     UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest * request) {
         [request setUrl:@"http://httpbin.org/post"];
@@ -86,7 +86,7 @@
 
 - (void)testDelete
 {
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", nil];
+    NSDictionary* parameters = @{@"name" : @"Mark"};
     
     UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNIMultipartRequest * request) {
         [request setUrl:@"http://httpbin.org/delete"];
