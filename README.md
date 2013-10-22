@@ -1,4 +1,4 @@
-# Unirest for Objective-C
+# Unirest for Objective-C [![Build Status](https://api.travis-ci.org/Mashape/unirest-obj-c.png)](https://travis-ci.org/Mashape/unirest-obj-c)
 
 Unirest is a set of lightweight HTTP libraries available in multiple languages.
 
