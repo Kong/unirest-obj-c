@@ -92,7 +92,8 @@ The Objective-C unirest library uses configuration blocks of type SimpleRequest,
 +(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
 +(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
 
-+(HttpRequest*) delete:(void (^)(SimpleRequest*)) config;
++(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config;
++(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config;
 ```
 
 - `HttpRequest` `[Unirest get:` `(void (^)(SimpleRequest*))] config;`  
@@ -107,7 +108,7 @@ The Objective-C unirest library uses configuration blocks of type SimpleRequest,
 - `HttpRequestWithBody` `[Unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `HttpRequest` `[Unirest delete:` `(void (^)(SimpleRequest*))] config;`  
+- `HttpRequestWithBody` `[Unirest (delete|deleteEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`
   
   Sends equivalent request with method type to given URL
 
