@@ -23,8 +23,10 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse.h"
+@interface UNIHTTPResponse : NSObject
 
-@implementation HttpResponse
+@property(readwrite) NSInteger code;
+@property(readwrite, strong) NSDictionary* headers;
+@property(readwrite, strong) NSData* rawBody;
 
 @end

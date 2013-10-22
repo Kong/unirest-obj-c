@@ -23,34 +23,8 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse/HttpStringResponse.h"
-#import "HttpResponse/HttpBinaryResponse.h"
-#import "HttpResponse/HttpJsonResponse.h"
+#import "UNIBaseRequest.h"
 
-typedef enum HttpMethod
-{
-	GET,
-	POST,
-	PUT,
-	DELETE,
-    PATCH
-} HttpMethod;
-
-@interface HttpRequest : NSObject
-
-@property(readwrite, strong) NSDictionary* headers;
-@property(readwrite, strong) NSString* url;
-@property(readwrite) HttpMethod httpMethod;
-
--(instancetype) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
-
--(HttpStringResponse*) asString;
--(void) asStringAsync:(void (^)(HttpStringResponse*)) response;
-
--(HttpBinaryResponse*) asBinary;
--(void) asBinaryAsync:(void (^)(HttpBinaryResponse*)) response;
-
--(HttpJsonResponse*) asJson;
--(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response;
+@interface UNISimpleRequest : UNIBaseRequest
 
 @end

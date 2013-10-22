@@ -23,20 +23,8 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "JsonNode.h"
+#import "UNIHTTPResponse.h"
 
-@implementation JsonNode
-
--(BOOL) isArray {
-    return _array != nil;
-}
-
--(NSDictionary*) JSONObject {
-    return [self object];
-}
-
--(NSArray*) JSONArray {
-    return [self array];
-}
+@implementation UNIHTTPResponse
 
 @end

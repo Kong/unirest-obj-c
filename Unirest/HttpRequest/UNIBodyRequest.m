@@ -23,12 +23,8 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse.h"
+#import "UNIBodyRequest.h"
 
-@interface HttpStringResponse : HttpResponse
-
-@property(readwrite, strong) NSString* body;
-
--(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse;
+@implementation UNIBodyRequest
 
 @end

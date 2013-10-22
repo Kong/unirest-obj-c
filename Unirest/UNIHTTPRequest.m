@@ -23,16 +23,16 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpRequest.h"
-#import "HttpClientHelper.h"
+#import "UNIHTTPRequest.h"
+#import "UNIHTTPClientHelper.h"
 
-@interface HttpRequest()
+@interface UNIHTTPRequest()
 
 - (void)invokeAsync:(id (^)(void))asyncBlock resultBlock:(void (^)(id))resultBlock errorBlock:(void (^)(id))errorBlock;
 
 @end
 
-@implementation HttpRequest
+@implementation UNIHTTPRequest
 
 // invokeAsync snippet got from: https://gist.github.com/raulraja/1176022
 
@@ -58,7 +58,7 @@
     });
 }
 
--(instancetype) initWithSimpleRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers {
+-(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers {
     self = [super init];
     if (self) {
         [self setHttpMethod:httpMethod];
@@ -75,34 +75,35 @@
     return self;
 }
 
--(HttpStringResponse*) asString {
-    HttpResponse* response = [HttpClientHelper request:self];
-    return [[HttpStringResponse alloc] initWithSimpleResponse:response];
+-(UNIHTTPStringResponse*) asString {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [[UNIHTTPStringResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asStringAsync:(void (^)(HttpStringResponse*)) response {
+-(void) asStringAsync:(void (^)(UNIHTTPStringResponse*)) response {
     [self invokeAsync:^{
         return [self asString];
     }     resultBlock:response errorBlock:nil];
+  
 }
 
--(HttpBinaryResponse*) asBinary {
-    HttpResponse* response = [HttpClientHelper request:self];
-    return [[HttpBinaryResponse alloc] initWithSimpleResponse:response];
+-(UNIHTTPBinaryResponse*) asBinary {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asBinaryAsync:(void (^)(HttpBinaryResponse*)) response {
+-(void) asBinaryAsync:(void (^)(UNIHTTPBinaryResponse*)) response {
     [self invokeAsync:^{
         return [self asBinary];
     }     resultBlock:response errorBlock:nil];
 }
 
--(HttpJsonResponse*) asJson {
-    HttpResponse* response = [HttpClientHelper request:self];
-    return [[HttpJsonResponse alloc] initWithSimpleResponse:response];
+-(UNIHTTPJsonResponse*) asJson {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [[UNIHTTPJsonResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response {
+-(void) asJsonAsync:(void (^)(UNIHTTPJsonResponse*)) response {
     [self invokeAsync:^{
         return [self asJson];
     }     resultBlock:response errorBlock:nil];

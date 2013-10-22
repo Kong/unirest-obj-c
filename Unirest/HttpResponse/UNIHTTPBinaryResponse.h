@@ -23,12 +23,12 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse.h"
+#import "UNIHTTPResponse.h"
 
-@interface HttpBinaryResponse : HttpResponse
+@interface UNIHTTPBinaryResponse : UNIHTTPResponse
 
 @property(readwrite, strong) NSData* body;
 
--(instancetype) initWithSimpleResponse:(HttpResponse*) httpResponse;
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse;
 
 @end

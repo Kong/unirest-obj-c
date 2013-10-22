@@ -24,7 +24,7 @@
  */
 
 #import "UnirestTests.h"
-#import "Unirest.h"
+#import "UNIRest.h"
 
 @implementation UnirestTests
 
@@ -44,7 +44,7 @@
 
 - (void)testGet
 {
-    HttpJsonResponse* response = [[Unirest get:^(SimpleRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
         [request setUrl:@"http://httpbin.org/get?name=Mark"];
     }] asJson];
     
@@ -59,7 +59,7 @@
 {
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", @"thefosk", @"nick", nil];
     
-    HttpJsonResponse* response = [[Unirest post:^(MultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest * request) {
         [request setUrl:@"http://httpbin.org/post"];
         [request setParameters:parameters];
     }] asJson];
@@ -74,7 +74,7 @@
 
 - (void)testDeleteNoBody
 {
-    HttpJsonResponse* response = [[Unirest delete:^(MultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNIMultipartRequest * request) {
      [request setUrl:@"http://httpbin.org/delete"];
     }] asJson];
     
@@ -88,7 +88,7 @@
 {
     NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"Mark", @"name", nil];
     
-    HttpJsonResponse* response = [[Unirest delete:^(MultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNIMultipartRequest * request) {
         [request setUrl:@"http://httpbin.org/delete"];
         [request setParameters:parameters];
     }] asJson];

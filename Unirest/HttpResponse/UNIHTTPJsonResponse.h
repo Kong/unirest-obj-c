@@ -23,10 +23,13 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SimpleRequest.h"
+#import "UNIHTTPResponse.h"
+#import "UNIJsonNode.h"
 
-@interface MultipartRequest : SimpleRequest
+@interface UNIHTTPJsonResponse : UNIHTTPResponse
 
-@property(readwrite, strong) NSDictionary* parameters;
+@property(readwrite, strong) UNIJsonNode* body;
+
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse;
 
 @end

@@ -23,23 +23,14 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpRequestWithBody.h"
+#import "HttpResponse/UNIHTTPResponse.h"
+#import "UNIHTTPRequest.h"
+#import "UNIHTTPRequestWithBody.h"
 
-@implementation HttpRequestWithBody
+#define BOUNDARY @"---------------------------17237809831461299884346131229"
 
--(instancetype) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters {
-    self = [super initWithSimpleRequest:httpMethod url:url headers:headers];
-    if (parameters == nil) {
-        parameters = [[NSDictionary alloc] init];
-    }
-    [self setParameters:[parameters mutableCopy]];
-    return self;
-}
+@interface UNIHTTPClientHelper : NSObject
 
--(instancetype) initWithBodyRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body {
-    self = [super initWithSimpleRequest:httpMethod url:url headers:headers];
-    [self setBody:body];
-    return self;
-}
++(UNIHTTPResponse*) request:(UNIHTTPRequest*) request;
 
 @end

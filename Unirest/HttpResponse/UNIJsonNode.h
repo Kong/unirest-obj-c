@@ -23,8 +23,15 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "MultipartRequest.h"
+@interface UNIJsonNode : NSObject
 
-@implementation MultipartRequest
+-(BOOL) isArray;
+
+@property(readwrite, strong) NSDictionary* object;
+@property(readwrite, strong) NSArray* array;
+
+-(NSDictionary*) JSONObject;
+
+-(NSArray*) JSONArray;
 
 @end

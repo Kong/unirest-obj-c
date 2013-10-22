@@ -23,14 +23,19 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse/HttpResponse.h"
-#import "HttpRequest.h"
-#import "HttpRequestWithBody.h"
+#import "UNIHTTPBinaryResponse.h"
 
-#define BOUNDARY @"---------------------------17237809831461299884346131229"
+@implementation UNIHTTPBinaryResponse
 
-@interface HttpClientHelper : NSObject
-
-+(HttpResponse*) request:(HttpRequest*) request;
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse {
+    self = [super init];
+    if (self) {
+        [self setCode:[httpResponse code]];
+        [self setHeaders:[httpResponse headers]];
+        [self setRawBody:[httpResponse rawBody]];
+        [self setBody:[httpResponse rawBody]];
+    }
+    return self;
+}
 
 @end

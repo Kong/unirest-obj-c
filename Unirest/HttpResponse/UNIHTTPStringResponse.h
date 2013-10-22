@@ -23,15 +23,12 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpRequest.h"
+#import "UNIHTTPResponse.h"
 
-@interface HttpRequestWithBody : HttpRequest
+@interface UNIHTTPStringResponse : UNIHTTPResponse
 
-@property(readwrite, strong) NSData* body;
-@property(readwrite, strong) NSDictionary* parameters;
+@property(readwrite, strong) NSString* body;
 
--(instancetype) initWithMultipartRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
-
--(instancetype) initWithBodyRequest:(HttpMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse;
 
 @end

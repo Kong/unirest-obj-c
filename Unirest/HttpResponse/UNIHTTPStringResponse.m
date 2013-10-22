@@ -23,10 +23,20 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SimpleRequest.h"
+#import "UNIHTTPStringResponse.h"
 
-@interface BodyRequest : SimpleRequest
+@implementation UNIHTTPStringResponse
 
-@property(readwrite, strong) NSData* body;
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse {
+    self = [super init];
+    if (self) {
+        [self setCode:[httpResponse code]];
+        [self setHeaders:[httpResponse headers]];
+        [self setRawBody:[httpResponse rawBody]];
+        NSString* body = [[NSString alloc] initWithData:[httpResponse rawBody] encoding:NSUTF8StringEncoding];
+        [self setBody:body];
+    }
+    return self;
+}
 
 @end

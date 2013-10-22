@@ -23,15 +23,31 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface JsonNode : NSObject
+#import "UNIHTTPJsonResponse.h"
 
--(BOOL) isArray;
+@implementation UNIHTTPJsonResponse
 
-@property(readwrite, strong) NSDictionary* object;
-@property(readwrite, strong) NSArray* array;
-
--(NSDictionary*) JSONObject;
-
--(NSArray*) JSONArray;
+-(instancetype) initWithSimpleResponse:(UNIHTTPResponse*) httpResponse {
+    self = [super init];
+    if (self) {
+        [self setCode:[httpResponse code]];
+        [self setHeaders:[httpResponse headers]];
+        [self setRawBody:[httpResponse rawBody]];
+        
+        UNIJsonNode* body = [[UNIJsonNode alloc] init];
+        
+        NSError * error = nil;
+        id json = [NSJSONSerialization JSONObjectWithData:[httpResponse rawBody] options:NSJSONReadingMutableLeaves error:&error];
+        
+        if ([json isKindOfClass:[NSArray class]]) {
+            [body setArray:json];
+        } else {
+            [body setObject:json];
+        }
+        
+        [self setBody:body];
+    }
+    return self;
+}
 
 @end
