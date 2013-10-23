@@ -52,7 +52,7 @@ Transferring files through request with unirest in Objective-C can be done by cr
 
 ```objective-c
 NSDictionary* headers = @{@"accept": @"application/json"};
-NSURL file = nil;
+NSURL* file = nil;
 NSDictionary* parameters = @{@"parameter": @"value", @"file": file};
 
 UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest* request) {
