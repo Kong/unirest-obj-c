@@ -57,7 +57,7 @@
 
 - (void)testPost
 {
-  NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
+    NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
     
     UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest * request) {
         [request setUrl:@"http://httpbin.org/post"];
