@@ -40,9 +40,9 @@ NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
   [request setParameters:parameters];
 }] asJsonAsync:^(UNIHTTPJsonResponse* response) {
   // This is the asyncronous callback block
-  int code = [response code];
+  NSInteger* code = [response code];
   NSDictionary* responseHeaders = [response headers];
-  JsonNode* body = [response body];
+  UNIJsonNode* body = [response body];
   NSData* rawBody = [response rawBody];
 }];
 ```
@@ -81,7 +81,7 @@ UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) 
 The Objective-C unirest library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 
 ```objective-c
-+(HttpRequest*) get:(void (^)(UNISimpleRequestBlock*)) config;
++(UNIHTTPRequest*) get:(void (^)(UNISimpleRequestBlock*)) config;
 
 +(UNIHTTPRequestWithBody*) post:(void (^)(UNIMultipartRequestBlock*)) config;
 +(UNIHTTPRequestWithBody*) postEntity:(void (^)(UNIBodyRequestBlock*)) config;
