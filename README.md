@@ -18,7 +18,7 @@ So you're probably wondering how using Unirest makes creating requests in Object
 NSDictionary* headers = @{@"accept": @"application/json"};
 NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
+UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -31,18 +31,18 @@ Just like in the Unirest Java library the Objective-C library supports multiple 
 For non-blocking requests you will want to make an asychronous request to keep your application going while data is fetched or updated in the background, doing so with unirest is extremely easy with barely any code change from the previous example:
 
 ```objective-c
-NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+NSDictionary* headers = @{@"accept": @"application/json"};
+NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-[[Unirest post:^(MultipartRequest* request) {
+[[UNIRest post:^(UNIMultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
-}] asJsonAsync:^(HttpJsonResponse* response) {
+}] asJsonAsync:^(UNIHTTPJsonResponse* response) {
   // This is the asyncronous callback block
-  int code = [response code];
+  NSInteger* code = [response code];
   NSDictionary* responseHeaders = [response headers];
-  JsonNode* body = [response body];
+  UNIJsonNode* body = [response body];
   NSData* rawBody = [response rawBody];
 }];
 ```
@@ -51,11 +51,11 @@ NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", 
 Transferring files through request with unirest in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `MultipartRequest` like so:
 
 ```objective-c
-NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-NSURL file = nil;
-NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", file, @"file", nil];
+NSDictionary* headers = @{@"accept": @"application/json"};
+NSURL* file = nil;
+NSDictionary* parameters = @{@"parameter": @"value", @"file": file};
 
-HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
+UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -66,10 +66,10 @@ HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
 To send a custom body such as JSON simply serialize your data utilizing the `NSJSONSerialization` with a `BodyRequest` and `[method]Entity` instead of just `[method]` block like so:
 
 ```objective-c
-NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"value", @"parameter", @"bar", @"foo", nil];
+NSDictionary* headers = @{@"accept": @"application/json"};
+NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
+UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   // Converting NSDictionary to JSON:
@@ -81,66 +81,66 @@ HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
 The Objective-C unirest library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 
 ```objective-c
-+(HttpRequest*) get:(void (^)(SimpleRequest*)) config;
++(UNIHTTPRequest*) get:(void (^)(UNISimpleRequestBlock*)) config;
 
-+(HttpRequestWithBody*) post:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) postEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) post:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) postEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(HttpRequestWithBody*) put:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) putEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) put:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) putEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(HttpRequestWithBody*) patch:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) patchEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) patch:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) patchEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(HttpRequestWithBody*) delete:(void (^)(MultipartRequest*)) config;
-+(HttpRequestWithBody*) deleteEntity:(void (^)(BodyRequest*)) config;
++(UNIHTTPRequestWithBody*) delete:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) deleteEntity:(void (^)(UNIBodyRequestBlock*)) config;
 ```
 
-- `HttpRequest` `[Unirest get:` `(void (^)(SimpleRequest*))] config;`  
+- `UNIHTTPRequest` `[UNIRest get:` `(void (^)(UNISimpleRequestBlock*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `HttpRequestWithBody` `[Unirest (post|postEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (post|postEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `HttpRequestWithBody` `[Unirest (put|putEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (put|putEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `HttpRequestWithBody` `[Unirest (patch|patchEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (patch|patchEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `HttpRequestWithBody` `[Unirest (delete|deleteEntity):` `(void (^)(MultipartRequest|BodyRequest)(*))] config;`
+- `UNIHTTPRequestWithBody` `[UNIRest (delete|deleteEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`
   
   Sends equivalent request with method type to given URL
 
 # Response
-The `HttpRequest` and `HttpRequestWithBody` can then be executed by calling one of:
+The `UNIHTTPRequest` and `UNIHTTPRequestWithBody` can then be executed by calling one of:
 
 ```objective-c
--(HttpStringResponse*) asString;
--(void) asStringAsync:(void (^)(HttpStringResponse*)) response;
+-(UNIHTTPStringResponse*) asString;
+-(void) asStringAsync:(void (^)(UNIHTTPStringResponse*)) response;
 
--(HttpBinaryResponse*) asBinary;
--(void) asBinaryAsync:(void (^)(HttpBinaryResponse*)) response;
+-(UNIHTTPBinaryResponse*) asBinary;
+-(void) asBinaryAsync:(void (^)(UNIHTTPBinaryResponse*)) response;
 
--(HttpJsonResponse*) asJson;
--(void) asJsonAsync:(void (^)(HttpJsonResponse*)) response;
+-(UNIHTTPJsonResponse*) asJson;
+-(void) asJsonAsync:(void (^)(UNIHTTPJsonResponse*)) response;
 ```
 
-- `-(HttpStringResponse*)` `asString;`  
+- `-(UNIHTTPStringResponse*)` `asString;`  
   
   Blocking request call with response returned as string for Hypermedia APIs or other.
-- `-(void)` `asStringAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+- `-(void)` `asStringAsync:` `(void (^)(UNIHTTPStringResponse*)) response;`  
   
   Asynchronous request call with response returned as string for Hypermedia APIs or other.
-- `-(HttpStringResponse*)` `asBinary;`  
+- `-(UNIHTTPBinaryResponse*)` `asBinary;`  
   
   Blocking request call with response returned as binary output for files and other media.
-- `-(void)` `asBinaryAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+- `-(void)` `asBinaryAsync:` `(void (^)(UNIHTTPBinaryResponse*)) response;`  
   
   Asynchronous request call with response returned as binary output for files and other media.
-- `-(HttpStringResponse*)` `asJson;`  
+- `-(UNIHTTPJsonResponse*)` `asJson;`  
   
   Blocking request call with response returned as JSON.
-- `-(void)` `asJsonAsync:` `(void (^)(HttpBinaryResponse*)) response;`  
+- `-(void)` `asJsonAsync:` `(void (^)(UNIHTTPJsonResponse*)) response;`  
   
   Asynchronous request call with response returned as JSON.
