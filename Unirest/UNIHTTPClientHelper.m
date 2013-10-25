@@ -45,11 +45,11 @@
 
 + (NSString*) encodeURI:(NSString*)value {
 	NSString* result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                           NULL,
-                                                                           (CFStringRef)value,
-                                                                           NULL,
-                                                                           (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                           kCFStringEncodingUTF8));
+                                                                                             NULL,
+                                                                                             (CFStringRef)value,
+                                                                                             NULL,
+                                                                                             (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                             kCFStringEncodingUTF8));
 	return result;
 }
 
@@ -75,39 +75,33 @@
 
 +(UNIHTTPResponse*) request:(UNIHTTPRequest*) request {
     
+    UNIHTTPMethod httpMethod = [request httpMethod];
     NSMutableDictionary* headers = [[request headers] mutableCopy];
     
-    [headers setValue:@"unirest-objc/1.0" forKey:@"user-agent"];
+    NSString* url = [request url];
     
-    // Add cookies to the headers
-    [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[request url]]]]];
-    
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[request url]]];
-    
-    UNIHTTPMethod httpMethod = [request httpMethod];
-
-    switch ([request httpMethod]) {
-        case GET:
-            [requestObj setHTTPMethod:@"GET"];
-            break;
-        case POST:
-            [requestObj setHTTPMethod:@"POST"];
-            break;
-        case PUT:
-            [requestObj setHTTPMethod:@"PUT"];
-            break;
-        case DELETE:
-            [requestObj setHTTPMethod:@"DELETE"];
-            break;
-        case PATCH:
-            [requestObj setHTTPMethod:@"PATCH"];
-            break;
+    if (httpMethod == GET) {
+        UNISimpleRequest* simpleRequest = (UNISimpleRequest*) request;
+        NSDictionary* parameters = [simpleRequest parameters];
+        if ([parameters count] > 0) {
+            // Add additional parameters if any
+            NSMutableString* finalUrl = [[NSMutableString alloc] initWithString:url];
+            if([url rangeOfString:@"?"].location == NSNotFound) {
+                [finalUrl appendString:@"?"];
+            } else {
+                [finalUrl appendString:@"&"];
+            }
+            
+            [finalUrl appendString:[self dictionaryToQuerystring:parameters]];
+            url = [NSString stringWithString:finalUrl];
+        }
     }
     
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSMutableData* body = [[NSMutableData alloc] init];
     
-    // Add body
     if (httpMethod != GET) {
+        // Add body
         UNIHTTPRequestWithBody* requestWithBody = (UNIHTTPRequestWithBody*) request;
         
         if ([requestWithBody body] == nil) {
@@ -141,6 +135,8 @@
             } else {
                 NSString* querystring = [UNIHTTPClientHelper dictionaryToQuerystring:parameters];
                 body = [NSMutableData dataWithData:[querystring dataUsingEncoding:NSUTF8StringEncoding]];
+                
+                [headers setValue:@"application/x-www-form-urlencoded" forKey:@"content-type"];
             }
         } else {
             // Has a body
@@ -150,11 +146,35 @@
         [requestObj setHTTPBody:body];
     }
     
+    // Set method
+    switch ([request httpMethod]) {
+        case GET:
+            [requestObj setHTTPMethod:@"GET"];
+            break;
+        case POST:
+            [requestObj setHTTPMethod:@"POST"];
+            break;
+        case PUT:
+            [requestObj setHTTPMethod:@"PUT"];
+            break;
+        case DELETE:
+            [requestObj setHTTPMethod:@"DELETE"];
+            break;
+        case PATCH:
+            [requestObj setHTTPMethod:@"PATCH"];
+            break;
+    }
+    
     // Add headers
+    [headers setValue:@"unirest-objc/1.0" forKey:@"user-agent"];
+    
     for (NSString *key in headers) {
         NSString *value = [headers objectForKey:key];
         [requestObj addValue:value forHTTPHeaderField:key];
     }
+    
+    // Add cookies to the headers
+    [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
     
     NSHTTPURLResponse * response = nil;
     NSError * error = nil;

@@ -40,11 +40,11 @@
 
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
-    return [[UNIHTTPRequest alloc] initWithSimpleRequest:GET url:[_config url] headers:[_config headers]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:GET url:[_config url] headers:[_config headers] parameters:[_config parameters]];
 }
 
-+(UNIHTTPRequestWithBody*) post:(UNIMultipartRequestBlock) config {
-    UNIMultipartRequest* _config = [self getConfig:[[UNIMultipartRequest alloc] init] config:config];
++(UNIHTTPRequestWithBody*) post:(UNISimpleRequestBlock) config {
+    UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
     return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:POST url:[_config url] headers:[_config headers] parameters:[_config parameters]];
 }
@@ -55,8 +55,8 @@
     return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:POST url:[_config url] headers:[_config headers] body:[_config body]];
 }
 
-+(UNIHTTPRequestWithBody*) put:(UNIMultipartRequestBlock) config {
-    UNIMultipartRequest* _config = [self getConfig:[[UNIMultipartRequest alloc] init] config:config];
++(UNIHTTPRequestWithBody*) put:(UNISimpleRequestBlock) config {
+    UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
     return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PUT url:[_config url] headers:[_config headers] parameters:[_config parameters]];
 }
@@ -67,8 +67,8 @@
     return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PUT url:[_config url] headers:[_config headers] body:[_config body]];
 }
 
-+(UNIHTTPRequestWithBody*) patch:(UNIMultipartRequestBlock) config {
-    UNIMultipartRequest* _config = [self getConfig:[[UNIMultipartRequest alloc] init] config:config];
++(UNIHTTPRequestWithBody*) patch:(UNISimpleRequestBlock) config {
+    UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
     return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PATCH url:[_config url] headers:[_config headers] parameters:[_config parameters]];
 }
@@ -79,8 +79,8 @@
     return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PATCH url:[_config url] headers:[_config headers] body:[_config body]];
 }
 
-+(UNIHTTPRequestWithBody*) delete:(UNIMultipartRequestBlock) config {
-    UNIMultipartRequest* _config = [self getConfig:[[UNIMultipartRequest alloc] init] config:config];
++(UNIHTTPRequestWithBody*) delete:(UNISimpleRequestBlock) config {
+    UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
     return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:DELETE url:[_config url] headers:[_config headers] parameters:[_config parameters]];
 }

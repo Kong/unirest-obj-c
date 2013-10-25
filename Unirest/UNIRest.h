@@ -26,27 +26,25 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPRequestWithBody.h"
 #import "HttpRequest/UNISimpleRequest.h"
-#import "HttpRequest/UNIMultipartRequest.h"
 #import "HttpRequest/UNIBodyRequest.h"
 
 typedef void (^UNISimpleRequestBlock)(UNISimpleRequest* simpleRequest);
-typedef void (^UNIMultipartRequestBlock)(UNIMultipartRequest* multipartRequest);
 typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 
 @interface UNIRest : NSObject
 
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config;
 
-+(UNIHTTPRequestWithBody*) post:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) post:(UNISimpleRequestBlock) config;
 +(UNIHTTPRequestWithBody*) postEntity:(UNIBodyRequestBlock) config;
 
-+(UNIHTTPRequestWithBody*) put:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) put:(UNISimpleRequestBlock) config;
 +(UNIHTTPRequestWithBody*) putEntity:(UNIBodyRequestBlock) config;
 
-+(UNIHTTPRequestWithBody*) patch:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) patch:(UNISimpleRequestBlock) config;
 +(UNIHTTPRequestWithBody*) patchEntity:(UNIBodyRequestBlock) config;
 
-+(UNIHTTPRequestWithBody*) delete:(UNIMultipartRequestBlock) config;
++(UNIHTTPRequestWithBody*) delete:(UNISimpleRequestBlock) config;
 +(UNIHTTPRequestWithBody*) deleteEntity:(UNIBodyRequestBlock) config;
 
 @end

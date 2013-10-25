@@ -18,7 +18,7 @@ So you're probably wondering how using Unirest makes creating requests in Object
 NSDictionary* headers = @{@"accept": @"application/json"};
 NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest* request) {
+UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -34,7 +34,7 @@ For non-blocking requests you will want to make an asychronous request to keep y
 NSDictionary* headers = @{@"accept": @"application/json"};
 NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-[[UNIRest post:^(UNIMultipartRequest* request) {
+[[UNIRest post:^(UNISimpleRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -48,14 +48,14 @@ NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 ```
 
 ## File Uploads
-Transferring files through request with unirest in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `MultipartRequest` like so:
+Transferring files through request with unirest in Objective-C can be done by creating a `NSURL` object and passing it along as a parameter value with a `UNISimpleRequest` like so:
 
 ```objective-c
 NSDictionary* headers = @{@"accept": @"application/json"};
 NSURL* file = nil;
 NSDictionary* parameters = @{@"parameter": @"value", @"file": file};
 
-UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest* request) {
+UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest* request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -78,37 +78,37 @@ UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) 
 ```
 
 # Request
-The Objective-C unirest library uses configuration blocks of type SimpleRequest, MultipartRequest and BodyRequest to configure the URL, Headers, and Parameters / Body of the request.
+The Objective-C unirest library uses configuration blocks of type UNISimpleRequest and UNIBodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 
 ```objective-c
 +(UNIHTTPRequest*) get:(void (^)(UNISimpleRequestBlock*)) config;
 
-+(UNIHTTPRequestWithBody*) post:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) post:(void (^)(UNISimpleRequestBlock*)) config;
 +(UNIHTTPRequestWithBody*) postEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(UNIHTTPRequestWithBody*) put:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) put:(void (^)(UNISimpleRequestBlock*)) config;
 +(UNIHTTPRequestWithBody*) putEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(UNIHTTPRequestWithBody*) patch:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) patch:(void (^)(UNISimpleRequestBlock*)) config;
 +(UNIHTTPRequestWithBody*) patchEntity:(void (^)(UNIBodyRequestBlock*)) config;
 
-+(UNIHTTPRequestWithBody*) delete:(void (^)(UNIMultipartRequestBlock*)) config;
++(UNIHTTPRequestWithBody*) delete:(void (^)(UNISimpleRequestBlock*)) config;
 +(UNIHTTPRequestWithBody*) deleteEntity:(void (^)(UNIBodyRequestBlock*)) config;
 ```
 
 - `UNIHTTPRequest` `[UNIRest get:` `(void (^)(UNISimpleRequestBlock*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `UNIHTTPRequestWithBody` `[UNIRest (post|postEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (post|postEntity):` `(void (^)(UNISimpleRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `UNIHTTPRequestWithBody` `[UNIRest (put|putEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (put|putEntity):` `(void (^)(UNISimpleRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `UNIHTTPRequestWithBody` `[UNIRest (patch|patchEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`  
+- `UNIHTTPRequestWithBody` `[UNIRest (patch|patchEntity):` `(void (^)(UNISimpleRequestBlock|UNIBodyRequestBlock)(*))] config;`  
   
   Sends equivalent request with method type to given URL
-- `UNIHTTPRequestWithBody` `[UNIRest (delete|deleteEntity):` `(void (^)(UNIMultipartRequestBlock|UNIBodyRequestBlock)(*))] config;`
+- `UNIHTTPRequestWithBody` `[UNIRest (delete|deleteEntity):` `(void (^)(UNISimpleRequestBlock|UNIBodyRequestBlock)(*))] config;`
   
   Sends equivalent request with method type to given URL
 

@@ -50,37 +50,150 @@
     
     NSDictionary* args = [response.body.object valueForKey:@"args"];
     
-    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
     NSAssert(1 == [args count], @"Invalid arguments size");
     NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+}
+
+- (void)testGetWithParameters
+{
+    NSDictionary* parameters = @{@"nick" : @"thefosk"};
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"args"];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert(1 == [args count], @"Invalid arguments size");
+    NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
+}
+
+- (void)testGetWithParametersMix
+{
+    NSDictionary* parameters = @{@"nick" : @"thefosk"};
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get?name=Mark"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"args"];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert(2 == [args count], @"Invalid arguments size");
+    NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+    NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
 }
 
 - (void)testPost
 {
     NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
     
-    UNIHTTPJsonResponse* response = [[UNIRest post:^(UNIMultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest * request) {
         [request setUrl:@"http://httpbin.org/post"];
         [request setParameters:parameters];
     }] asJson];
     
     NSDictionary* args = [response.body.object valueForKey:@"form"];
     
-    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
     NSAssert(2 == [args count], @"Invalid arguments size");
     NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
     NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
 }
 
+- (void)testPostEntity
+{
+    NSData* data = [@"helloworld" dataUsingEncoding:NSUTF8StringEncoding];
+    UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
+        [request setUrl:@"http://httpbin.org/post"];
+        [request setBody:data];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert([@"helloworld" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
+}
+
+- (void)testPatch
+{
+    NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
+    
+    UNIHTTPJsonResponse* response = [[UNIRest patch:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/patch"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"form"];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert(2 == [args count], @"Invalid arguments size");
+    NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+    NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
+}
+
+- (void)testPatchEntity
+{
+    NSData* data = [@"helloworld" dataUsingEncoding:NSUTF8StringEncoding];
+    UNIHTTPJsonResponse* response = [[UNIRest patchEntity:^(UNIBodyRequest *request) {
+        [request setUrl:@"http://httpbin.org/patch"];
+        [request setBody:data];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert([@"helloworld" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
+}
+
+- (void)testPut
+{
+    NSDictionary* parameters = @{@"name" : @"Mark", @"nick" : @"thefosk"};
+    
+    UNIHTTPJsonResponse* response = [[UNIRest put:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/put"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"form"];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert(2 == [args count], @"Invalid arguments size");
+    NSAssert([@"Mark" isEqualToString:[args valueForKey:@"name"]], @"Invalid argument value");
+    NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
+}
+
+- (void)testPutEntity
+{
+    NSData* data = [@"helloworld" dataUsingEncoding:NSUTF8StringEncoding];
+    UNIHTTPJsonResponse* response = [[UNIRest putEntity:^(UNIBodyRequest *request) {
+        [request setUrl:@"http://httpbin.org/put"];
+        [request setBody:data];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert([@"helloworld" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
+}
+
+- (void)testDeleteEntity
+{
+    NSData* data = [@"helloworld" dataUsingEncoding:NSUTF8StringEncoding];
+    UNIHTTPJsonResponse* response = [[UNIRest deleteEntity:^(UNIBodyRequest *request) {
+        [request setUrl:@"http://httpbin.org/delete"];
+        [request setBody:data];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert([@"helloworld" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
+}
+
 - (void)testDeleteNoBody
 {
-    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNIMultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNISimpleRequest * request) {
      [request setUrl:@"http://httpbin.org/delete"];
     }] asJson];
     
     NSDictionary* args = [response.body.object valueForKey:@"form"];
     
-    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
     NSAssert(0 == [args count], @"Invalid arguments size");
 }
 
@@ -88,12 +201,12 @@
 {
     NSDictionary* parameters = @{@"name" : @"Mark"};
     
-    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNIMultipartRequest * request) {
+    UNIHTTPJsonResponse* response = [[UNIRest delete:^(UNISimpleRequest * request) {
         [request setUrl:@"http://httpbin.org/delete"];
         [request setParameters:parameters];
     }] asJson];
     
-    NSAssert(200 == response.code, @"Invalid code");
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
     NSAssert([@"name=Mark" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
 }
 

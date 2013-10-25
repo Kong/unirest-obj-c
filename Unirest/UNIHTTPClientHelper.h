@@ -26,6 +26,7 @@
 #import "HttpResponse/UNIHTTPResponse.h"
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPRequestWithBody.h"
+#import "HttpRequest/UNISimpleRequest.h"
 
 #define BOUNDARY @"---------------------------17237809831461299884346131229"
 

@@ -20,8 +20,7 @@
 		A9E78BF316E9803E006B80FD /* UNIHTTPRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDB16E9803E006B80FD /* UNIHTTPRequestWithBody.m */; };
 		A9E78BF416E9803E006B80FD /* UNIBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BDE16E9803E006B80FD /* UNIBaseRequest.m */; };
 		A9E78BF516E9803E006B80FD /* UNIBodyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE016E9803E006B80FD /* UNIBodyRequest.m */; };
-		A9E78BF616E9803E006B80FD /* UNIMultipartRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE216E9803E006B80FD /* UNIMultipartRequest.m */; };
-		A9E78BF716E9803E006B80FD /* UNISimpleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE416E9803E006B80FD /* UNISimpleRequest.m */; };
+		A9E78BF616E9803E006B80FD /* UNISimpleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE216E9803E006B80FD /* UNISimpleRequest.m */; };
 		A9E78BF816E9803E006B80FD /* UNIHTTPBinaryResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE716E9803E006B80FD /* UNIHTTPBinaryResponse.m */; };
 		A9E78BF916E9803E006B80FD /* UNIHTTPJsonResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BE916E9803E006B80FD /* UNIHTTPJsonResponse.m */; };
 		A9E78BFA16E9803E006B80FD /* UNIHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BEB16E9803E006B80FD /* UNIHTTPResponse.m */; };
@@ -74,10 +73,8 @@
 		A9E78BDE16E9803E006B80FD /* UNIBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBaseRequest.m; sourceTree = "<group>"; };
 		A9E78BDF16E9803E006B80FD /* UNIBodyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIBodyRequest.h; sourceTree = "<group>"; };
 		A9E78BE016E9803E006B80FD /* UNIBodyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBodyRequest.m; sourceTree = "<group>"; };
-		A9E78BE116E9803E006B80FD /* UNIMultipartRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIMultipartRequest.h; sourceTree = "<group>"; };
-		A9E78BE216E9803E006B80FD /* UNIMultipartRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIMultipartRequest.m; sourceTree = "<group>"; };
-		A9E78BE316E9803E006B80FD /* UNISimpleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISimpleRequest.h; sourceTree = "<group>"; };
-		A9E78BE416E9803E006B80FD /* UNISimpleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISimpleRequest.m; sourceTree = "<group>"; };
+		A9E78BE116E9803E006B80FD /* UNISimpleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISimpleRequest.h; sourceTree = "<group>"; };
+		A9E78BE216E9803E006B80FD /* UNISimpleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISimpleRequest.m; sourceTree = "<group>"; };
 		A9E78BE616E9803E006B80FD /* UNIHTTPBinaryResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPBinaryResponse.h; sourceTree = "<group>"; };
 		A9E78BE716E9803E006B80FD /* UNIHTTPBinaryResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPBinaryResponse.m; sourceTree = "<group>"; };
 		A9E78BE816E9803E006B80FD /* UNIHTTPJsonResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPJsonResponse.h; sourceTree = "<group>"; };
@@ -194,10 +191,8 @@
 				A9E78BDE16E9803E006B80FD /* UNIBaseRequest.m */,
 				A9E78BDF16E9803E006B80FD /* UNIBodyRequest.h */,
 				A9E78BE016E9803E006B80FD /* UNIBodyRequest.m */,
-				A9E78BE116E9803E006B80FD /* UNIMultipartRequest.h */,
-				A9E78BE216E9803E006B80FD /* UNIMultipartRequest.m */,
-				A9E78BE316E9803E006B80FD /* UNISimpleRequest.h */,
-				A9E78BE416E9803E006B80FD /* UNISimpleRequest.m */,
+				A9E78BE116E9803E006B80FD /* UNISimpleRequest.h */,
+				A9E78BE216E9803E006B80FD /* UNISimpleRequest.m */,
 			);
 			path = HttpRequest;
 			sourceTree = "<group>";
@@ -323,8 +318,7 @@
 				A9E78BF316E9803E006B80FD /* UNIHTTPRequestWithBody.m in Sources */,
 				A9E78BF416E9803E006B80FD /* UNIBaseRequest.m in Sources */,
 				A9E78BF516E9803E006B80FD /* UNIBodyRequest.m in Sources */,
-				A9E78BF616E9803E006B80FD /* UNIMultipartRequest.m in Sources */,
-				A9E78BF716E9803E006B80FD /* UNISimpleRequest.m in Sources */,
+				A9E78BF616E9803E006B80FD /* UNISimpleRequest.m in Sources */,
 				A9E78BF816E9803E006B80FD /* UNIHTTPBinaryResponse.m in Sources */,
 				A9E78BF916E9803E006B80FD /* UNIHTTPJsonResponse.m in Sources */,
 				A9E78BFA16E9803E006B80FD /* UNIHTTPResponse.m in Sources */,

@@ -23,9 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "UNISimpleRequest.h"
+#import "UNIBaseRequest.h"
 
-@interface UNIBodyRequest : UNISimpleRequest
+@interface UNIBodyRequest : UNIBaseRequest
 
 @property(readwrite, strong) NSData* body;
 

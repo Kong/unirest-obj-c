@@ -27,4 +27,6 @@
 
 @interface UNISimpleRequest : UNIBaseRequest
 
+@property(readwrite, strong) NSDictionary* parameters;
+
 @end
