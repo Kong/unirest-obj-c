@@ -29,6 +29,8 @@
 + (NSString*) encodeURI:(NSString*)value;
 + (NSString*) dictionaryToQuerystring:(NSDictionary*) parameters;
 + (BOOL) hasBinaryParameters:(NSDictionary*) parameters;
++ (NSMutableURLRequest*) prepareRequest:(UNIHTTPRequest*) request;
++ (UNIHTTPResponse*) getResponse:(NSURLResponse*) response data:(NSData*) data;
 @end
 
 @implementation UNIHTTPClientHelper
@@ -73,12 +75,7 @@
     return result;
 }
 
-+(UNIHTTPResponse*) request:(UNIHTTPRequest*) request {
-    return [self request:request error:nil];
-}
-
-+(UNIHTTPResponse*) request:(UNIHTTPRequest*) request error:(NSError**) error {
-    
++ (NSMutableURLRequest*) prepareRequest:(UNIHTTPRequest*) request {
     UNIHTTPMethod httpMethod = [request httpMethod];
     NSMutableDictionary* headers = [[request headers] mutableCopy];
     
@@ -173,24 +170,49 @@
     [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
     [headers setValue:@"gzip" forKey:@"accept-encoding"];
     
+    // Add cookies to the headers
+    [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
+    
     for (NSString *key in headers) {
         NSString *value = [headers objectForKey:key];
         [requestObj addValue:value forHTTPHeaderField:key];
     }
-    
-    // Add cookies to the headers
-    [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
+    return requestObj;
+}
+
++(UNIHTTPResponse*) requestSync:(UNIHTTPRequest*) request error:(NSError**) error {
+    NSMutableURLRequest* requestObj = [self prepareRequest:request];
     
     NSHTTPURLResponse * response = nil;
     NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:error];
+
+    return [self getResponse:response data:data];
+}
+
++(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler {
+    NSMutableURLRequest* requestObj = [self prepareRequest:request];
+    NSOperationQueue *mainQueue = [[NSOperationQueue alloc] init];
     
+    UNIUrlConnection* connection = [UNIUrlConnection sendAsynchronousRequest:requestObj queue:mainQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        UNIHTTPResponse* res = [self getResponse:response data:data];
+        handler(res, connectionError);
+ 
+    }];
+    
+    return connection;
+}
+
++ (UNIHTTPResponse*) getResponse:(NSURLResponse*) response data:(NSData*) data {
     if (data == nil) {
         return nil;
     }
     
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+    
     UNIHTTPResponse* res = [[UNIHTTPResponse alloc] init];
-    [res setCode:[response statusCode]];
-    [res setHeaders:[response allHeaderFields]];
+    [res setCode:[httpResponse statusCode]];
+    [res setHeaders:[httpResponse allHeaderFields]];
     [res setRawBody:data];
     
     return res;

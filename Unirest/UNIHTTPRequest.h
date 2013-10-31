@@ -26,20 +26,19 @@
 #import "HttpResponse/UNIHTTPStringResponse.h"
 #import "HttpResponse/UNIHTTPBinaryResponse.h"
 #import "HttpResponse/UNIHTTPJsonResponse.h"
+#import "UNIUrlConnection.h"
 
 typedef NS_ENUM(NSInteger, UNIHTTPMethod) {
 	GET,
 	POST,
 	PUT,
 	DELETE,
-  PATCH
+    PATCH
 };
 
-typedef void (^UNIHTTPStringResponseBlock)(UNIHTTPStringResponse* stringResponse);
-typedef void (^UNIHTTPBinaryResponseBlock)(UNIHTTPBinaryResponse* binaryResponse);
-typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse);
-
-typedef void (^UNIErrorBlock)(NSError* error);
+typedef void (^UNIHTTPStringResponseBlock)(UNIHTTPStringResponse* stringResponse, NSError* error);
+typedef void (^UNIHTTPBinaryResponseBlock)(UNIHTTPBinaryResponse* binaryResponse, NSError* error);
+typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse, NSError* error);
 
 @interface UNIHTTPRequest : NSObject
 
@@ -52,14 +51,14 @@ typedef void (^UNIErrorBlock)(NSError* error);
 
 -(UNIHTTPStringResponse*) asString;
 -(UNIHTTPStringResponse*) asString:(NSError**) error;
--(void) asStringAsync:(UNIHTTPStringResponseBlock) response;
+-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response;
 
 -(UNIHTTPBinaryResponse*) asBinary;
 -(UNIHTTPBinaryResponse*) asBinary:(NSError**) error;
--(void) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
+-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
 
 -(UNIHTTPJsonResponse*) asJson;
 -(UNIHTTPJsonResponse*) asJson:(NSError**) error;
--(void) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
+-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
 
 @end

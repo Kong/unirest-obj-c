@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A97AFD4918224E2200AE4B7C /* UNIUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A97AFD4818224E2200AE4B7C /* UNIUrlConnection.m */; };
 		A9E78BAD16E9801F006B80FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BAC16E9801F006B80FD /* Foundation.framework */; };
 		A9E78BBC16E9801F006B80FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBB16E9801F006B80FD /* SenTestingKit.framework */; };
 		A9E78BBE16E9801F006B80FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E78BBD16E9801F006B80FD /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A97AFD4718224E2200AE4B7C /* UNIUrlConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIUrlConnection.h; sourceTree = "<group>"; };
+		A97AFD4818224E2200AE4B7C /* UNIUrlConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIUrlConnection.m; sourceTree = "<group>"; };
 		A9E78BA916E9801F006B80FD /* libUnirest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnirest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9E78BAC16E9801F006B80FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A9E78BB016E9801F006B80FD /* Unirest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				A9E78BDC16E9803E006B80FD /* HttpRequest */,
 				A9E78BE516E9803E006B80FD /* HttpResponse */,
 				A9E78BAF16E9801F006B80FD /* Supporting Files */,
+				A97AFD4718224E2200AE4B7C /* UNIUrlConnection.h */,
+				A97AFD4818224E2200AE4B7C /* UNIUrlConnection.m */,
 			);
 			path = Unirest;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 			files = (
 				A9E78BF016E9803E006B80FD /* UNIRest.m in Sources */,
 				A9E78BF116E9803E006B80FD /* UNIHTTPClientHelper.m in Sources */,
+				A97AFD4918224E2200AE4B7C /* UNIUrlConnection.m in Sources */,
 				A9E78BF216E9803E006B80FD /* UNIHTTPRequest.m in Sources */,
 				A9E78BF316E9803E006B80FD /* UNIHTTPRequestWithBody.m in Sources */,
 				A9E78BF416E9803E006B80FD /* UNIBaseRequest.m in Sources */,

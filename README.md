@@ -42,13 +42,27 @@ NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
-}] asJsonAsync:^(UNIHTTPJsonResponse* response) {
+}] asJsonAsync:^(UNIHTTPJsonResponse* response, NSError *error) {
   // This is the asyncronous callback block
   NSInteger* code = [response code];
   NSDictionary* responseHeaders = [response headers];
   UNIJsonNode* body = [response body];
   NSData* rawBody = [response rawBody];
 }];
+```
+
+### Cancel Asynchronous Request
+
+You can cancel an asyncronous request by invoking the `cancel` method on the `UNIUrlConnection` object:
+
+```objective-c
+UNIUrlConnection* asyncConnection = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+    [request setUrl:@"http://httpbin.org/get"];
+}] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+    // Do something
+}];
+
+[asyncConnection cancel]; // Cancel request
 ```
 
 ## File Uploads
@@ -121,30 +135,50 @@ The `UNIHTTPRequest` and `UNIHTTPRequestWithBody` can then be executed by callin
 
 ```objective-c
 -(UNIHTTPStringResponse*) asString;
--(void) asStringAsync:(void (^)(UNIHTTPStringResponse*)) response;
+-(UNIHTTPStringResponse*) asString:(NSError**) error;
+-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response;
 
 -(UNIHTTPBinaryResponse*) asBinary;
--(void) asBinaryAsync:(void (^)(UNIHTTPBinaryResponse*)) response;
+-(UNIHTTPBinaryResponse*) asBinary:(NSError**) error;
+-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
 
 -(UNIHTTPJsonResponse*) asJson;
--(void) asJsonAsync:(void (^)(UNIHTTPJsonResponse*)) response;
+-(UNIHTTPJsonResponse*) asJson:(NSError**) error;
+-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
 ```
 
 - `-(UNIHTTPStringResponse*)` `asString;`  
   
   Blocking request call with response returned as string for Hypermedia APIs or other.
-- `-(void)` `asStringAsync:` `(void (^)(UNIHTTPStringResponse*)) response;`  
+  
+- `-(UNIHTTPStringResponse*) asString:(NSError**) error;`
+
+  Blocking request call with response returned as string and error handling. 
+  
+- `-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response;`  
   
   Asynchronous request call with response returned as string for Hypermedia APIs or other.
-- `-(UNIHTTPBinaryResponse*)` `asBinary;`  
   
+- `-(UNIHTTPBinaryResponse*)` `asBinary;`  
+
   Blocking request call with response returned as binary output for files and other media.
-- `-(void)` `asBinaryAsync:` `(void (^)(UNIHTTPBinaryResponse*)) response;`  
+  
+- `-(UNIHTTPBinaryResponse*) asBinary:(NSError**) error;`
+
+  Blocking request call with response returned as binary output and error handling.    
+
+- `-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;`  
   
   Asynchronous request call with response returned as binary output for files and other media.
+  
 - `-(UNIHTTPJsonResponse*)` `asJson;`  
   
-  Blocking request call with response returned as JSON.
-- `-(void)` `asJsonAsync:` `(void (^)(UNIHTTPJsonResponse*)) response;`  
+  Blocking request call with response returned as JSON.  
+  
+- `-(UNIHTTPJsonResponse*) asString:(NSError**) error;`
+
+  Blocking request call with response returned as JSON and error handling.  
+
+- `-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response;`  
   
   Asynchronous request call with response returned as JSON.

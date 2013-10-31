@@ -27,13 +27,16 @@
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPRequestWithBody.h"
 #import "HttpRequest/UNISimpleRequest.h"
+#import "UNIUrlConnection.h"
 
 #define BOUNDARY @"---------------------------17237809831461299884346131229"
 
+typedef void (^UNIAsyncResponse)(UNIHTTPJsonResponse* jsonResponse, NSError* error);
+
 @interface UNIHTTPClientHelper : NSObject
 
-+(UNIHTTPResponse*) request:(UNIHTTPRequest*) request;
++(UNIHTTPResponse*) requestSync:(UNIHTTPRequest*) request error:(NSError**) error;
 
-+(UNIHTTPResponse*) request:(UNIHTTPRequest*) request error:(NSError**) error;
++(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler;
 
 @end

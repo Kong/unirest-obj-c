@@ -33,9 +33,8 @@
         [self setCode:[httpResponse code]];
         [self setHeaders:[httpResponse headers]];
         [self setRawBody:[httpResponse rawBody]];
-        
+
         UNIJsonNode* body = [[UNIJsonNode alloc] init];
-        
         NSError * error = nil;
         id json = [NSJSONSerialization JSONObjectWithData:[httpResponse rawBody] options:NSJSONReadingMutableLeaves error:&error];
         
@@ -46,6 +45,7 @@
         }
         
         [self setBody:body];
+        
     }
     return self;
 }

@@ -26,37 +26,7 @@
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPClientHelper.h"
 
-@interface UNIHTTPRequest()
-
-- (void)invokeAsync:(id (^)(void))asyncBlock resultBlock:(void (^)(id))resultBlock errorBlock:(void (^)(id))errorBlock;
-
-@end
-
 @implementation UNIHTTPRequest
-
-// invokeAsync snippet got from: https://gist.github.com/raulraja/1176022
-
-- (void)invokeAsync:(id (^)(void))asyncBlock resultBlock:(void (^)(id))resultBlock errorBlock:(void (^)(id))errorBlock {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        id result = nil;
-        id error = nil;
-        @try {
-            result = asyncBlock();
-        } @catch (NSException *exception) {
-            NSLog(@"caught exception: %@", exception);
-            error = exception;
-        }
-        // tell the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error != nil) {
-                errorBlock(error);
-            } else {
-                resultBlock(result);
-            }
-        });
-    });
-}
 
 -(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers  {
     self = [super init];
@@ -80,15 +50,19 @@
 }
 
 -(UNIHTTPStringResponse*) asString:(NSError**) error {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    UNIHTTPResponse* response = [UNIHTTPClientHelper requestSync:self error:error];
     if (response == nil) return nil;
     return [[UNIHTTPStringResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asStringAsync:(UNIHTTPStringResponseBlock) response {
-    [self invokeAsync:^{
-        return [self asString];
-    }     resultBlock:response errorBlock:nil];
+-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response {
+    return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
+        if (error != nil) {
+            response(nil, error);
+        } else {
+            response([[UNIHTTPStringResponse alloc] initWithSimpleResponse:res], error);
+        }
+    }];
 }
 
 -(UNIHTTPBinaryResponse*) asBinary {
@@ -96,15 +70,19 @@
 }
 
 -(UNIHTTPBinaryResponse*) asBinary:(NSError**) error {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    UNIHTTPResponse* response = [UNIHTTPClientHelper requestSync:self error:error];
     if (response == nil) return nil;
     return [[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response {
-    [self invokeAsync:^{
-        return [self asBinary];
-    }     resultBlock:response errorBlock:nil];
+-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response {
+    return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
+        if (error != nil) {
+            response(nil, error);
+        } else {
+            response([[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:res], error);
+        }
+    }];
 }
 
 -(UNIHTTPJsonResponse*) asJson {
@@ -112,15 +90,19 @@
 }
 
 -(UNIHTTPJsonResponse*) asJson:(NSError**) error {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    UNIHTTPResponse* response = [UNIHTTPClientHelper requestSync:self error:error];
     if (response == nil) return nil;
     return [[UNIHTTPJsonResponse alloc] initWithSimpleResponse:response];
 }
 
--(void) asJsonAsync:(UNIHTTPJsonResponseBlock) response {
-    [self invokeAsync:^{
-        return [self asJson];
-    }     resultBlock:response errorBlock:nil];
+-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response {
+    return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
+        if (error != nil) {
+            response(nil, error);
+        } else {
+            response([[UNIHTTPJsonResponse alloc] initWithSimpleResponse:res], error);
+        }
+    }];
 }
 
 @end

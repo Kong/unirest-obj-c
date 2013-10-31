@@ -236,4 +236,90 @@
     NSAssert(gzipped == 1, @"Expecting gzipped=true");
 }
 
+- (void)testAsyncError
+{
+    __block BOOL hasCalledBack = NO;
+    
+    [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://gzipeedhttpbin.org/get?name=Mark"];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+        NSAssert(response == nil, @"Response should be nil");
+        NSAssert(error != nil, @"Error should be not nil");
+        hasCalledBack = YES;
+    }];
+
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:5];
+    while (hasCalledBack == NO && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:loopUntil];
+    }
+    
+    if (!hasCalledBack) {
+        STFail(@"I know this will fail, thanks");
+    }
+    
+}
+
+- (void)testAsync
+{
+
+    __block BOOL hasCalledBack = NO;
+    
+    [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get?name=Mark"];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+        NSAssert(response != nil, @"Response should be not nil");
+        NSAssert(error == nil, @"Error should be nil");
+        
+        NSAssert(200 == response.code, @"Invalid code %d", response.code);
+        hasCalledBack = YES;
+    }];
+
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:5];
+    while (hasCalledBack == NO && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:loopUntil];
+    }
+    
+    if (!hasCalledBack) {
+        STFail(@"I know this will fail, thanks");
+    }
+}
+
+- (void)testCancelAsync
+{
+    
+    UNIUrlConnection* asyncConnection = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [request setUrl:@"http://httpbin.org/get"];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+        // Do something
+    }];
+    
+    [asyncConnection cancel]; // Cancel request
+    
+    __block BOOL hasCalledBack = NO;
+    
+    UNIUrlConnection* connection = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get?name=Mark"];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+        NSAssert(response != nil, @"Response should be not nil");
+        NSAssert(error == nil, @"Error should be nil");
+        
+        NSAssert(200 == response.code, @"Invalid code %d", response.code);
+        hasCalledBack = YES;
+    }];
+    
+    [connection cancel];
+    
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:5];
+    while (hasCalledBack == NO && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:loopUntil];
+    }
+    
+    if (hasCalledBack) {
+        STFail(@"I know this will fail, thanks");
+    }
+}
+
 @end
