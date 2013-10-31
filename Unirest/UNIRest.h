@@ -33,6 +33,13 @@ typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 
 @interface UNIRest : NSObject
 
++(void) timeout:(int) seconds;
++(int) timeout;
+
++(void) defaultHeader:(NSString*) name value:(NSString*) value;
++(void) clearDefaultHeaders;
++(NSMutableDictionary*) defaultHeaders;
+
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config;
 
 +(UNIHTTPRequestWithBody*) post:(UNISimpleRequestBlock) config;

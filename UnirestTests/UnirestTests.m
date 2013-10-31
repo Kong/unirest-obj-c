@@ -328,4 +328,55 @@
     NSAssert([@"Basic dXNlcjpwYXNzd29yZA==" isEqualToString:[headers valueForKey:@"Authorization"]], @"Invalid header value %@", [headers valueForKey:@"Authorization"]);
 }
 
+- (void)testDefaultHeaders
+{
+    [UNIRest defaultHeader:@"Hello" value:@"custom"];
+    
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSDictionary* headers = [response.body.object valueForKey:@"headers"];
+    NSAssert([@"custom" isEqualToString:[headers valueForKey:@"Hello"]], @"Invalid header value %@", [headers valueForKey:@"Hello"]);
+    
+    response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+    }] asJson];
+    headers = [response.body.object valueForKey:@"headers"];
+    NSAssert([@"custom" isEqualToString:[headers valueForKey:@"Hello"]], @"Invalid header value %@", [headers valueForKey:@"Hello"]);
+    
+    [UNIRest clearDefaultHeaders];
+    response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+    }] asJson];
+    headers = [response.body.object valueForKey:@"headers"];
+    NSAssert([headers valueForKey:@"Hello"] == nil, @"Invalid header value %@", [headers valueForKey:@"Hello"]);
+}
+
+- (void)testTimeout
+{
+    [UNIRest timeout:1];
+    
+    NSError* error = nil;
+    
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/delay/3"];
+    }] asJson:&error];
+    
+    NSAssert(error != nil, @"Error should be not nil");
+    NSAssert(response == nil, @"Response should be nil");
+    
+    [UNIRest timeout:5];
+    error = nil;
+    response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/delay/2"];
+    }] asJson:&error];
+    
+    NSAssert(response != nil, @"Response should be not nil");
+    NSAssert(error == nil, @"Error should be nil");
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+}
+
 @end

@@ -194,3 +194,32 @@ The `UNIHTTPRequest` and `UNIHTTPRequestWithBody` can then be executed by callin
 - `-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response;`  
   
   Asynchronous request call with response returned as JSON.
+
+# Advanced Configuration
+
+You can set some advanced configuration to tune Unirest-Obj-C:
+
+### Timeouts
+
+You can set custom connection and socket timeout values (in **seconds**):
+
+```objective-c
+[UNIRest timeout:2];
+```
+
+By default the timeout is `60`.
+
+### Default Request Headers
+
+You can set default headers that will be sent on every request:
+
+```objective-c
+[UNIRest defaultHeader:@"Header1" value:@"Value1"];
+[UNIRest defaultHeader:@"Header2" value:@"Value2"];
+```
+
+You can clear the default headers anytime with:
+
+```objective-c
+[UNIRest clearDefaultHeaders];
+```

@@ -25,6 +25,7 @@
 
 #import "UNIHTTPClientHelper.h"
 #import "Base64.h"
+#import "UNIRest.h"
 
 @interface UNIHTTPClientHelper()
 + (NSString*) encodeURI:(NSString*)value;
@@ -98,8 +99,8 @@
             url = [NSString stringWithString:finalUrl];
         }
     }
-    
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:[UNIRest timeout]];
     NSMutableData* body = [[NSMutableData alloc] init];
     
     if (httpMethod != GET) {
@@ -184,6 +185,13 @@
         [headers setValue:header forKey:@"authorization"];
     }
     
+    // Default headers
+    NSMutableDictionary* defaultHeaders = [UNIRest defaultHeaders];
+    for(NSString* key in defaultHeaders) {
+        NSString *value = [defaultHeaders objectForKey:key];
+        [requestObj addValue:value forHTTPHeaderField:key];
+    }
+    
     for (NSString *key in headers) {
         NSString *value = [headers objectForKey:key];
         [requestObj addValue:value forHTTPHeaderField:key];
@@ -196,7 +204,6 @@
     
     NSHTTPURLResponse * response = nil;
     NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:error];
-
     return [self getResponse:response data:data];
 }
 

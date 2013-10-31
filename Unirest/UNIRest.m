@@ -29,7 +29,39 @@
 + (id) getConfig:instance config:(void (^)(id)) config;
 @end
 
+static NSMutableDictionary* defaultHeaders  = nil;
+static int timeout = 60;
+
 @implementation UNIRest
+
++(void) timeout:(int) seconds {
+    timeout = seconds;
+}
+
++(int) timeout {
+    return timeout;
+}
+
++(void) defaultHeader:(NSString*) name value:(NSString*) value {
+    if (defaultHeaders == nil) {
+        defaultHeaders = [NSMutableDictionary dictionary];
+    }
+    [defaultHeaders setObject:value forKey:name];
+}
+
++(NSMutableDictionary*) defaultHeaders {
+    if (defaultHeaders == nil) {
+        defaultHeaders = [NSMutableDictionary dictionary];
+    }
+    return defaultHeaders;
+}
+
++(void) clearDefaultHeaders {
+    if (defaultHeaders == nil) {
+        defaultHeaders = [NSMutableDictionary dictionary];
+    }
+    [defaultHeaders removeAllObjects];
+}
 
 + (id) getConfig:instance config:(void (^)(id)) config {
     if (config) {
