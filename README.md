@@ -1,8 +1,17 @@
 # Unirest for Objective-C [![Build Status](https://api.travis-ci.org/Mashape/unirest-obj-c.png)](https://travis-ci.org/Mashape/unirest-obj-c)
 
-Unirest is a set of lightweight HTTP libraries available in multiple languages.
+Unirest is a set of lightweight HTTP libraries available in multiple languages, ideal for most applications:
 
-Created with love by http://mashape.com
+* Make `GET`, `POST`, `PUT`, `PATCH`, `DELETE` requests
+* Both syncronous and asynchronous (non-blocking) requests
+* It supports form parameters, file uploads and custom body entities
+* Supports gzip
+* Supports Basic Authentication natively
+* Customizable timeout
+* Customizable default headers for every request (DRY)
+* Automatic JSON parsing into native object (`NSDictionary` or `NSArray`) for JSON responses
+
+Created with love by [thefosk](https://github.com/thefosk) @ [mashape.com](https://mashape.com)
 
 
 
