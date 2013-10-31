@@ -199,9 +199,9 @@ The `UNIHTTPRequest` and `UNIHTTPRequestWithBody` can then be executed by callin
 
 You can set some advanced configuration to tune Unirest-Obj-C:
 
-### Timeouts
+### Timeout
 
-You can set custom connection and socket timeout values (in **seconds**):
+You can set a custom timeout value (in **seconds**):
 
 ```objective-c
 [UNIRest timeout:2];
