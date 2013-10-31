@@ -2,6 +2,10 @@
 
 Unirest is a set of lightweight HTTP libraries available in multiple languages.
 
+Created with love by http://mashape.com
+
+
+
 ## Installing
 <a href="https://github.com/Mashape/unirest-obj-c/archive/master.zip">Download</a> the Objective-C Unirest Library from <a href="https://github.com/Mashape/unirest-obj-c">GitHub</a> (or clone the repo) and import the folder into your project. You can also install Unirest-obj-c with [CocoaPods](http://cocoapods.org/).
 
