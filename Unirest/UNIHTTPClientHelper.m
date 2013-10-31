@@ -74,6 +74,10 @@
 }
 
 +(UNIHTTPResponse*) request:(UNIHTTPRequest*) request {
+    return [self request:request error:nil];
+}
+
++(UNIHTTPResponse*) request:(UNIHTTPRequest*) request error:(NSError**) error {
     
     UNIHTTPMethod httpMethod = [request httpMethod];
     NSMutableDictionary* headers = [[request headers] mutableCopy];
@@ -166,7 +170,8 @@
     }
     
     // Add headers
-    [headers setValue:@"unirest-objc/1.0" forKey:@"user-agent"];
+    [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
+    [headers setValue:@"gzip" forKey:@"accept-encoding"];
     
     for (NSString *key in headers) {
         NSString *value = [headers objectForKey:key];
@@ -177,8 +182,11 @@
     [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
     
     NSHTTPURLResponse * response = nil;
-    NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:&error];
+    NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:error];
+    
+    if (data == nil) {
+        return nil;
+    }
     
     UNIHTTPResponse* res = [[UNIHTTPResponse alloc] init];
     [res setCode:[response statusCode]];

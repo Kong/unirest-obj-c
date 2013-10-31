@@ -39,21 +39,27 @@ typedef void (^UNIHTTPStringResponseBlock)(UNIHTTPStringResponse* stringResponse
 typedef void (^UNIHTTPBinaryResponseBlock)(UNIHTTPBinaryResponse* binaryResponse);
 typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse);
 
+typedef void (^UNIErrorBlock)(NSError* error);
+
 @interface UNIHTTPRequest : NSObject
 
 @property(readwrite, strong) NSDictionary* headers;
 @property(readwrite, strong) NSString* url;
+@property(readwrite, strong) NSError* error;
 @property(readwrite) UNIHTTPMethod httpMethod;
 
 -(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
 
 -(UNIHTTPStringResponse*) asString;
+-(UNIHTTPStringResponse*) asString:(NSError**) error;
 -(void) asStringAsync:(UNIHTTPStringResponseBlock) response;
 
 -(UNIHTTPBinaryResponse*) asBinary;
+-(UNIHTTPBinaryResponse*) asBinary:(NSError**) error;
 -(void) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
 
 -(UNIHTTPJsonResponse*) asJson;
+-(UNIHTTPJsonResponse*) asJson:(NSError**) error;
 -(void) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
 
 @end

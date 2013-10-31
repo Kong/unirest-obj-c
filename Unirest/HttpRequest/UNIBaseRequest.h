@@ -23,7 +23,9 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@interface UNIBaseRequest : NSObject
+@interface UNIBaseRequest : NSObject {
+    NSError* _error;
+}
 
 @property(readwrite, strong) NSString* url;
 @property(readwrite, strong) NSDictionary* headers;

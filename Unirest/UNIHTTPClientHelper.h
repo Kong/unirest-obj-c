@@ -34,4 +34,6 @@
 
 +(UNIHTTPResponse*) request:(UNIHTTPRequest*) request;
 
++(UNIHTTPResponse*) request:(UNIHTTPRequest*) request error:(NSError**) error;
+
 @end

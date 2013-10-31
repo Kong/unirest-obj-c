@@ -210,4 +210,30 @@
     NSAssert([@"name=Mark" isEqualToString:[response.body.object valueForKey:@"data"]], @"invalid argument value");
 }
 
+- (void)testError
+{
+    NSError* error = nil;
+    
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://gzippedhttpbin.org/gzip"];
+    }] asJson:&error];
+    
+    NSAssert(error != nil, @"Expecting an error");
+    NSAssert(response == nil, @"Expecting null response");
+}
+
+- (void)testGzip
+{
+    NSError* error = nil;
+    
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/gzip"];
+    }] asJson:&error];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    
+    NSInteger gzipped = [[response.body.object valueForKey:@"gzipped"] integerValue];
+    NSAssert(gzipped == 1, @"Expecting gzipped=true");
+}
+
 @end

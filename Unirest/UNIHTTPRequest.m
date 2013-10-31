@@ -58,7 +58,7 @@
     });
 }
 
--(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers {
+-(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers  {
     self = [super init];
     if (self) {
         [self setHttpMethod:httpMethod];
@@ -76,7 +76,12 @@
 }
 
 -(UNIHTTPStringResponse*) asString {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [self asString:nil];
+}
+
+-(UNIHTTPStringResponse*) asString:(NSError**) error {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    if (response == nil) return nil;
     return [[UNIHTTPStringResponse alloc] initWithSimpleResponse:response];
 }
 
@@ -84,11 +89,15 @@
     [self invokeAsync:^{
         return [self asString];
     }     resultBlock:response errorBlock:nil];
-  
 }
 
 -(UNIHTTPBinaryResponse*) asBinary {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [self asBinary:nil];
+}
+
+-(UNIHTTPBinaryResponse*) asBinary:(NSError**) error {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    if (response == nil) return nil;
     return [[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:response];
 }
 
@@ -99,7 +108,12 @@
 }
 
 -(UNIHTTPJsonResponse*) asJson {
-    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self];
+    return [self asJson:nil];
+}
+
+-(UNIHTTPJsonResponse*) asJson:(NSError**) error {
+    UNIHTTPResponse* response = [UNIHTTPClientHelper request:self error:error];
+    if (response == nil) return nil;
     return [[UNIHTTPJsonResponse alloc] initWithSimpleResponse:response];
 }
 
