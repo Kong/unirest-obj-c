@@ -30,8 +30,8 @@
 @property(readwrite, strong) NSData* body;
 @property(readwrite, strong) NSDictionary* parameters;
 
--(instancetype) initWithMultipartRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters;
+-(instancetype) initWithMultipartRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters username:(NSString*) username password:(NSString*) password;
 
--(instancetype) initWithBodyRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body;
+-(instancetype) initWithBodyRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body username:(NSString*) username password:(NSString*) password;
 
 @end

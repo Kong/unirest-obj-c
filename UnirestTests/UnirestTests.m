@@ -288,15 +288,6 @@
 
 - (void)testCancelAsync
 {
-    
-    UNIUrlConnection* asyncConnection = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
-        [request setUrl:@"http://httpbin.org/get"];
-    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
-        // Do something
-    }];
-    
-    [asyncConnection cancel]; // Cancel request
-    
     __block BOOL hasCalledBack = NO;
     
     UNIUrlConnection* connection = [[UNIRest get:^(UNISimpleRequest * request) {
@@ -320,6 +311,21 @@
     if (hasCalledBack) {
         STFail(@"I know this will fail, thanks");
     }
+}
+
+- (void)testBasicAuth
+{
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+        [request setUsername:@"user"];
+        [request setPassword:@"password"];
+    }] asJson];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    
+    NSDictionary* headers = [response.body.object valueForKey:@"headers"];
+    
+    NSAssert([@"Basic dXNlcjpwYXNzd29yZA==" isEqualToString:[headers valueForKey:@"Authorization"]], @"Invalid header value %@", [headers valueForKey:@"Authorization"]);
 }
 
 @end

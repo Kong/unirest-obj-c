@@ -28,11 +28,13 @@
 
 @implementation UNIHTTPRequest
 
--(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers  {
+-(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers username:(NSString*) username password:(NSString*) password {
     self = [super init];
     if (self) {
         [self setHttpMethod:httpMethod];
         [self setUrl:url];
+        [self setUsername:username];
+        [self setPassword:password];
         NSMutableDictionary* lowerCaseHeaders = [[NSMutableDictionary alloc] init];
         if (headers != nil) {
             for(id key in headers) {

@@ -95,6 +95,18 @@ UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) 
 }] asJson];
 ```
 
+## Basic Authentication
+
+Authenticating the request with basic authentication can be done by setting the `username` and `password` properties in the builder:
+
+```objective-c
+UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+    [request setUrl:@"http://httpbin.org/get"];
+    [request setUsername:@"user"];
+    [request setPassword:@"password"];
+}] asJson];
+```
+
 # Request
 The Objective-C unirest library uses configuration blocks of type UNISimpleRequest and UNIBodyRequest to configure the URL, Headers, and Parameters / Body of the request.
 

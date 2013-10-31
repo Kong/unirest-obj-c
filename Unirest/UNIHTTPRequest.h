@@ -45,9 +45,11 @@ typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse, NSEr
 @property(readwrite, strong) NSDictionary* headers;
 @property(readwrite, strong) NSString* url;
 @property(readwrite, strong) NSError* error;
+@property(readwrite, strong) NSString* username;
+@property(readwrite, strong) NSString* password;
 @property(readwrite) UNIHTTPMethod httpMethod;
 
--(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers;
+-(instancetype) initWithSimpleRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers username:(NSString*) username password:(NSString*) password;
 
 -(UNIHTTPStringResponse*) asString;
 -(UNIHTTPStringResponse*) asString:(NSError**) error;

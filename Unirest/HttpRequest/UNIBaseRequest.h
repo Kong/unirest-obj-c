@@ -29,5 +29,7 @@
 
 @property(readwrite, strong) NSString* url;
 @property(readwrite, strong) NSDictionary* headers;
+@property(readwrite, strong) NSString* username;
+@property(readwrite, strong) NSString* password;
 
 @end

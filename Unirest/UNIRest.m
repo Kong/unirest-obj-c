@@ -40,55 +40,55 @@
 
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
-    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:GET url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:GET url:[_config url] headers:[_config headers] parameters:[_config parameters] username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) post:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:POST url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:POST url:[_config url] headers:[_config headers] parameters:[_config parameters]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) postEntity:(UNIBodyRequestBlock) config {
     UNIBodyRequest* _config = [self getConfig:[[UNIBodyRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:POST url:[_config url] headers:[_config headers] body:[_config body]];
+    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:POST url:[_config url] headers:[_config headers] body:[_config body]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) put:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PUT url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PUT url:[_config url] headers:[_config headers] parameters:[_config parameters]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) putEntity:(UNIBodyRequestBlock) config {
     UNIBodyRequest* _config = [self getConfig:[[UNIBodyRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PUT url:[_config url] headers:[_config headers] body:[_config body]];
+    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PUT url:[_config url] headers:[_config headers] body:[_config body]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) patch:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PATCH url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:PATCH url:[_config url] headers:[_config headers] parameters:[_config parameters]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) patchEntity:(UNIBodyRequestBlock) config {
     UNIBodyRequest* _config = [self getConfig:[[UNIBodyRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PATCH url:[_config url] headers:[_config headers] body:[_config body]];
+    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:PATCH url:[_config url] headers:[_config headers] body:[_config body]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) delete:(UNISimpleRequestBlock) config {
     UNISimpleRequest* _config = [self getConfig:[[UNISimpleRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:DELETE url:[_config url] headers:[_config headers] parameters:[_config parameters]];
+    return [[UNIHTTPRequestWithBody alloc] initWithMultipartRequest:DELETE url:[_config url] headers:[_config headers] parameters:[_config parameters]  username:[_config username] password:[_config password]];
 }
 
 +(UNIHTTPRequestWithBody*) deleteEntity:(UNIBodyRequestBlock) config {
     UNIBodyRequest* _config = [self getConfig:[[UNIBodyRequest alloc] init] config:config];
     
-    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:DELETE url:[_config url] headers:[_config headers] body:[_config body]];
+    return [[UNIHTTPRequestWithBody alloc] initWithBodyRequest:DELETE url:[_config url] headers:[_config headers] body:[_config body]  username:[_config username] password:[_config password]];
 }
 
 @end

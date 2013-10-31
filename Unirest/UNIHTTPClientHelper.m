@@ -24,6 +24,7 @@
  */
 
 #import "UNIHTTPClientHelper.h"
+#import "Base64.h"
 
 @interface UNIHTTPClientHelper()
 + (NSString*) encodeURI:(NSString*)value;
@@ -172,6 +173,16 @@
     
     // Add cookies to the headers
     [headers setValuesForKeysWithDictionary:[NSHTTPCookie requestHeaderFieldsWithCookies:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:url]]]];
+    
+    // Basic Auth
+    if ([request username] != nil || [request password] != nil) {
+        NSString* user = ([request username] == nil) ? @"" : [request username];
+        NSString* pass = ([request password] == nil) ? @"" : [request password];
+        NSString *credentials = [NSString stringWithFormat: @"%@:%@", user, pass];
+
+        NSString* header = [NSString stringWithFormat:@"Basic %@", [Base64 base64String:credentials]];
+        [headers setValue:header forKey:@"authorization"];
+    }
     
     for (NSString *key in headers) {
         NSString *value = [headers objectForKey:key];

@@ -23,23 +23,8 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "UNIHTTPRequestWithBody.h"
+@interface Base64 : NSObject
 
-@implementation UNIHTTPRequestWithBody
-
--(instancetype) initWithMultipartRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers parameters:(NSDictionary*) parameters username:(NSString*) username password:(NSString*) password {
-    self = [super initWithSimpleRequest:httpMethod url:url headers:headers username:username password:password];
-    if (parameters == nil) {
-        parameters = [[NSDictionary alloc] init];
-    }
-    [self setParameters:[parameters mutableCopy]];
-    return self;
-}
-
--(instancetype) initWithBodyRequest:(UNIHTTPMethod) httpMethod url:(NSString*) url headers:(NSDictionary*) headers body:(NSData*) body username:(NSString*) username password:(NSString*) password {
-    self = [super initWithSimpleRequest:httpMethod url:url headers:headers username:username password:password];
-    [self setBody:body];
-    return self;
-}
++ (NSString *)base64String:(NSString *)str;
 
 @end
