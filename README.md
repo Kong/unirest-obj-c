@@ -18,6 +18,30 @@ Created with love by [thefosk](https://github.com/thefosk) @ [mashape.com](https
 ## Installing
 <a href="https://github.com/Mashape/unirest-obj-c/archive/master.zip">Download</a> the Objective-C Unirest Library from <a href="https://github.com/Mashape/unirest-obj-c">GitHub</a> (or clone the repo) and import the folder into your project. You can also install Unirest-obj-c with [CocoaPods](http://cocoapods.org/).
 
+### CocoaPods
+
+If you decide to use CocoaPods, create a `Podfile` file in your project's folder:
+
+```
+$ edit Podfile
+platform :ios, '5.0'
+pod 'Unirest', '~> 1.1.2'
+```
+
+and then execute `pod install`. Make sure to always open the Xcode **workspace** instead of the project file when building your project:
+
+```
+$ open App.xcworkspace
+```
+
+Now you can import your dependencies:
+
+```
+#import <UNIRest.h>
+```
+
+### Requirements
+
 The Unirest-Obj-C client library requires ARC (Automatic Reference Counting) to be enabled in your Xcode project. To enable ARC select your project or target and then go to Build Settings and under the section Apple LLVM compiler 3.0 - Language you will see the option Objective-C Automatic Reference Counting:
 
 <img src="http://unirest.io/img/arc-enable.png" alt="Enable ARC in Xcode"/>
