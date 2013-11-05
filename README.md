@@ -36,7 +36,7 @@ $ open App.xcworkspace
 
 Now you can import your dependencies:
 
-```
+```objective-c
 #import <UNIRest.h>
 ```
 
