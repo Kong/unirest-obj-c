@@ -30,16 +30,16 @@
 @end
 
 static NSMutableDictionary* defaultHeaders  = nil;
-static int timeout = 60;
+static int UNIRestTimeout = 60;
 
 @implementation UNIRest
 
 +(void) timeout:(int) seconds {
-    timeout = seconds;
+    UNIRestTimeout = seconds;
 }
 
 +(int) timeout {
-    return timeout;
+    return UNIRestTimeout;
 }
 
 +(void) defaultHeader:(NSString*) name value:(NSString*) value {
