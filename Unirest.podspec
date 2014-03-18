@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Unirest"
-  s.version      = "1.1.2"
+  s.version      = "1.1.3"
   s.summary      = "Unirest is a set of lightweight HTTP libraries available in multiple languages."
   s.homepage     = "http://github.com/mashape/unirest-obj-c"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
