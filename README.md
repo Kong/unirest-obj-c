@@ -22,7 +22,7 @@ Created with love by [thefosk](https://github.com/thefosk) @ [mashape.com](https
 
 If you decide to use CocoaPods, create a `Podfile` file in your project's folder:
 
-```
+```bash
 $ edit Podfile
 platform :ios, '5.0'
 pod 'Unirest', '~> 1.1.3'
@@ -30,7 +30,7 @@ pod 'Unirest', '~> 1.1.3'
 
 and then execute `pod install`. Make sure to always open the Xcode **workspace** instead of the project file when building your project:
 
-```
+```bash
 $ open App.xcworkspace
 ```
 
