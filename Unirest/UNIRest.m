@@ -31,6 +31,8 @@
 
 static NSMutableDictionary* defaultHeaders  = nil;
 static int UNIRestTimeout = 60;
+static NSURLRequestCachePolicy UNIRestCachePolicy = NSURLRequestUseProtocolCachePolicy;
+
 
 @implementation UNIRest
 
@@ -40,6 +42,13 @@ static int UNIRestTimeout = 60;
 
 +(int) timeout {
     return UNIRestTimeout;
+}
+
++(void) cachepolicy: (NSURLRequestCachePolicy) policy {
+    UNIRestCachePolicy = policy;
+}
++(NSURLRequestCachePolicy) cachepolicy {
+    return UNIRestCachePolicy;
 }
 
 +(void) defaultHeader:(NSString*) name value:(NSString*) value {

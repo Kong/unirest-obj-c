@@ -39,6 +39,9 @@ typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 +(void) timeout:(int) seconds;
 +(int) timeout;
 
++(void) cachepolicy: (NSURLRequestCachePolicy) policy;
++(NSURLRequestCachePolicy) cachepolicy;
+
 +(void) defaultHeader:(NSString*) name value:(NSString*) value;
 +(void) clearDefaultHeaders;
 +(NSMutableDictionary*) defaultHeaders;
