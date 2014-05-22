@@ -55,7 +55,7 @@ So you're probably wondering how using Unirest makes creating requests in Object
 NSDictionary* headers = @{@"accept": @"application/json"};
 NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest* request) {
+UNIHTTPJsonResponse *response = [[UNIRest post:^(UNISimpleRequest *request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -68,19 +68,19 @@ Just like in the Unirest Java library the Objective-C library supports multiple 
 For non-blocking requests you will want to make an asychronous request to keep your application going while data is fetched or updated in the background, doing so with unirest is extremely easy with barely any code change from the previous example:
 
 ```objective-c
-NSDictionary* headers = @{@"accept": @"application/json"};
-NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
+NSDictionary *headers = @{@"accept": @"application/json"};
+NSDictionary *parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-[[UNIRest post:^(UNISimpleRequest* request) {
+[[UNIRest post:^(UNISimpleRequest *request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
 }] asJsonAsync:^(UNIHTTPJsonResponse* response, NSError *error) {
   // This is the asyncronous callback block
-  NSInteger* code = [response code];
-  NSDictionary* responseHeaders = [response headers];
-  UNIJsonNode* body = [response body];
-  NSData* rawBody = [response rawBody];
+  NSInteger code = response.code;
+  NSDictionary *responseHeaders = response.headers;
+  UNIJsonNode *body = response.body;
+  NSData *rawBody = response.rawBody;
 }];
 ```
 
@@ -89,7 +89,7 @@ NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
 You can cancel an asyncronous request by invoking the `cancel` method on the `UNIUrlConnection` object:
 
 ```objective-c
-UNIUrlConnection* asyncConnection = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+UNIUrlConnection *asyncConnection = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
     [request setUrl:@"http://httpbin.org/get"];
 }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
     // Do something
@@ -106,7 +106,7 @@ NSDictionary* headers = @{@"accept": @"application/json"};
 NSURL* file = nil;
 NSDictionary* parameters = @{@"parameter": @"value", @"file": file};
 
-UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest* request) {
+UNIHTTPJsonResponse *response = [[UNIRest post:^(UNISimpleRequest *request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   [request setParameters:parameters];
@@ -117,14 +117,14 @@ UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest* request) {
 To send a custom body such as JSON simply serialize your data utilizing the `NSJSONSerialization` with a `BodyRequest` and `[method]Entity` instead of just `[method]` block like so:
 
 ```objective-c
-NSDictionary* headers = @{@"accept": @"application/json"};
-NSDictionary* parameters = @{@"parameter": @"value", @"foo": @"bar"};
+NSDictionary *headers = @{@"accept": @"application/json"};
+NSDictionary *parameters = @{@"parameter": @"value", @"foo": @"bar"};
 
-UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) {
+UNIHTTPJsonResponse *response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
   [request setUrl:@"http://httpbin.org/post"];
   [request setHeaders:headers];
   // Converting NSDictionary to JSON:
-  [request setBody:[NSJSONSerialization dataWithJSONObject:headers options:0 error:nil]];
+  [request setBody:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil]];
 }] asJson];
 ```
 
@@ -133,7 +133,7 @@ UNIHTTPJsonResponse* response = [[UNIRest postEntity:^(UNIBodyRequest* request) 
 Authenticating the request with basic authentication can be done by setting the `username` and `password` properties in the builder:
 
 ```objective-c
-UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+UNIHTTPJsonResponse *response = [[UNIRest get:^(UNISimpleRequest *request) {
     [request setUrl:@"http://httpbin.org/get"];
     [request setUsername:@"user"];
     [request setPassword:@"password"];
