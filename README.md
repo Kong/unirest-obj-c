@@ -259,7 +259,7 @@ You can clear the default headers anytime with:
 
 ### Cache Policy
 
-You can set an alternative cache policy (policy has type `NSURLRequestCachePolicy`)
+You can set an alternative cache policy (policy has type `NSURLRequestCachePolicy`):
 
 ```objective-c
 [UNIRest cachepolicy:policy];
