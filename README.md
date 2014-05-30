@@ -256,3 +256,13 @@ You can clear the default headers anytime with:
 ```objective-c
 [UNIRest clearDefaultHeaders];
 ```
+
+### Cache Policy
+
+You can set an alternative cache policy (policy has type `NSURLRequestCachePolicy`)
+
+```objective-c
+[UNIRest cachepolicy:policy];
+```
+
+By default the cache policy is `NSURLRequestUseProtocolCachePolicy`.
