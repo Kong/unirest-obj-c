@@ -100,7 +100,7 @@
         }
     }
 
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:[UNIRest timeout]];
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:[UNIRest cachepolicy] timeoutInterval:[UNIRest timeout]];
     NSMutableData* body = [[NSMutableData alloc] init];
     
     if (httpMethod != GET) {
