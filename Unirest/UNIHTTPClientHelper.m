@@ -40,7 +40,7 @@
 + (BOOL) hasBinaryParameters:(NSDictionary*) parameters {
     for(id key in parameters) {
         id value = [parameters objectForKey:key];
-        if ([value isKindOfClass:[NSURL class]]) {
+        if ([value isKindOfClass:[NSURL class]] || [value isKindOfClass:[NSData class]]) {
             return true;
         }
     }
@@ -125,6 +125,15 @@
                         
                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:data];
+                    } else if ([value isKindOfClass:[NSData class]] && value != nil) {
+                        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+                        NSString* filename = key;
+                        
+                        NSData* data = [NSData dataWithData:value];
+                        
+                        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", (int)data.length] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:data];
                     } else {
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];

@@ -269,6 +269,7 @@
 		A9E78BA116E9801F006B80FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Marco Palladino";
 			};
