@@ -63,7 +63,7 @@
     BOOL firstParameter = YES;
     for(id key in parameters) {
         id value = [parameters objectForKey:key];
-        if (!([value isKindOfClass:[NSURL class]] || value == nil)) { // Don't encode files and null values
+        if (!([value isKindOfClass:[NSURL class]] || value == nil || value == [NSNull null])) { // Don't encode files and null values
             NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [UNIHTTPClientHelper encodeURI:key], @"=", [UNIHTTPClientHelper encodeURI:value]];
             if (firstParameter) {
                 result = [NSString stringWithFormat:@"%@%@", result, parameter];
@@ -117,7 +117,7 @@
                 
                 for(id key in parameters) {
                     id value = [parameters objectForKey:key];
-                    if ([value isKindOfClass:[NSURL class]] && value != nil) { // Don't encode files and null values
+                    if ([value isKindOfClass:[NSURL class]] && value != nil && value != [NSNull null]) { // Don't encode files and null values
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
                         NSString* filename = [[value absoluteString] lastPathComponent];
                         

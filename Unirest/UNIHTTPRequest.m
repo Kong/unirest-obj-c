@@ -39,7 +39,8 @@
         if (headers != nil) {
             for(id key in headers) {
                 id value = [headers objectForKey:key];
-                [lowerCaseHeaders setObject:value forKey:[key lowercaseString]];
+                if ([NSNull null] != value)
+                    [lowerCaseHeaders setObject:value forKey:[key lowercaseString]];
             }
         }
         [self setHeaders:lowerCaseHeaders];
