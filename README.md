@@ -5,7 +5,9 @@
 [![Coverage Status][codeclimate-coverage]][codeclimate-url]
 [![Gitter][gitter-image]][gitter-url]
 
-Unirest is a set of lightweight HTTP libraries available in multiple languages, ideal for most applications:
+Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io).
+
+## Features
 
 * Make `GET`, `POST`, `PUT`, `PATCH`, `DELETE` requests
 * Both syncronous and asynchronous (non-blocking) requests
