@@ -267,15 +267,15 @@ Made with &#9829; from the [Mashape](https://www.mashape.com/) team
 [license-url]: https://github.com/Mashape/unirest-obj-c/blob/master/LICENSE
 
 [gitter-url]: https://gitter.im/Mashape/unirest-obj-c
-[gitter-image]: https://img.shields.io/badge/Gitter-Join%20Chat-blue.svg?style=flat-square
+[gitter-image]: https://img.shields.io/badge/Gitter-Join%20Chat-blue.svg?style=flat
 
 [travis-url]: https://travis-ci.org/Mashape/unirest-obj-c
-[travis-image]: https://img.shields.io/travis/Mashape/unirest-obj-c.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/Mashape/unirest-obj-c.svg?style=flat
 
 [cocoapods-url]: http://cocoadocs.org/docsets/Unirest
-[cocoapods-license]: https://img.shields.io/cocoapods/l/Unirest.svg?style=flat-square
-[cocoapods-version]: https://img.shields.io/cocoapods/v/Unirest.svg?style=flat-square
+[cocoapods-license]: https://img.shields.io/cocoapods/l/Unirest.svg?style=flat
+[cocoapods-version]: https://img.shields.io/cocoapods/v/Unirest.svg?style=flat
 
 [codeclimate-url]: https://codeclimate.com/github/Mashape/unirest-obj-c
-[codeclimate-quality]: https://img.shields.io/codeclimate/github/Mashape/unirest-obj-c.svg?style=flat-square
-[codeclimate-coverage]: https://img.shields.io/codeclimate/coverage/github/Mashape/unirest-obj-c.svg?style=flat-square
+[codeclimate-quality]: https://img.shields.io/codeclimate/github/Mashape/unirest-obj-c.svg?style=flat
+[codeclimate-coverage]: https://img.shields.io/codeclimate/coverage/github/Mashape/unirest-obj-c.svg?style=flat
