@@ -1,9 +1,6 @@
-# Unirest for Objective-C  [![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url]
+# Unirest for Objective-C
 
-[![License][cocoapods-license]][license-url]
-[![Code Climate][codeclimate-quality]][codeclimate-url]
-[![Coverage Status][codeclimate-coverage]][codeclimate-url]
-[![Gitter][gitter-image]][gitter-url]
+[![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url] [![License][cocoapods-license]][license-url] [![Gitter][gitter-image]][gitter-url]
 
 Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io).
 
@@ -28,7 +25,7 @@ If you decide to use CocoaPods, create a `Podfile` file in your project's folder
 ```bash
 $ edit Podfile
 platform :ios, '5.0'
-pod 'Unirest', '~> 1.1.3'
+pod 'Unirest', '~> 1.1.4'
 ```
 
 and then execute `pod install`. Make sure to always open the Xcode **workspace** instead of the project file when building your project:
@@ -275,7 +272,3 @@ Made with &#9829; from the [Mashape](https://www.mashape.com/) team
 [cocoapods-url]: http://cocoadocs.org/docsets/Unirest
 [cocoapods-license]: https://img.shields.io/cocoapods/l/Unirest.svg?style=flat
 [cocoapods-version]: https://img.shields.io/cocoapods/v/Unirest.svg?style=flat
-
-[codeclimate-url]: https://codeclimate.com/github/Mashape/unirest-obj-c
-[codeclimate-quality]: https://img.shields.io/codeclimate/github/Mashape/unirest-obj-c.svg?style=flat
-[codeclimate-coverage]: https://img.shields.io/codeclimate/coverage/github/Mashape/unirest-obj-c.svg?style=flat
