@@ -32,11 +32,18 @@
     if (self) {
         [self setCode:[httpResponse code]];
         [self setHeaders:[httpResponse headers]];
-        [self setRawBody:[httpResponse rawBody]];
+        
+        NSData *rawBody = [httpResponse rawBody];
+        
+        if (rawBody == nil) {
+            rawBody = [NSData new];
+        }
+        
+        [self setRawBody:rawBody];
 
         UNIJsonNode* body = [[UNIJsonNode alloc] init];
         NSError * error = nil;
-        id json = [NSJSONSerialization JSONObjectWithData:[httpResponse rawBody] options:NSJSONReadingMutableLeaves error:&error];
+        id json = [NSJSONSerialization JSONObjectWithData:rawBody options:NSJSONReadingMutableLeaves error:&error];
         
         if ([json isKindOfClass:[NSArray class]]) {
             [body setArray:json];
