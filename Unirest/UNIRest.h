@@ -43,6 +43,8 @@ typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 +(void) defaultHeader:(NSString*) name value:(NSString*) value;
 +(void) clearDefaultHeaders;
 +(NSMutableDictionary*) defaultHeaders;
++(NSURLRequestCachePolicy) cachePolicy;
++(void) cachePolicy:(NSURLRequestCachePolicy)cachePolicy;
 
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config;
 
