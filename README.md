@@ -1,6 +1,10 @@
-# Unirest for Objective-C [![Build Status](https://api.travis-ci.org/Mashape/unirest-obj-c.png)](https://travis-ci.org/Mashape/unirest-obj-c)
+# Unirest for Objective-C
 
-Unirest is a set of lightweight HTTP libraries available in multiple languages, ideal for most applications:
+[![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url] [![License][cocoapods-license]][license-url] [![Gitter][gitter-image]][gitter-url]
+
+Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io).
+
+## Features
 
 * Make `GET`, `POST`, `PUT`, `PATCH`, `DELETE` requests
 * Both syncronous and asynchronous (non-blocking) requests
@@ -10,10 +14,6 @@ Unirest is a set of lightweight HTTP libraries available in multiple languages, 
 * Customizable timeout
 * Customizable default headers for every request (DRY)
 * Automatic JSON parsing into native object (`NSDictionary` or `NSArray`) for JSON responses
-
-Created with love by [thefosk](https://github.com/thefosk) @ [mashape.com](https://mashape.com)
-
-
 
 ## Installing
 <a href="https://github.com/Mashape/unirest-obj-c/archive/master.zip">Download</a> the Objective-C Unirest Library from <a href="https://github.com/Mashape/unirest-obj-c">GitHub</a> (or clone the repo) and import the folder into your project. You can also install Unirest-obj-c with [CocoaPods](http://cocoapods.org/).
@@ -25,7 +25,7 @@ If you decide to use CocoaPods, create a `Podfile` file in your project's folder
 ```bash
 $ edit Podfile
 platform :ios, '5.0'
-pod 'Unirest', '~> 1.1.3'
+pod 'Unirest', '~> 1.1.4'
 ```
 
 and then execute `pod install`. Make sure to always open the Xcode **workspace** instead of the project file when building your project:
@@ -256,3 +256,19 @@ You can clear the default headers anytime with:
 ```objective-c
 [UNIRest clearDefaultHeaders];
 ```
+
+----
+
+Made with &#9829; from the [Mashape](https://www.mashape.com/) team
+
+[license-url]: https://github.com/Mashape/unirest-obj-c/blob/master/LICENSE
+
+[gitter-url]: https://gitter.im/Mashape/unirest-obj-c
+[gitter-image]: https://img.shields.io/badge/Gitter-Join%20Chat-blue.svg?style=flat
+
+[travis-url]: https://travis-ci.org/Mashape/unirest-obj-c
+[travis-image]: https://img.shields.io/travis/Mashape/unirest-obj-c.svg?style=flat
+
+[cocoapods-url]: http://cocoadocs.org/docsets/Unirest
+[cocoapods-license]: https://img.shields.io/cocoapods/l/Unirest.svg?style=flat
+[cocoapods-version]: https://img.shields.io/cocoapods/v/Unirest.svg?style=flat
