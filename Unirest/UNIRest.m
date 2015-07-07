@@ -26,7 +26,7 @@
 #import "UNIRest.h"
 
 @interface UNIRest()
-+ (id) getConfig:instance config:(void (^)(id)) config;
+
 @end
 
 static NSMutableDictionary* defaultHeaders  = nil;

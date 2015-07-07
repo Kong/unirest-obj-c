@@ -37,6 +37,8 @@ typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 
 @interface UNIRest : NSObject
 
++ (id) getConfig:instance config:(void (^)(id)) config;
+
 +(void) timeout:(int) seconds;
 +(int) timeout;
 
