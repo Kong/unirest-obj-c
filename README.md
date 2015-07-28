@@ -2,7 +2,7 @@
 
 [![Build Status][travis-image]][travis-url] [![version][cocoapods-version]][cocoapods-url] [![License][cocoapods-license]][license-url] [![Gitter][gitter-image]][gitter-url]
 
-Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io).
+Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io), built and maintained by the [Mashape team](https://github.com/Mashape).
 
 ## Features
 
