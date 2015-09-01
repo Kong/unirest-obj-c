@@ -124,7 +124,7 @@
                         NSData* data = [NSData dataWithContentsOfURL:value];
                         
                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %lu\r\n\r\n", (unsigned long)data.length] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:data];
                     } else {
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -169,7 +169,6 @@
     }
     
     // Add headers
-    [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
     [headers setValue:@"gzip" forKey:@"accept-encoding"];
     
     // Add cookies to the headers
@@ -187,6 +186,10 @@
     
     // Default headers
     NSMutableDictionary* defaultHeaders = [UNIRest defaultHeaders];
+    if ([defaultHeaders valueForKey:@"user-agent"] == nil || [[defaultHeaders valueForKey:@"user-agent"] isEqualToString:@""]) {
+        [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
+    }
+    
     for(NSString* key in defaultHeaders) {
         NSString *value = [defaultHeaders objectForKey:key];
         [requestObj addValue:value forHTTPHeaderField:key];
