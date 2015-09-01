@@ -169,7 +169,6 @@
     }
     
     // Add headers
-    [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
     [headers setValue:@"gzip" forKey:@"accept-encoding"];
     
     // Add cookies to the headers
@@ -187,6 +186,10 @@
     
     // Default headers
     NSMutableDictionary* defaultHeaders = [UNIRest defaultHeaders];
+    if ([defaultHeaders valueForKey:@"user-agent"] == nil || [[defaultHeaders valueForKey:@"user-agent"] isEqualToString:@""]) {
+        [headers setValue:@"unirest-objc/1.1" forKey:@"user-agent"];
+    }
+    
     for(NSString* key in defaultHeaders) {
         NSString *value = [defaultHeaders objectForKey:key];
         [requestObj addValue:value forHTTPHeaderField:key];
