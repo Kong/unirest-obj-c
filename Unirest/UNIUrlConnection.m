@@ -39,6 +39,7 @@
     result.request = request;
     result.queue = queue;
     result.completionHandler = completionHandler;
+    result->responseData = [NSMutableData data];
     [result start];
     return result;
 }

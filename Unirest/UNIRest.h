@@ -26,11 +26,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #import <Foundation/Foundation.h>
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPRequestWithBody.h"
-#import "HttpRequest/UNISimpleRequest.h"
-#import "HttpRequest/UNIBodyRequest.h"
-#import "HttpResponse/UNIHTTPBinaryResponse.h"
-#import "HttpResponse/UNIHTTPJsonResponse.h"
-#import "HttpResponse/UNIHTTPStringResponse.h"
+#import "UNISimpleRequest.h"
+#import "UNIBodyRequest.h"
+#import "UNIHTTPBinaryResponse.h"
+#import "UNIHTTPJsonResponse.h"
+#import "UNIHTTPStringResponse.h"
 
 typedef void (^UNISimpleRequestBlock)(UNISimpleRequest* simpleRequest);
 typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
@@ -43,6 +43,8 @@ typedef void (^UNIBodyRequestBlock)(UNIBodyRequest* unibodyRequest);
 +(void) defaultHeader:(NSString*) name value:(NSString*) value;
 +(void) clearDefaultHeaders;
 +(NSMutableDictionary*) defaultHeaders;
++(NSURLRequestCachePolicy) cachePolicy;
++(void) cachePolicy:(NSURLRequestCachePolicy)cachePolicy;
 
 +(UNIHTTPRequest*) get:(UNISimpleRequestBlock) config;
 
