@@ -77,6 +77,18 @@
     return result;
 }
 
++ (NSString*) mimeTypeForFileAtPath:(NSString *)filePath {
+    NSString* fullPath = [filePath stringByExpandingTildeInPath];
+    NSURL* fileUrl = [NSURL fileURLWithPath:fullPath];
+    NSURLRequest* fileUrlRequest = [[NSURLRequest alloc] initWithURL:fileUrl cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:.1];
+    
+    NSError* error = nil;
+    NSURLResponse* response = nil;
+    [NSURLConnection sendSynchronousRequest:fileUrlRequest returningResponse:&response error:&error];
+    
+    return [response MIMEType];
+}
+
 + (NSMutableURLRequest*) prepareRequest:(UNIHTTPRequest*) request {
     UNIHTTPMethod httpMethod = [request httpMethod];
     NSMutableDictionary* headers = [[request headers] mutableCopy];
@@ -124,6 +136,7 @@
                         NSData* data = [NSData dataWithContentsOfURL:value];
                         
                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n", [self mimeTypeForFileAtPath:(NSString*)[value path]]] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:data];
                     } else {
