@@ -31,6 +31,7 @@
 
 static NSMutableDictionary* defaultHeaders  = nil;
 static int UNIRestTimeout = 60;
+static NSURLRequestCachePolicy cachePolicy = NSURLRequestUseProtocolCachePolicy;
 
 @implementation UNIRest
 
@@ -61,6 +62,14 @@ static int UNIRestTimeout = 60;
         defaultHeaders = [NSMutableDictionary dictionary];
     }
     [defaultHeaders removeAllObjects];
+}
+
++(NSURLRequestCachePolicy) cachePolicy {
+    return cachePolicy;
+}
+
++(void) cachePolicy:(NSURLRequestCachePolicy)policy {
+    cachePolicy = policy;
 }
 
 + (id) getConfig:instance config:(void (^)(id)) config {

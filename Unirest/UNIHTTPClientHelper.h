@@ -23,10 +23,10 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "HttpResponse/UNIHTTPResponse.h"
+#import "UNIHTTPResponse.h"
 #import "UNIHTTPRequest.h"
 #import "UNIHTTPRequestWithBody.h"
-#import "HttpRequest/UNISimpleRequest.h"
+#import "UNISimpleRequest.h"
 #import "UNIUrlConnection.h"
 
 #define BOUNDARY @"---------------------------17237809831461299884346131229"
