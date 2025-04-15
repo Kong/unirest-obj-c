@@ -103,6 +103,23 @@
     NSAssert([@"thefosk" isEqualToString:[args valueForKey:@"nick"]], @"Invalid argument value");
 }
 
+- (void)testPostMultiparameterSameName
+{
+    NSDictionary* parameters = @{@"name" : @[@"thefosk",@"toto",@"bananarama"]};
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest * request) {
+        [request setUrl:@"http://httpbin.org/get"];
+        [request setParameters:parameters];
+    }] asJson];
+    
+    NSDictionary* args = [response.body.object valueForKey:@"args"];
+    
+    NSAssert(200 == response.code, @"Invalid code %d", response.code);
+    NSAssert( [parameters count] == [args count], @"Invalid arguments size");
+    for ( NSInteger i = 0 ; i < [parameters count] ; i++ ) {
+        NSAssert([[[parameters objectForKey:@"name"] objectAtIndex:i] isEqualToString:[[args objectForKey:@"name"] objectAtIndex:i]], @"Invalid argument value");
+    }
+}
+
 - (void)testPostEntity
 {
     NSData* data = [@"helloworld" dataUsingEncoding:NSUTF8StringEncoding];

@@ -63,7 +63,19 @@
     BOOL firstParameter = YES;
     for(id key in parameters) {
         id value = [parameters objectForKey:key];
-        if (!([value isKindOfClass:[NSURL class]] || value == nil)) { // Don't encode files and null values
+        if ([value isKindOfClass:[NSArray class]])
+        {
+            for (NSString* paramValue in value) {
+                NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [UNIHTTPClientHelper encodeURI:key], @"=", [UNIHTTPClientHelper encodeURI:paramValue]];
+                if (firstParameter) {
+                    result = [NSString stringWithFormat:@"%@%@", result, parameter];
+                } else {
+                    result = [NSString stringWithFormat:@"%@&%@", result, parameter];
+                }
+                firstParameter = NO;
+            }
+        }
+        else if (!([value isKindOfClass:[NSURL class]] || value == nil)) { // Don't encode files and null values
             NSString* parameter = [NSString stringWithFormat:@"%@%@%@", [UNIHTTPClientHelper encodeURI:key], @"=", [UNIHTTPClientHelper encodeURI:value]];
             if (firstParameter) {
                 result = [NSString stringWithFormat:@"%@%@", result, parameter];
@@ -117,7 +129,15 @@
                 
                 for(id key in parameters) {
                     id value = [parameters objectForKey:key];
-                    if ([value isKindOfClass:[NSURL class]] && value != nil) { // Don't encode files and null values
+                    /* Handling Multi Key With Same Name */
+                    if ([value isKindOfClass:[NSArray class]]) {
+                        for (id aValue in value) {
+                            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [body appendData:[[NSString stringWithFormat:@"%@", aValue] dataUsingEncoding:NSUTF8StringEncoding]];
+                        }
+                    }
+                    else if ([value isKindOfClass:[NSURL class]] && value != nil) { // Don't encode files and null values
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];
                         NSString* filename = [[value absoluteString] lastPathComponent];
                         
